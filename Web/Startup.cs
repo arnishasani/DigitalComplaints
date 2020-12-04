@@ -13,6 +13,7 @@ using Infrastructure.Identity;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using Infrastructure.Services;
+using Infrastructure.Repositories;
 
 namespace Web
 {
@@ -47,6 +48,7 @@ namespace Web
 
             services.Configure<IdentityOptions>(options =>
             {
+                options.SignIn.RequireConfirmedAccount = false;
                 // Password settings.
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -79,6 +81,7 @@ namespace Web
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ITblKerkesatAnkesatRepository, TblKerkesatAnkesatRepository>();
             services.AddControllersWithViews();
         }
 
