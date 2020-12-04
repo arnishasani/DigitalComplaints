@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Infrastructure.Repositories
 {
-    public class TblKerkesatAnkesatRepository : Repository<TblKerkesatAnkesat>, ITblKerkesatAnkesatRepository
+    public class TblKerkesatAnkesatRepository : Repository<ApplicationCore.Entities.Kerkesat>, ApplicationCore.Interfaces.Kerkesat
     {
         protected readonly ApplicationDBContext _cineflexxContext;
 

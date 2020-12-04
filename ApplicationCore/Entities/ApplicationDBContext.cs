@@ -22,20 +22,20 @@ namespace ApplicationCore.Entities
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Kerkesat> Kerkesat { get; set; }
         public virtual DbSet<TblDepartamentet> TblDepartamentet { get; set; }
-        public virtual DbSet<TblKerkesatAnkesat> TblKerkesatAnkesat { get; set; }
         public virtual DbSet<TblLlojetDepartamenteve> TblLlojetDepartamenteve { get; set; }
         public virtual DbSet<TblMenaxhimiKerkesave> TblMenaxhimiKerkesave { get; set; }
-        public virtual DbSet<TblVeprimet> TblVeprimet { get; set; }
+        public virtual DbSet<Veprimet> Veprimet { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=ARNIS;Initial Catalog=DigitalComplaintsDB2;Integrated Security=True");
-            }
-        }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("Data Source=ARNIS;Initial Catalog=DigitalComplaintsDB2;Integrated Security=True");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -129,30 +129,17 @@ namespace ApplicationCore.Entities
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
 
-            modelBuilder.Entity<TblDepartamentet>(entity =>
+            modelBuilder.Entity<Kerkesat>(entity =>
             {
-                entity.HasKey(e => e.DepartamentiId);
+                entity.HasKey(e => e.KerkesaAnkesaId);
 
-                entity.ToTable("tbl.Departamentet");
-
-                entity.Property(e => e.DepartamentiId).HasColumnName("DepartamentiID");
-
-                entity.Property(e => e.VeprimetId).HasColumnName("VeprimetID");
-            });
-
-            modelBuilder.Entity<TblKerkesatAnkesat>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("tbl.KerkesatAnkesat");
+                entity.Property(e => e.KerkesaAnkesaId).HasColumnName("KerkesaAnkesaID");
 
                 entity.Property(e => e.AnonimId).HasColumnName("AnonimID");
 
-                entity.Property(e => e.Departamenti).HasMaxLength(50);
+                entity.Property(e => e.DepartamentiId).HasColumnName("DepartamentiID");
 
                 entity.Property(e => e.InsertDate).HasColumnType("date");
-
-                entity.Property(e => e.KerkesaAnkesaId).HasColumnName("KerkesaAnkesaID");
 
                 entity.Property(e => e.Lub).HasColumnName("LUB");
 
@@ -168,7 +155,38 @@ namespace ApplicationCore.Entities
                     .HasColumnName("PershkrimiIKerkeses")
                     .HasMaxLength(500);
 
-                entity.Property(e => e.RoliId).HasColumnName("RoliID");
+                entity.Property(e => e.UserId).HasMaxLength(450);
+
+                entity.HasOne(d => d.Departamenti)
+                    .WithMany(p => p.Kerkesat)
+                    .HasForeignKey(d => d.DepartamentiId)
+                    .HasConstraintName("FK_Kerkesat_tbl.LlojetDepartamenteve");
+
+                entity.HasOne(d => d.LlojiKerkesesNavigation)
+                    .WithMany(p => p.Kerkesat)
+                    .HasForeignKey(d => d.LlojiKerkeses)
+                    .HasConstraintName("FK_Kerkesat_tbl.MenaxhimiKerkesave");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Kerkesat)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_Kerkesat_AspNetUsers");
+            });
+
+            modelBuilder.Entity<TblDepartamentet>(entity =>
+            {
+                entity.HasKey(e => e.DepartamentiId);
+
+                entity.ToTable("tbl.Departamentet");
+
+                entity.Property(e => e.DepartamentiId).HasColumnName("DepartamentiID");
+
+                entity.Property(e => e.VeprimetId).HasColumnName("VeprimetID");
+
+                entity.HasOne(d => d.Veprimet)
+                    .WithMany(p => p.TblDepartamentet)
+                    .HasForeignKey(d => d.VeprimetId)
+                    .HasConstraintName("FK_tbl.Departamentet_Veprimet");
             });
 
             modelBuilder.Entity<TblLlojetDepartamenteve>(entity =>
@@ -176,6 +194,18 @@ namespace ApplicationCore.Entities
                 entity.HasKey(e => e.DepartamentiId);
 
                 entity.ToTable("tbl.LlojetDepartamenteve");
+
+                entity.Property(e => e.DepartamentiId)
+                    .HasColumnName("DepartamentiID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.EmriDepartamentit).HasMaxLength(450);
+
+                entity.HasOne(d => d.Departamenti)
+                    .WithOne(p => p.TblLlojetDepartamenteve)
+                    .HasForeignKey<TblLlojetDepartamenteve>(d => d.DepartamentiId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl.LlojetDepartamenteve_tbl.Departamentet");
             });
 
             modelBuilder.Entity<TblMenaxhimiKerkesave>(entity =>
@@ -201,11 +231,13 @@ namespace ApplicationCore.Entities
                 entity.Property(e => e.Lun).HasColumnName("LUN");
             });
 
-            modelBuilder.Entity<TblVeprimet>(entity =>
+            modelBuilder.Entity<Veprimet>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.VeprimiId);
 
-                entity.ToTable("tbl.Veprimet");
+                entity.Property(e => e.VeprimiId)
+                    .HasColumnName("VeprimiID")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.Grupi).HasMaxLength(50);
 
@@ -225,10 +257,6 @@ namespace ApplicationCore.Entities
                     .HasColumnName("LendetERefuzuara")
                     .HasMaxLength(500);
 
-                entity.Property(e => e.LlojiIkerkeses)
-                    .HasColumnName("LlojiIKerkeses")
-                    .HasMaxLength(50);
-
                 entity.Property(e => e.Lub).HasColumnName("LUB");
 
                 entity.Property(e => e.Lud)
@@ -236,8 +264,6 @@ namespace ApplicationCore.Entities
                     .HasColumnType("date");
 
                 entity.Property(e => e.Lun).HasColumnName("LUN");
-
-                entity.Property(e => e.MenaxhimiId).HasColumnName("MenaxhimiID");
 
                 entity.Property(e => e.ObligimetEmbetura)
                     .HasColumnName("ObligimetEMbetura")
@@ -251,9 +277,12 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.RefuzimiTotalPerLende).HasMaxLength(50);
 
-                entity.Property(e => e.VeprimiId).HasColumnName("VeprimiID");
-
                 entity.Property(e => e.VitiAkademik).HasMaxLength(50);
+
+                entity.HasOne(d => d.Kerkesa)
+                    .WithMany(p => p.Veprimet)
+                    .HasForeignKey(d => d.KerkesaId)
+                    .HasConstraintName("FK_Veprimet_Kerkesat");
             });
 
             OnModelCreatingPartial(modelBuilder);

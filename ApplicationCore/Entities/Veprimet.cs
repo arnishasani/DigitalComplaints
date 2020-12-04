@@ -3,16 +3,19 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Entities
 {
-    public partial class TblVeprimet
+    public partial class Veprimet
     {
-        public int? KerkesaId { get; set; }
-        public int? MenaxhimiId { get; set; }
+        public Veprimet()
+        {
+            TblDepartamentet = new HashSet<TblDepartamentet>();
+        }
+
         public int VeprimiId { get; set; }
+        public int? KerkesaId { get; set; }
         public bool? Pranimi { get; set; }
         public bool? Verifikimi { get; set; }
         public bool? Miratimi { get; set; }
         public bool? Vendimi { get; set; }
-        public string LlojiIkerkeses { get; set; }
         public string Grupi { get; set; }
         public string Orari { get; set; }
         public string LendetEmbetura { get; set; }
@@ -29,5 +32,8 @@ namespace ApplicationCore.Entities
         public int? Lun { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsDeleted { get; set; }
+
+        public virtual Kerkesat Kerkesa { get; set; }
+        public virtual ICollection<TblDepartamentet> TblDepartamentet { get; set; }
     }
 }

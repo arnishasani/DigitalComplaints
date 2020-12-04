@@ -5,6 +5,11 @@ namespace ApplicationCore.Entities
 {
     public partial class TblMenaxhimiKerkesave
     {
+        public TblMenaxhimiKerkesave()
+        {
+            Kerkesat = new HashSet<Kerkesat>();
+        }
+
         public int MenaxhimiId { get; set; }
         public string LlojiIkerkeses { get; set; }
         public int? InsertBy { get; set; }
@@ -14,5 +19,7 @@ namespace ApplicationCore.Entities
         public int? Lun { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsDeleted { get; set; }
+
+        public virtual ICollection<Kerkesat> Kerkesat { get; set; }
     }
 }

@@ -3,11 +3,17 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Entities
 {
-    public partial class TblKerkesatAnkesat
+    public partial class Kerkesat
     {
+        public Kerkesat()
+        {
+            Veprimet = new HashSet<Veprimet>();
+        }
+
         public int KerkesaAnkesaId { get; set; }
-        public int? RoliId { get; set; }
-        public string Departamenti { get; set; }
+        public string UserId { get; set; }
+        public int? LlojiKerkeses { get; set; }
+        public int? DepartamentiId { get; set; }
         public string Nenshkrimi { get; set; }
         public string PershkrimiIkerkeses { get; set; }
         public bool? IsActive { get; set; }
@@ -19,5 +25,10 @@ namespace ApplicationCore.Entities
         public int? Lub { get; set; }
         public DateTime? Lud { get; set; }
         public int? Lun { get; set; }
+
+        public virtual TblLlojetDepartamenteve Departamenti { get; set; }
+        public virtual TblMenaxhimiKerkesave LlojiKerkesesNavigation { get; set; }
+        public virtual AspNetUsers User { get; set; }
+        public virtual ICollection<Veprimet> Veprimet { get; set; }
     }
 }

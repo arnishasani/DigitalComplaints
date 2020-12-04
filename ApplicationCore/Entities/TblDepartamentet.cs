@@ -7,5 +7,8 @@ namespace ApplicationCore.Entities
     {
         public int DepartamentiId { get; set; }
         public int? VeprimetId { get; set; }
+
+        public virtual Veprimet Veprimet { get; set; }
+        public virtual TblLlojetDepartamenteve TblLlojetDepartamenteve { get; set; }
     }
 }

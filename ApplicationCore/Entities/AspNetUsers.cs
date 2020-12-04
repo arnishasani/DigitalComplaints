@@ -11,6 +11,7 @@ namespace ApplicationCore.Entities
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
             AspNetUserTokens = new HashSet<AspNetUserTokens>();
+            Kerkesat = new HashSet<Kerkesat>();
         }
 
         public string Id { get; set; }
@@ -43,5 +44,6 @@ namespace ApplicationCore.Entities
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
+        public virtual ICollection<Kerkesat> Kerkesat { get; set; }
     }
 }

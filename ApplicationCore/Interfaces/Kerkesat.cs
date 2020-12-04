@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface ITblKerkesatAnkesatRepository : IRepository<TblKerkesatAnkesat> { 
+    public interface Kerkesat : IRepository<Entities.Kerkesat> { 
 
     }
 }
