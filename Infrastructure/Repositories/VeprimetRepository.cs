@@ -2,16 +2,15 @@
 using ApplicationCore.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Text;
 
 namespace Infrastructure.Repositories
 {
-    public class TblKerkesatAnkesatRepository : Repository<ApplicationCore.Entities.Kerkesat>, ApplicationCore.Interfaces.Kerkesat
+    public class VeprimetRepository : Repository<Veprimet>, IVeprimet
     {
         protected readonly ApplicationDBContext _digitalComplaintsDB;
 
-        public TblKerkesatAnkesatRepository(ApplicationDBContext digitalComplaintsDB) : base(digitalComplaintsDB)
+        public VeprimetRepository(ApplicationDBContext digitalComplaintsDB) : base(digitalComplaintsDB)
         {
             _digitalComplaintsDB = digitalComplaintsDB;
         }
