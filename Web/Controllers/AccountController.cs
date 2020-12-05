@@ -11,6 +11,8 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Infrastructure.Identity;
+using Web.Areas.Management.Controllers;
+using Web.Areas.Client.Controllers;
 
 namespace Web.Controllers
 {
@@ -54,36 +56,52 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
-            
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            try
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
+                ViewData["ReturnUrl"] = returnUrl;
+                if (ModelState.IsValid)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    // This doesn't count login failures towards account lockout
+                    // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                    var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                    if (result.Succeeded)
+                    {
+                        var user = await _userManager.FindByEmailAsync(model.Email);
+                        var roles = await _userManager.GetRolesAsync(user);
+                        if (roles[0] == "SuperAdmin" || roles[0] == "Admin")
+                        {
+                            return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Management" });
+                        }
+                        if (roles[0] == "Student")
+                        {
+                            return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Client" });
+                        }
+                        _logger.LogInformation("User logged in.");
+                        return RedirectToLocal(returnUrl);
+                    }
+                    if (result.RequiresTwoFactor)
+                    {
+                        return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+                    }
+                    if (result.IsLockedOut)
+                    {
+                        _logger.LogWarning("User account locked out.");
+                        return RedirectToAction(nameof(Lockout));
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        return View(model);
+                    }
                 }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToAction(nameof(Lockout));
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
-                }
-            }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                // If we got this far, something failed, redisplay form
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpGet]
