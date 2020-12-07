@@ -19,6 +19,14 @@
     {
       "library": "jquery@3.5.1",
       "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "datatables.net@1.10.22",
+      "destination": "wwwroot/datatables.net/"
+    },
+    {
+      "library": "datatables@1.10.0",
+      "destination": "wwwroot/lib/datatables/"
     }
   ]
 }

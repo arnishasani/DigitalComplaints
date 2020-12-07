@@ -83,6 +83,7 @@ namespace Web
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ApplicationCore.Interfaces.Kerkesat, TblKerkesatAnkesatRepository>();
+            services.AddTransient<IStaff, StaffRepository>();
             services.AddControllersWithViews();
         }
 
