@@ -1,7 +1,137 @@
-﻿
+﻿@model Web.Areas.Client.Models.KerkesaViewModel
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
 }
 
-<h1>Student Index</h1>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                @*@foreach (var item in Model.kerkesalist)
+                    {
+                        <h1>@item.LlojiKerkeses</h1>
+                        <h1>@item.KerkesaAnkesaId</h1>
+                        <h1>@item.Nenshkrimi</h1>
+                    }*@
 
+            </div>
+        </div>
+    </div>
+    @*<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.KerkesaAnkesaId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.LlojiKerkeses)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.DepartamentiId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.Nenshkrimi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.PershkrimiIkerkeses)
+                </th>
+
+            </tr>
+            @foreach (var item in Model.kerkesalist)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(Model => item.KerkesaAnkesaId)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(Model => item.LlojiKerkeses)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(Model => item.DepartamentiId)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(Model => item.Nenshkrimi)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(Model => item.PershkrimiIkerkeses)
+                    </td>
+                </tr>
+            }
+        </table>*@
+</div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Kerkesat e mia
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+
+                            Kerkese/Ankese
+
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.LlojiKerkeses)
+                        </th>
+                        <th>
+                            Departamenti
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.Nenshkrimi)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.PershkrimiIkerkeses)
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.kerkesalist)
+                    {
+                        <tr>
+
+                            @if (item.KerkesaAnkesaId == 1)
+                            {
+                                <td>Kerkese</td>
+                            }
+                            else
+                            {
+                                <td>Ankese</td>
+                            }
+                            <td>
+                                @Html.DisplayFor(Model => item.LlojiKerkeses)
+                            </td>
+                            @if (item.DepartamentiId == 4)
+                            {
+                                <td>Shkenca kompjuterike</td>
+                            }
+                            else
+                            {
+                                <td>Ekonomik</td>
+                            }
+                            <td>
+                                @Html.DisplayFor(Model => item.Nenshkrimi)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(Model => item.PershkrimiIkerkeses)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
