@@ -1,0 +1,71 @@
+﻿@model StaffViewModel
+@using Web.Areas.Management.Models;
+
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "AddKerkese";
+    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+}
+
+
+<div style="padding-left:3em; padding-top:3em">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <form asp-area="Management" asp-action="AddStaff" asp-controller="Staff" method="post">
+                        <div class="col-md-12">
+                            <div class="panel-body">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Departamenti">Departamenti</label>
+                                                <input name="Departamenti" asp-for="Departamenti" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Llojiikerkeses">Lloji i kerkeses</label>
+                                                <input name="Llojiikerkeses" asp-for="Llojiikerkeses" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Nenshkrimi">Nenshkrimi</label>
+                                                <input name="Nenshkrimi " asp-for="Nenshkrimi" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="PershkrimiIKerkese"> PershkrimiIKerkese</label>
+                                                <input name="PershkrimiIKerkese" asp-for="PershkrimiIKerkese" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a asp-area="Managment" asp-action="Index" asp-controller="Staff" class="btn  btn-default btn-xl">Cancel</a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-success btn-xl"><i class="fa fa-save"></i> Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
