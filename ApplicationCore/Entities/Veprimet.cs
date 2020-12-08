@@ -5,11 +5,6 @@ namespace ApplicationCore.Entities
 {
     public partial class Veprimet
     {
-        public Veprimet()
-        {
-            TblDepartamentet = new HashSet<TblDepartamentet>();
-        }
-
         public int VeprimiId { get; set; }
         public int? KerkesaId { get; set; }
         public bool? Pranimi { get; set; }
@@ -34,6 +29,5 @@ namespace ApplicationCore.Entities
         public bool? IsDeleted { get; set; }
 
         public virtual Kerkesat Kerkesa { get; set; }
-        public virtual ICollection<TblDepartamentet> TblDepartamentet { get; set; }
     }
 }

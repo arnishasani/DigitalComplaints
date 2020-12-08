@@ -84,6 +84,7 @@ namespace Web
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ApplicationCore.Interfaces.Kerkesat, TblKerkesatAnkesatRepository>();
             services.AddTransient<IStaff, StaffRepository>();
+            services.AddTransient<ILlojetDepartamenteve, LlojetDepartamenteveRepository>();
             services.AddControllersWithViews();
         }
 

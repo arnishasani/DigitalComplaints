@@ -113,7 +113,18 @@ namespace Infrastructure.Repositories
                 throw;
             }
         }
+        public T GetById(int id)
+        {
+            try
+            {
+                return _context.Set<T>().Find(id);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public IEnumerable<T> GetAll()
         {
             try

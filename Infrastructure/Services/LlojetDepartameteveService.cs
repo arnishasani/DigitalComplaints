@@ -1,6 +1,5 @@
 ﻿using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
-using Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -8,59 +7,59 @@ using System.Text;
 
 namespace Infrastructure.Services
 {
-    public class StaffService : IStaff
+    public class LlojetDepartameteveService : ILlojetDepartamenteve
     {
-        public void Add(AspNetUsers entity)
+        public void Add(TblLlojetDepartamenteve entity)
         {
             throw new NotImplementedException();
         }
 
-        public void AddRange(IEnumerable<AspNetUsers> entity)
+        public void AddRange(IEnumerable<TblLlojetDepartamenteve> entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteUser(AspNetUsers model)
+        public bool DeleteDepartament(TblLlojetDepartamenteve model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<AspNetUsers> Find(Expression<Func<AspNetUsers, bool>> predicte, params Expression<Func<AspNetUsers, object>>[] includes)
+        public IEnumerable<TblLlojetDepartamenteve> Find(Expression<Func<TblLlojetDepartamenteve, bool>> predicte, params Expression<Func<TblLlojetDepartamenteve, object>>[] includes)
         {
             throw new NotImplementedException();
         }
 
-        public AspNetUsers FindOne(Expression<Func<AspNetUsers, bool>> predicte)
+        public TblLlojetDepartamenteve FindOne(Expression<Func<TblLlojetDepartamenteve, bool>> predicte)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<AspNetUsers> GetAll()
+        public IEnumerable<TblLlojetDepartamenteve> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<AspNetUsers> GetAllList()
+        public IEnumerable<TblLlojetDepartamenteve> GetAllList()
         {
             throw new NotImplementedException();
         }
 
-        public AspNetUsers GetById(string id)
+        public TblLlojetDepartamenteve GetById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public AspNetUsers GetById(int id)
+        public TblLlojetDepartamenteve GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(AspNetUsers entity)
+        public void Remove(TblLlojetDepartamenteve entity)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveRange(IEnumerable<AspNetUsers> entity)
+        public void RemoveRange(IEnumerable<TblLlojetDepartamenteve> entity)
         {
             throw new NotImplementedException();
         }
@@ -70,17 +69,17 @@ namespace Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public void Update(AspNetUsers entity)
+        public void Update(TblLlojetDepartamenteve entity)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateRange(IEnumerable<AspNetUsers> entity)
+        public bool UpdateDepartament(TblLlojetDepartamenteve model)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateUser(AspNetUsers model)
+        public void UpdateRange(IEnumerable<TblLlojetDepartamenteve> entity)
         {
             throw new NotImplementedException();
         }

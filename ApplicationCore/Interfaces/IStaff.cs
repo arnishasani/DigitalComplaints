@@ -9,5 +9,7 @@ namespace ApplicationCore.Interfaces
     {
         IEnumerable<AspNetUsers> GetAllList();
         bool DeleteUser(AspNetUsers model);
+
+        bool UpdateUser(AspNetUsers model);
     }
 }

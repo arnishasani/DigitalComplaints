@@ -131,6 +131,66 @@ namespace Web.Areas.Management.Controllers
                 throw ex;
             }
         }
+        
+        //[HttpGet]
+        //public IActionResult Edit(string id)
+        //{
+        //    try
+        //    {
+        //        var staff = _staffRepository.GetById(id);
+        //        var vm = new StaffViewModel()
+        //        {
+        //            Name = staff.Name,
+        //            Surname = staff.Surname,
+        //            Email = staff.Email,
+        //            PhoneNumber = staff.PhoneNumber,
+        //            Birthday = staff.Birthday,
+        //            Gender = staff.Gender,
+        //            IsActive = staff.IsActive,
+        //            IsDeleted = staff.IsDeleted,
+        //            CreateOnDate = staff.CreateOnDate,
+        //            LastModifiedOnDate = staff.LastModifiedOnDate
+        //        };
+        //        return View(vm);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+        //[HttpPost]
+        //public IActionResult EditStaff(StaffViewModel model)
+        //{
+        //    try
+        //    {
+        //        if (!ModelState.IsValid)
+        //            return View(model);
+        //        else
+        //        {
+        //            var user = new ApplicationUser
+        //            {
+        //                Name = model.Name,
+        //                Surname = model.Surname,
+        //                UserName = model.Email,
+        //                Email = model.Email,
+        //                PhoneNumber = model.PhoneNumber,
+        //                Birthday = model.Birthday,
+        //                Gender = model.Gender,
+        //                IsActive = model.IsActive,
+        //                IsDeleted = model.IsDeleted,
+        //                LastModifiedByUserId = _userManager.GetUserId(User),
+        //                LastModifiedOnDate = DateTime.Now,
+        //            };
+        //            //_staffRepository.UpdateUser(user);
+        //        }
+        //        return RedirectToAction(nameof(StaffController.Index), "Staff", new { area = "Management" });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         [HttpPost]
         public IActionResult DeleteStaff(string id)

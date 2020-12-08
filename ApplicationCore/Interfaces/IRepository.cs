@@ -14,6 +14,7 @@ namespace ApplicationCore.Interfaces
         void Update(T entity);
         void UpdateRange(IEnumerable<T> entity);
         T GetById(string id);
+        T GetById(int id);
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Expression<Func<T, bool>> predicte, params Expression<Func<T, object>>[] includes);
         T FindOne(Expression<Func<T, bool>> predicte);

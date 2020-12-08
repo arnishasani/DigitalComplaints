@@ -1,0 +1,44 @@
+﻿@using Web.Areas.Management.Models
+@model DepartamentiViewModel
+@{
+    ViewData["Title"] = "AddDepartamente";
+    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+}
+
+<div style="padding-left:3em; padding-top:3em">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <form asp-area="Management" asp-action="AddDepartamente" asp-controller="Departamenti" method="post">
+                        <div class="col-md-12">
+                            <div class="panel-body">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="EmriDepartamentit">Emri Departamentit</label>
+                                                <input name="EmriDepartamentit" asp-for="EmriDepartamentit" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a asp-area="Managment" asp-action="Index" asp-controller="Departamenti" class="btn  btn-default btn-xl">Cancel</a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-success btn-xl"><i class="fa fa-save"></i> Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

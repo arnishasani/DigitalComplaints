@@ -175,16 +175,24 @@ namespace ApplicationCore.Entities
 
             modelBuilder.Entity<TblDepartamentet>(entity =>
             {
-                entity.HasKey(e => e.DepartamentiId);
+                entity.HasNoKey();
 
                 entity.ToTable("tbl.Departamentet");
 
-                entity.Property(e => e.DepartamentiId).HasColumnName("DepartamentiID");
+                entity.Property(e => e.DepartamentiId)
+                    .HasColumnName("DepartamentiID")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.VeprimetId).HasColumnName("VeprimetID");
 
+                entity.HasOne(d => d.Departamenti)
+                    .WithMany()
+                    .HasForeignKey(d => d.DepartamentiId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl.Departamentet_tbl.LlojetDepartamenteve");
+
                 entity.HasOne(d => d.Veprimet)
-                    .WithMany(p => p.TblDepartamentet)
+                    .WithMany()
                     .HasForeignKey(d => d.VeprimetId)
                     .HasConstraintName("FK_tbl.Departamentet_Veprimet");
             });
@@ -195,17 +203,19 @@ namespace ApplicationCore.Entities
 
                 entity.ToTable("tbl.LlojetDepartamenteve");
 
-                entity.Property(e => e.DepartamentiId)
-                    .HasColumnName("DepartamentiID")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.DepartamentiId).HasColumnName("DepartamentiID");
 
                 entity.Property(e => e.EmriDepartamentit).HasMaxLength(450);
 
-                entity.HasOne(d => d.Departamenti)
-                    .WithOne(p => p.TblLlojetDepartamenteve)
-                    .HasForeignKey<TblLlojetDepartamenteve>(d => d.DepartamentiId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbl.LlojetDepartamenteve_tbl.Departamentet");
+                entity.Property(e => e.InsertDate).HasColumnType("date");
+
+                entity.Property(e => e.Lub).HasColumnName("LUB");
+
+                entity.Property(e => e.Lud)
+                    .HasColumnName("LUD")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Lun).HasColumnName("LUN");
             });
 
             modelBuilder.Entity<TblMenaxhimiKerkesave>(entity =>

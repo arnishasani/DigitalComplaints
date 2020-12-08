@@ -8,26 +8,26 @@ using System.Text;
 
 namespace Infrastructure.Repositories
 {
-    public class StaffRepository : Repository<AspNetUsers>, IStaff
+    public class LlojetDepartamenteveRepository : Repository<TblLlojetDepartamenteve>, ILlojetDepartamenteve
     {
         protected readonly ApplicationDBContext _digitalComplaintsDB;
 
-        public StaffRepository(ApplicationDBContext digitalComplaintsDB) : base(digitalComplaintsDB)
+        public LlojetDepartamenteveRepository(ApplicationDBContext digitalComplaintsDB) : base(digitalComplaintsDB)
         {
             _digitalComplaintsDB = digitalComplaintsDB;
         }
 
-        public bool DeleteUser(AspNetUsers model)
+        public bool DeleteDepartament(TblLlojetDepartamenteve model)
         {
             _digitalComplaintsDB.Entry(model).State = EntityState.Modified;
             return _digitalComplaintsDB.SaveChanges() > 0;
         }
 
-        public IEnumerable<AspNetUsers> GetAllList()
+        public IEnumerable<TblLlojetDepartamenteve> GetAllList()
         {
             try
             {
-                var temp = _digitalComplaintsDB.AspNetUserRoles.Where(x => x.RoleId == "1" || x.RoleId == "2").Select(x => x.User).Where(x=>x.IsDeleted == false || x.IsDeleted == null).ToList();
+                var temp = _digitalComplaintsDB.TblLlojetDepartamenteve.ToList();
                 return temp;
             }
             catch (Exception ex)
@@ -36,10 +36,9 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public bool UpdateUser(AspNetUsers model)
+        public bool UpdateDepartament(TblLlojetDepartamenteve model)
         {
-            _digitalComplaintsDB.Entry(model).State = EntityState.Modified;
-            return _digitalComplaintsDB.SaveChanges() > 0;
+            throw new NotImplementedException();
         }
     }
 }
