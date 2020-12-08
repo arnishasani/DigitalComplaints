@@ -26,6 +26,7 @@
                                             <th class="text-center">Is Delete</th>
                                             <th class="text-center">CreateOnDate</th>
                                             <th class="text-center">LastModifiedOnDate</th>
+                                            <th class="text-center">Veprimet</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -40,7 +41,16 @@
                                             <td><a class="text-center" style=" color: inherit;">@item.Email</a></td>
                                             <td><a class="text-center" style=" color: inherit;">@item.PhoneNumber</a></td>
                                             <td><a class="text-center" style=" color: inherit;">@item.Birthday</a></td>
-                                            <td><a class="text-center" style=" color: inherit;">@item.Gender</a></td>
+                                            <td>
+                                                @if (item.Gender == true)
+                                                {
+                                                    <a class="text-center" style=" color: inherit;">Mashkull</a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="text-center" style=" color: inherit;">Femer</a>
+                                                }
+                                            </td>
                                             <td>
                                                 @if (item.IsActive == true)
                                                 {
@@ -65,6 +75,7 @@
                                             </td>
                                             <td><a class="text-center" style=" color: inherit;">@item.CreateOnDate</a></td>
                                             <td><a class="text-center" style=" color: inherit;">@item.LastModifiedOnDate</a></td>
+                                            <td><a href="/Management/Staff/Details/@item.StaffID">Details</a> | <a onclick="ConfirmDelete('@item.StaffID')" id="btnContinueDelete">Delete</a></td>
                                             @*<td class="text-center">
             <div class="btn-group btn-hspace">
                 <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="true"><span class="icon mdi mdi-chevron-down"></span></button>
@@ -81,6 +92,20 @@
                                     </tbody>
 
                                 </table>
+                                <div id="myModal" class="modal fade delete-modal" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <h3>Are you sure want to delete this User?</h3>
+                                                <div class="m-t-20">
+                                                    <a href="#" class="btn mb-3 btn-primary btn-sm" data-dismiss="modal">Close</a>
+                                                    <button onclick="DeleteUser()" id="btnContinueDelete" class="btn mb-3 btn-primary btn-sm">Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="hiddenUserId" />
+                                </div>
                             }
                             else
                             {
@@ -121,6 +146,26 @@
                 },
             });
         });
+    </script>
+
+    <script>
+        var ConfirmDelete = function (UserId) {
+            $("#hiddenUserId").val(UserId);
+            $("#myModal").modal('show');
+        }
+        var DeleteUser = function () {
+            var userid = $("#hiddenUserId").val();
+            $.ajax({
+                type: "POST",
+                url: "/Management/Staff/DeleteStaff",
+                data: { ID: userid },
+                success: function (result) {
+                    $("#myModal").modal("hide");
+                    $("#row_" + userid).remove();
+                    window.location.href = '/Management/Staff/Index';
+                }
+            })
+        }
     </script>
 }
 

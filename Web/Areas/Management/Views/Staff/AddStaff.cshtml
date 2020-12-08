@@ -1,0 +1,109 @@
+﻿@model StaffViewModel
+@using Web.Areas.Management.Models;
+
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "AddStaff";
+    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+}
+
+
+<div style="padding-left:3em; padding-top:3em">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <form asp-area="Management" asp-action="AddStaff" asp-controller="Staff" method="post">
+                        <div class="col-md-12">
+                            <div class="panel-body">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Email">Email</label>
+                                                <input name="Email" asp-for="Email" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Password">Password</label>
+                                                <input name="Password" asp-for="Password" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Confrim Password">Confirm Password</label>
+                                                <input name="ConfirmPassword " asp-for="Email" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="PhoneNumber"> PhoneNumber</label>
+                                                <input name="PhoneNumber" asp-for="PhoneNumber" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Name">Name</label>
+                                                <input name="Name" asp-for="Name" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Surname">Surname</label>
+                                                <input name="Surname" asp-for="Surname" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="input-box ">
+                                                    <label for="gender">Gender </label>
+                                                    <select name="Gender" asp-for="Gender" class="form-control">
+                                                        <option value="" disabled selected>-- Select Gender --</option>
+                                                        <option value="false">Female</option>
+                                                        <option value="true">Male</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Birthday">Birthday</label>
+                                                <input name="Birthday" asp-for="Birthday" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a asp-area="Managment" asp-action="Index" asp-controller="Staff" class="btn  btn-default btn-xl">Cancel</a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-success btn-xl"><i class="fa fa-save"></i> Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

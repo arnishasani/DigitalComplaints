@@ -13,7 +13,7 @@ namespace ApplicationCore.Interfaces
         void RemoveRange(IEnumerable<T> entity);
         void Update(T entity);
         void UpdateRange(IEnumerable<T> entity);
-        T GetById(int id);
+        T GetById(string id);
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Expression<Func<T, bool>> predicte, params Expression<Func<T, object>>[] includes);
         T FindOne(Expression<Func<T, bool>> predicte);

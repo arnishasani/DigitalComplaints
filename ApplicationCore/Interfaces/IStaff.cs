@@ -8,5 +8,6 @@ namespace ApplicationCore.Interfaces
     public interface IStaff : IRepository<AspNetUsers>
     {
         IEnumerable<AspNetUsers> GetAllList();
+        bool DeleteUser(AspNetUsers model);
     }
 }

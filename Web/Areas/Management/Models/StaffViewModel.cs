@@ -22,9 +22,8 @@ namespace Web.Areas.Management.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-
-        public string StaffID { get; set; }
         public string ConfirmPassword { get; set; }
+        public string StaffID { get; set; }
         public string UserName { get; set; }
         public string NormalizedUserName { get; set; }
         public string NormalizedEmail { get; set; }
@@ -49,5 +48,9 @@ namespace Web.Areas.Management.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public List<StaffViewModel> Staff { get; set; }
+        public string CreatedBy { get; set; }
+        public string CreatedOn { get; set; }
+        public string UpdatedBy { get; set; }
+        public string UpdatedOn { get; set; }
     }
 }

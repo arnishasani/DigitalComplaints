@@ -17,11 +17,17 @@ namespace Infrastructure.Repositories
             _digitalComplaintsDB = digitalComplaintsDB;
         }
 
+        public bool DeleteUser(AspNetUsers model)
+        {
+            _digitalComplaintsDB.Entry(model).State = EntityState.Modified;
+            return _digitalComplaintsDB.SaveChanges() > 0;
+        }
+
         public IEnumerable<AspNetUsers> GetAllList()
         {
             try
             {
-                var temp = _digitalComplaintsDB.AspNetUserRoles.Where(x => x.RoleId == "1" || x.RoleId == "2").Select(x => x.User).ToList();
+                var temp = _digitalComplaintsDB.AspNetUserRoles.Where(x => x.RoleId == "1" || x.RoleId == "2").Select(x => x.User).Where(x=>x.IsDeleted == false || x.IsDeleted == null).ToList();
                 return temp;
             }
             catch (Exception ex)

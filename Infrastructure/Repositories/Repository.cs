@@ -101,7 +101,7 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public T GetById(int id)
+        public T GetById(string id)
         {
             try
             {
