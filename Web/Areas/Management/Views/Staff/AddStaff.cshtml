@@ -1,7 +1,6 @@
 ﻿@model StaffViewModel
 @using Web.Areas.Management.Models;
 
-@using Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "AddStaff";
     Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
@@ -27,7 +26,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label asp-for="Password">Password</label>
-                                                <input name="Password" asp-for="Password" class="form-control" />
+                                                <input type="password" name="Password" asp-for="Password" class="form-control" />
                                             </div>
                                         </div>
                                     </div>
@@ -37,7 +36,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label asp-for="Confrim Password">Confirm Password</label>
-                                                <input name="ConfirmPassword " asp-for="Email" class="form-control" />
+                                                <input type="password" name="ConfirmPassword " asp-for="Email" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-md-4">

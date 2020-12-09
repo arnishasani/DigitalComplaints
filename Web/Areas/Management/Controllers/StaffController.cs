@@ -21,12 +21,14 @@ namespace Web.Areas.Management.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public StaffController(IStaff staffRepository, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public StaffController(IStaff staffRepository, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _staffRepository = staffRepository;
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -61,7 +63,7 @@ namespace Web.Areas.Management.Controllers
                 return null;
             }
         }
-    
+
         public IActionResult Details(string id)
         {
             try
@@ -99,31 +101,33 @@ namespace Web.Areas.Management.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                    return View(model);
-                else
+                //if (!ModelState.IsValid)
+                //    return View(model);
+                //else
+                //{
+                var user = new ApplicationUser
                 {
-                    var user = new ApplicationUser
-                    {
-                        Name = model.Name,
-                        Surname = model.Surname,
-                        UserName = model.Email,
-                        Email = model.Email,
-                        PhoneNumber = model.PhoneNumber,
-                        Birthday = model.Birthday,
-                        Gender = model.Gender,
-                        IsActive = true,
-                        IsDeleted = false,
-                        CreateByUserId = _userManager.GetUserId(User),
-                        CreateOnDate = DateTime.Now,
-                    };
-                    var result = await _userManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
-                    {
-                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
-                    }
+                    Name = model.Name,
+                    Surname = model.Surname,
+                    UserName = model.Email,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    Birthday = model.Birthday,
+                    Gender = model.Gender,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreateByUserId = _userManager.GetUserId(User),
+                    CreateOnDate = DateTime.Now,
+                };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var role = await _roleManager.FindByIdAsync("2");
+                    await _userManager.AddToRoleAsync(user, role.Name);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
                 }
+                //}
                 return RedirectToAction(nameof(StaffController.Index), "Staff", new { area = "Management" });
             }
             catch (Exception ex)
@@ -131,7 +135,7 @@ namespace Web.Areas.Management.Controllers
                 throw ex;
             }
         }
-        
+
         //[HttpGet]
         //public IActionResult Edit(string id)
         //{

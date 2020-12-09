@@ -36,14 +36,18 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                @*<li class="nav-item d-none d-sm-inline-block">
                     <a href="index3.html" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
-                </li>
+                </li>*@
             </ul>
-                @*<partial name="_LoginPartial" />*@
+            <div class="col-md-11">
+                <div class="fa-pull-right">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
             <!-- SEARCH FORM -->
             @*<form class="form-inline ml-3">
             <div class="input-group input-group-sm">
@@ -157,7 +161,7 @@
             <a asp-area="Management" asp-controller="Home" asp-action="Index" class="brand-link">
                 @*<img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                      style="opacity: .8">*@
-                <span class="brand-text font-weight-light">Digital Management</span>
+                <span class="brand-text font-weight-light" style="text-align:center">Digital Management</span>
             </a>
 
             <!-- Sidebar -->
@@ -179,7 +183,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
     with font-awesome or any other icon font library -->
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a asp-area="Management" asp-controller="Home" asp-action="Create" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
@@ -187,7 +191,7 @@
                                     <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
-                        </li>
+                        </li>*@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             if (User.IsInRole("SuperAdmin"))

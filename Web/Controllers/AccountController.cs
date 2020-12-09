@@ -24,17 +24,19 @@ namespace Web.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -282,38 +284,55 @@ namespace Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
+            returnUrl = returnUrl ?? Url.Content("~/");
+
             if (remoteError != null)
             {
-                ErrorMessage = $"Error from external provider: {remoteError}";
+                ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
                 return RedirectToAction(nameof(Login));
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
+                ModelState.AddModelError(string.Empty, "Error loading external login information.");
                 return RedirectToAction(nameof(Login));
             }
 
-            // Sign in the user with this external login provider if the user already has a login.
-            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
-            if (result.Succeeded)
+            var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+            if (signInResult.Succeeded)
             {
-                _logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToLocal(returnUrl);
-            }
-            if (result.IsLockedOut)
-            {
-                return RedirectToAction(nameof(Lockout));
+                return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Client" });
             }
             else
             {
-                // If the user does not have an account, then ask the user to create an account.
-                ViewData["ReturnUrl"] = returnUrl;
-                ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLogin", new ExternalLoginViewModel { Email = email });
+
+                if (email != null)
+                {
+                    var user = await _userManager.FindByEmailAsync(email);
+
+                    if (user == null)
+                    {
+                        user = new ApplicationUser
+                        {
+                            UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        };
+                        await _userManager.CreateAsync(user);
+                    }
+                    await _userManager.AddLoginAsync(user, info);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    var role = await _roleManager.FindByIdAsync("3");
+                    await _userManager.AddToRoleAsync(user , role.Name);
+                    return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Client" });
+                }
+                ViewBag.ErrorTitle = $"Email claim not received from: {info.LoginProvider}";
+                ViewBag.ErrorMessage = "Please contact support on it@riinvest.net";
+
+                return View("Error");
             }
         }
-
+      
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

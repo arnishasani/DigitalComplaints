@@ -1,0 +1,61 @@
+﻿@using Web.Areas.Management.Models
+@model DepartamentiViewModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div style="margin-left:50px" class="col-md-5">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <table class="no-border no-strip skills">
+                            <tbody class="no-border-x no-borsder-y">
+                                <tr>
+                                    <td class="item" style="word-break:break-word">Emri : </td>
+                                    <td style="word-break:break-word">@Model.EmriDepartamentit</td>
+                                </tr>
+                                <tr>
+                                    <td class="item" style="word-break:break-word">Eshte aktiv : </td>
+                                    @if (Model.IsActive == true)
+                                    {
+                                        <td style="word-break:break-word">Po</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="word-break:break-word">Jo</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td class="item" style="word-break:break-word">Eshte i fshirë : </td>
+                                    @if (Model.IsDeleted == true)
+                                    {
+                                        <td style="word-break:break-word">Po</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="word-break:break-word">Jo</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td class="item" style="word-break:break-word">Eshte krijuar : </td>
+                                    <td style="word-break:break-word">@Model.InsertDate</td>
+                                </tr>
+                                <tr>
+                                    <td class="item" style="word-break:break-word">Modifikimi i fundit : </td>
+                                    <td style="word-break:break-word">@Model.Lud</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

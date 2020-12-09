@@ -14,6 +14,8 @@ using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using Infrastructure.Services;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Web
 {
@@ -79,7 +81,17 @@ namespace Web
                 //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+            services.AddMvc(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            }).AddXmlSerializerFormatters();
 
+            services.AddAuthentication()
+                .AddGoogle(options => {
+                    options.ClientId = "273612054101-3a7n4rr34pr18vfl6t3ggjpesqm2gqn7.apps.googleusercontent.com";
+                    options.ClientSecret = "3PH6fL6rKQU-kcKc54Runv0h";
+                });
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ApplicationCore.Interfaces.IKerkesat, TblKerkesatAnkesatRepository>();

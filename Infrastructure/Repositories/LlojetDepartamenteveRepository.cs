@@ -27,7 +27,7 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var temp = _digitalComplaintsDB.TblLlojetDepartamenteve.ToList();
+                var temp = _digitalComplaintsDB.TblLlojetDepartamenteve.Where(x=>x.IsDeleted == false && x.IsActive == true).ToList();
                 return temp;
             }
             catch (Exception ex)

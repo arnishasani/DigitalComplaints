@@ -95,5 +95,48 @@ namespace Web.Areas.Management.Controllers
                 throw ex;
             }
         }
+        public IActionResult Details(string id)
+        {
+            try
+            {
+                int departID = int.Parse(id);
+                var depart = _departamentetRepository.GetById(departID);
+                var vm = new DepartamentiViewModel()
+                {
+                    EmriDepartamentit = depart.EmriDepartamentit,
+                    IsActive = depart.IsActive,
+                    IsDeleted = depart.IsDeleted,
+                    Lud = depart.Lud,
+                    InsertDate = depart.InsertDate,
+                };
+                return View(vm);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public IActionResult DeleteDepartament(int id)
+        {
+            try
+            {
+                var staff = _departamentetRepository.GetById(id);
+                if (staff != null)
+                {
+
+                    staff.IsDeleted = true;
+                    //staff.LastModifiedByUserId = _userManager.GetUserId(User);
+                    //staff.LastModifiedOnDate = DateTime.Now;
+                    _departamentetRepository.DeleteDepartament(staff);
+                }
+                return RedirectToAction(nameof(DepartamentiController.Index), "Departamenti", new { area = "Management" });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
