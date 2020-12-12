@@ -20,11 +20,11 @@ namespace ApplicationCore.Entities
         public bool? IsDeleted { get; set; }
         public bool? IsAnonim { get; set; }
         public int? AnonimId { get; set; }
-        public int? InsertBy { get; set; }
+        public string InsertBy { get; set; }
         public DateTime? InsertDate { get; set; }
-        public int? Lub { get; set; }
+        public string Lub { get; set; }
         public DateTime? Lud { get; set; }
-        public int? Lun { get; set; }
+        public string Lun { get; set; }
 
         public virtual TblLlojetDepartamenteve Departamenti { get; set; }
         public virtual TblMenaxhimiKerkesave LlojiKerkesesNavigation { get; set; }

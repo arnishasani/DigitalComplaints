@@ -33,7 +33,7 @@ namespace ApplicationCore.Entities
 //            if (!optionsBuilder.IsConfigured)
 //            {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer("Data Source=ARNIS;Initial Catalog=DigitalComplaintsDB2;Integrated Security=True");
+//                optionsBuilder.UseSqlServer("Data Source=DESKTOP-2SSVAAH\\ARNISHASANI;Initial Catalog=DigitalComplaintsDB3;Integrated Security=True");
 //            }
 //        }
 
@@ -122,6 +122,8 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.Email).HasMaxLength(256);
 
+                entity.Property(e => e.IndexId).HasMaxLength(450);
+
                 entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
@@ -133,29 +135,39 @@ namespace ApplicationCore.Entities
             {
                 entity.HasKey(e => e.KerkesaAnkesaId);
 
+                entity.HasIndex(e => e.DepartamentiId);
+
+                entity.HasIndex(e => e.LlojiKerkeses);
+
+                entity.HasIndex(e => e.UserId);
+
                 entity.Property(e => e.KerkesaAnkesaId).HasColumnName("KerkesaAnkesaID");
 
                 entity.Property(e => e.AnonimId).HasColumnName("AnonimID");
 
                 entity.Property(e => e.DepartamentiId).HasColumnName("DepartamentiID");
 
+                entity.Property(e => e.InsertBy).HasMaxLength(450);
+
                 entity.Property(e => e.InsertDate).HasColumnType("date");
 
-                entity.Property(e => e.Lub).HasColumnName("LUB");
+                entity.Property(e => e.Lub)
+                    .HasColumnName("LUB")
+                    .HasMaxLength(450);
 
                 entity.Property(e => e.Lud)
                     .HasColumnName("LUD")
                     .HasColumnType("date");
 
-                entity.Property(e => e.Lun).HasColumnName("LUN");
+                entity.Property(e => e.Lun)
+                    .HasColumnName("LUN")
+                    .HasMaxLength(450);
 
                 entity.Property(e => e.Nenshkrimi).HasMaxLength(50);
 
                 entity.Property(e => e.PershkrimiIkerkeses)
                     .HasColumnName("PershkrimiIKerkeses")
                     .HasMaxLength(500);
-
-                entity.Property(e => e.UserId).HasMaxLength(450);
 
                 entity.HasOne(d => d.Departamenti)
                     .WithMany(p => p.Kerkesat)
@@ -178,6 +190,10 @@ namespace ApplicationCore.Entities
                 entity.HasNoKey();
 
                 entity.ToTable("tbl.Departamentet");
+
+                entity.HasIndex(e => e.DepartamentiId);
+
+                entity.HasIndex(e => e.VeprimetId);
 
                 entity.Property(e => e.DepartamentiId)
                     .HasColumnName("DepartamentiID")
@@ -207,15 +223,21 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.EmriDepartamentit).HasMaxLength(450);
 
+                entity.Property(e => e.InsertBy).HasMaxLength(450);
+
                 entity.Property(e => e.InsertDate).HasColumnType("date");
 
-                entity.Property(e => e.Lub).HasColumnName("LUB");
+                entity.Property(e => e.Lub)
+                    .HasColumnName("LUB")
+                    .HasMaxLength(450);
 
                 entity.Property(e => e.Lud)
                     .HasColumnName("LUD")
                     .HasColumnType("date");
 
-                entity.Property(e => e.Lun).HasColumnName("LUN");
+                entity.Property(e => e.Lun)
+                    .HasColumnName("LUN")
+                    .HasMaxLength(450);
             });
 
             modelBuilder.Entity<TblMenaxhimiKerkesave>(entity =>
@@ -226,30 +248,40 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.MenaxhimiId).HasColumnName("MenaxhimiID");
 
+                entity.Property(e => e.InsertBy).HasMaxLength(450);
+
                 entity.Property(e => e.InsertDate).HasColumnType("date");
 
                 entity.Property(e => e.LlojiIkerkeses)
                     .HasColumnName("LlojiIKerkeses")
                     .HasMaxLength(500);
 
-                entity.Property(e => e.Lub).HasColumnName("LUB");
+                entity.Property(e => e.Lub)
+                    .HasColumnName("LUB")
+                    .HasMaxLength(450);
 
                 entity.Property(e => e.Lud)
                     .HasColumnName("LUD")
                     .HasColumnType("date");
 
-                entity.Property(e => e.Lun).HasColumnName("LUN");
+                entity.Property(e => e.Lun)
+                    .HasColumnName("LUN")
+                    .HasMaxLength(450);
             });
 
             modelBuilder.Entity<Veprimet>(entity =>
             {
                 entity.HasKey(e => e.VeprimiId);
 
+                entity.HasIndex(e => e.KerkesaId);
+
                 entity.Property(e => e.VeprimiId)
                     .HasColumnName("VeprimiID")
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.Grupi).HasMaxLength(50);
+
+                entity.Property(e => e.InsertBy).HasMaxLength(450);
 
                 entity.Property(e => e.InsertDate).HasColumnType("date");
 
@@ -267,13 +299,17 @@ namespace ApplicationCore.Entities
                     .HasColumnName("LendetERefuzuara")
                     .HasMaxLength(500);
 
-                entity.Property(e => e.Lub).HasColumnName("LUB");
+                entity.Property(e => e.Lub)
+                    .HasColumnName("LUB")
+                    .HasMaxLength(450);
 
                 entity.Property(e => e.Lud)
                     .HasColumnName("LUD")
                     .HasColumnType("date");
 
-                entity.Property(e => e.Lun).HasColumnName("LUN");
+                entity.Property(e => e.Lun)
+                    .HasColumnName("LUN")
+                    .HasMaxLength(450);
 
                 entity.Property(e => e.ObligimetEmbetura)
                     .HasColumnName("ObligimetEMbetura")

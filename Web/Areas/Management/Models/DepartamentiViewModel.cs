@@ -15,7 +15,7 @@ namespace Web.Areas.Management.Models
         public DateTime? InsertDate { get; set; }
         public string Lub { get; set; }
         public DateTime? Lud { get; set; }
-        public int? Lun { get; set; }
+        public string Lun { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsDeleted { get; set; }
         public virtual ICollection<Kerkesat> Kerkesat { get; set; }

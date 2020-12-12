@@ -38,11 +38,12 @@ namespace Web.Areas.Management.Controllers
                     {
                         DepartamentiId = item.DepartamentiId,
                         EmriDepartamentit = item.EmriDepartamentit,
+                        InsertBy = _userManager.GetUserName(User),
                         IsActive = item.IsActive,
                         IsDeleted = item.IsDeleted,
                         InsertDate = item.InsertDate,
                         Lud = item.Lud
-                    });
+                    }) ;
                 }
                 model.DepartamentetList = departamentetList;
                 return View(model);
@@ -66,7 +67,6 @@ namespace Web.Areas.Management.Controllers
                     return View(model);
                 else
                 {
-                    var currentUser = _userManager.GetUserId(User);
                     if (model.DepartamentiId == 0)
                     {
                         TblLlojetDepartamenteve modelDepartamente = new TblLlojetDepartamenteve();
@@ -74,6 +74,7 @@ namespace Web.Areas.Management.Controllers
                         modelDepartamente.InsertDate = DateTime.Now;
                         modelDepartamente.IsActive = true;
                         modelDepartamente.IsDeleted = false;
+                        modelDepartamente.InsertBy = _userManager.GetUserName(User);
                         _departamentetRepository.Add(modelDepartamente);
                         _departamentetRepository.SaveChanges();
                     }
@@ -106,6 +107,8 @@ namespace Web.Areas.Management.Controllers
                     EmriDepartamentit = depart.EmriDepartamentit,
                     IsActive = depart.IsActive,
                     IsDeleted = depart.IsDeleted,
+                    InsertBy = depart.InsertBy,
+                    Lub = depart.Lub,
                     Lud = depart.Lud,
                     InsertDate = depart.InsertDate,
                 };
@@ -127,8 +130,8 @@ namespace Web.Areas.Management.Controllers
                 {
 
                     staff.IsDeleted = true;
-                    //staff.LastModifiedByUserId = _userManager.GetUserId(User);
-                    //staff.LastModifiedOnDate = DateTime.Now;
+                    staff.Lub = _userManager.GetUserName(User);
+                    staff.Lud = DateTime.Now;
                     _departamentetRepository.DeleteDepartament(staff);
                 }
                 return RedirectToAction(nameof(DepartamentiController.Index), "Departamenti", new { area = "Management" });

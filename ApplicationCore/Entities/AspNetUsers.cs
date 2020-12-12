@@ -39,6 +39,7 @@ namespace ApplicationCore.Entities
         public DateTime? LastModifiedOnDate { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string IndexId { get; set; }
 
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
