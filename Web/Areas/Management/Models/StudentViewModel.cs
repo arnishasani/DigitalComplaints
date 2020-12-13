@@ -1,19 +1,13 @@
-﻿using System;
+﻿using ApplicationCore.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ApplicationCore.Entities
+namespace Web.Areas.Management.Models
 {
-    public partial class AspNetUsers
+    public class StudentViewModel
     {
-        public AspNetUsers()
-        {
-            AspNetUserClaims = new HashSet<AspNetUserClaims>();
-            AspNetUserLogins = new HashSet<AspNetUserLogins>();
-            AspNetUserRoles = new HashSet<AspNetUserRoles>();
-            AspNetUserTokens = new HashSet<AspNetUserTokens>();
-            Kerkesat = new HashSet<Kerkesat>();
-        }
-
         public string Id { get; set; }
         public string UserName { get; set; }
         public string NormalizedUserName { get; set; }
@@ -40,8 +34,8 @@ namespace ApplicationCore.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public string IndexId { get; set; }
-        public int? DepartamentiId { get; set; }
 
+        public List<StudentViewModel> student { get; set; }
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }

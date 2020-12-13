@@ -64,6 +64,10 @@ namespace Web.Areas.Management.Controllers
             }
         }
 
+        public IActionResult Edit()
+        {
+            return View();
+        }
         public IActionResult Details(string id)
         {
             try

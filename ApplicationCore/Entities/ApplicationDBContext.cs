@@ -26,6 +26,7 @@ namespace ApplicationCore.Entities
         public virtual DbSet<TblDepartamentet> TblDepartamentet { get; set; }
         public virtual DbSet<TblLlojetDepartamenteve> TblLlojetDepartamenteve { get; set; }
         public virtual DbSet<TblMenaxhimiKerkesave> TblMenaxhimiKerkesave { get; set; }
+        public virtual DbSet<VendimiPerfundimtar> VendimiPerfundimtar { get; set; }
         public virtual DbSet<Veprimet> Veprimet { get; set; }
 
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -269,6 +270,24 @@ namespace ApplicationCore.Entities
                     .HasMaxLength(450);
             });
 
+            modelBuilder.Entity<VendimiPerfundimtar>(entity =>
+            {
+                entity.Property(e => e.InsertBy).HasMaxLength(450);
+
+                entity.Property(e => e.InsertDate).HasColumnType("date");
+
+                entity.Property(e => e.Lub).HasMaxLength(450);
+
+                entity.Property(e => e.Lud).HasColumnType("date");
+
+                entity.Property(e => e.StaffId).HasMaxLength(450);
+
+                entity.HasOne(d => d.Veprimi)
+                    .WithMany(p => p.VendimiPerfundimtar)
+                    .HasForeignKey(d => d.VeprimiId)
+                    .HasConstraintName("FK_VendimiPerfundimtar_Veprimet");
+            });
+
             modelBuilder.Entity<Veprimet>(entity =>
             {
                 entity.HasKey(e => e.VeprimiId);
@@ -322,6 +341,8 @@ namespace ApplicationCore.Entities
                     .HasMaxLength(500);
 
                 entity.Property(e => e.RefuzimiTotalPerLende).HasMaxLength(50);
+
+                entity.Property(e => e.StafId).HasMaxLength(450);
 
                 entity.Property(e => e.VitiAkademik).HasMaxLength(50);
 

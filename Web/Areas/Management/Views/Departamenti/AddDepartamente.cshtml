@@ -1,5 +1,6 @@
 ﻿@using Web.Areas.Management.Models
 @model DepartamentiViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "AddDepartamente";
     Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
@@ -43,12 +44,12 @@
 </div>
 
 @section scripts {
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.0.3/jquery-confirm.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.0.3/jquery-confirm.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-<script>
- var validobj;
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.0.3/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.0.3/jquery-confirm.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script>
+        var validobj;
         $(function () {
             validobj = $("#departamentFormId").validate({
                 ignore: ".note-editable.panel-body",
@@ -73,22 +74,22 @@
                     },
                 },
                 messages: {
-                    EmriDepartamentit:{
-                        required: '<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">"Ju lutem plotsoni kriterin"</li></ul>',
-                        minlength: '<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">"Minimumi 3 shkronja"</li></ul>'
-                },
+                    EmriDepartamentit: {
+                        required: '<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">Ju lutem plotsoni fushen e kerkuar</li></ul>',
+                        minlength: '<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">Minimumi 3 karaktere</li></ul>'
+                    },
                 },
                 submitHandler: function (form) {
-                if (submitted) {
-                event.preventDefault();
-                return false;
+                    if (submitted) {
+                        event.preventDefault();
+                        return false;
+                    }
+                    else {
+                        submitted = true;
+                        form.submit();
+                    }
                 }
-                else {
-                submitted = true;
-                form.submit();
-                }
-                }
-                });
+            });
         });
-</script>
+    </script>
 }

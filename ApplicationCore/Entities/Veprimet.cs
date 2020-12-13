@@ -5,8 +5,14 @@ namespace ApplicationCore.Entities
 {
     public partial class Veprimet
     {
+        public Veprimet()
+        {
+            VendimiPerfundimtar = new HashSet<VendimiPerfundimtar>();
+        }
+
         public int VeprimiId { get; set; }
         public int? KerkesaId { get; set; }
+        public string StafId { get; set; }
         public bool? Pranimi { get; set; }
         public bool? Verifikimi { get; set; }
         public bool? Miratimi { get; set; }
@@ -29,5 +35,6 @@ namespace ApplicationCore.Entities
         public bool? IsDeleted { get; set; }
 
         public virtual Kerkesat Kerkesa { get; set; }
+        public virtual ICollection<VendimiPerfundimtar> VendimiPerfundimtar { get; set; }
     }
 }

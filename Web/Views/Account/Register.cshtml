@@ -11,8 +11,6 @@
                 <div class="card card-signin my-5">
                     <h5 class="card-title text-center" style="margin-top:10px">Register</h5>
                     <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                        <div class="card-body">
-                            <form class="form-signin">
                                 <div asp-validation-summary="All" class="text-danger"></div>
                                 <div class="form-label-group">
                                     <label asp-for="Email">Email address</label>
@@ -43,8 +41,6 @@
                                 <button type="submit" class="btn btn-lg btn-primary btn-block text-uppercase">Register</button>
                                 @*<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>*@
                                 <hr class="my-4">
-                            </form>
-                        </div>
                     </form>
                 </div>
             </div>
