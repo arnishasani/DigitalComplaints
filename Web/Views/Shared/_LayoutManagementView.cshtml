@@ -183,16 +183,16 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                         @*<li class="nav-item">
-                                <a asp-area="Management" asp-controller="Home" asp-action="Create" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Create
-                                        <span class="right badge badge-danger">New</span>
-                                    </p>
-                                </a>
-                            </li>*@
+            <a asp-area="Management" asp-controller="Home" asp-action="Create" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Create
+                    <span class="right badge badge-danger">New</span>
+                </p>
+            </a>
+        </li>*@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             if (User.IsInRole("SuperAdmin"))
@@ -216,6 +216,29 @@
                                             <a asp-area="Management" asp-controller="Staff" asp-action="AddStaff" class="nav-link active">
                                                 <i class="fas fa-circle nav-icon"></i>
                                                 <p>Shto Staf</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview menu-open">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                                        <p>
+                                            Llojet e kerkesave
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-area="Management" asp-controller="MenaxhimiKerkesave" asp-action="Index" class="nav-link active">
+                                                <i class="fas fa-circle nav-icon"></i>
+                                                <p>Shiko llojet e kerkesave</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-area="Management" asp-controller="MenaxhimiKerkesave" asp-action="AddKerkese" class="nav-link active">
+                                                <i class="fas fa-circle nav-icon"></i>
+                                                <p>Shto lloj te kerkeses</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -268,11 +291,11 @@
                                             </a>
                                         </li>
                                         @*<li class="nav-item">
-                                                <a asp-area="Client" asp-controller="Role" asp-action="Index" class="nav-link active">
-                                                    <i class="fas fa-circle nav-icon"></i>
-                                                    <p>Rolet</p>
-                                                </a>
-                                            </li>*@
+                            <a asp-area="Client" asp-controller="Role" asp-action="Index" class="nav-link active">
+                                <i class="fas fa-circle nav-icon"></i>
+                                <p>Rolet</p>
+                            </a>
+                        </li>*@
                                     </ul>
                                 </li>
                             }
