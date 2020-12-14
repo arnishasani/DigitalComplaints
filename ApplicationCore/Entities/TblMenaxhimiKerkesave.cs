@@ -12,6 +12,7 @@ namespace ApplicationCore.Entities
 
         public int MenaxhimiId { get; set; }
         public string LlojiIkerkeses { get; set; }
+        public string PershkrimiKerkeses { get; set; }
         public string InsertBy { get; set; }
         public DateTime? InsertDate { get; set; }
         public string Lub { get; set; }

@@ -16,7 +16,6 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>@ViewData["Title"] - Management</title>
-
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="~/css/all.min.css">
@@ -183,16 +182,16 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
                         @*<li class="nav-item">
-            <a asp-area="Management" asp-controller="Home" asp-action="Create" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                    Create
-                    <span class="right badge badge-danger">New</span>
-                </p>
-            </a>
-        </li>*@
+                                <a asp-area="Management" asp-controller="Home" asp-action="Create" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Create
+                                        <span class="right badge badge-danger">New</span>
+                                    </p>
+                                </a>
+                            </li>*@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             if (User.IsInRole("SuperAdmin"))
@@ -291,11 +290,11 @@
                                             </a>
                                         </li>
                                         @*<li class="nav-item">
-                            <a asp-area="Client" asp-controller="Role" asp-action="Index" class="nav-link active">
-                                <i class="fas fa-circle nav-icon"></i>
-                                <p>Rolet</p>
-                            </a>
-                        </li>*@
+                                                <a asp-area="Client" asp-controller="Role" asp-action="Index" class="nav-link active">
+                                                    <i class="fas fa-circle nav-icon"></i>
+                                                    <p>Rolet</p>
+                                                </a>
+                                            </li>*@
                                     </ul>
                                 </li>
                             }

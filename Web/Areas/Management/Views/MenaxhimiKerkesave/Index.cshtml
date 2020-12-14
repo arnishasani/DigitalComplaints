@@ -4,7 +4,11 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+
 }
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+</head>
 <div style="padding-left:4em; padding-top:5em; padding-right:4em;">
     <div class="content">
         <div class="container-fluid">
@@ -13,11 +17,9 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-4 fa-pull-right">
-                                    <form method="get" asp-area="Management" asp-action="AddKerkese" asp-controller="MenaxhimiKerkesave">
-                                        <button type="submit" class="btn mb-3 btn-primary btn-sm">  Shto Kerkese</button>
-                                    </form>
-                                </div>
+                                <form method="get" asp-area="Management" asp-action="AddKerkese" asp-controller="MenaxhimiKerkesave">
+                                    <button type="submit" class="btn mb-3 btn-primary btn-sm float-right">  Shto Kerkese</button>
+                                </form>
                             </div>
                             <div class="col-md-12">
                                 @if (Model.menaxhimiList.Count > 0)
@@ -26,6 +28,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">Name</th>
+                                                <th class="text-center">Pershkrimi i detajizuar</th>
                                                 <th class="text-center">Is Active</th>
                                                 <th class="text-center">Is Delete</th>
                                                 <th class="text-center">Create by</th>
@@ -42,6 +45,7 @@
                                             {
                                                 <tr>
                                                     <td><a class="text-center" style=" color: inherit;">@item.LlojiIkerkeses</a></td>
+                                                    <td><a class="text-center" style=" color: inherit;">@Html.Raw(item.PershkrimiKerkeses)</a></td>
                                                     <td>
                                                         @if (item.IsActive == true)
                                                         {
@@ -67,7 +71,7 @@
                                                     <td><a class="text-center" style=" color: inherit;">@item.InsertBy</a></td>
                                                     <td><a class="text-center" style=" color: inherit;">@item.InsertDate</a></td>
                                                     <td><a class="text-center" style=" color: inherit;">@item.Lub</a></td>
-                                                    <td><a href="/Management/Staff/Details/@item.MenaxhimiId">Details</a> | <a onclick="ConfirmDelete('@item.MenaxhimiId')" id="btnContinueDelete">Delete</a></td>
+                                                    <td><a class="btn mb-1 btn-primary btn-sm " href="/Management/Staff/Details/@item.MenaxhimiId">Details</a> | <a class="btn mb-1 btn-danger btn-sm" onclick="ConfirmDelete('@item.MenaxhimiId')" id="btnContinueDelete">Delete</a></td>
                                                     @*<td class="text-center">
                                                             <div class="btn-group btn-hspace">
                                                                 <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="true"><span class="icon mdi mdi-chevron-down"></span></button>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ApplicationCore.Migrations
 {
-    public partial class Migration1 : Migration
+    public partial class migration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,7 +49,9 @@ namespace ApplicationCore.Migrations
                     LastModifiedByUserId = table.Column<string>(nullable: true),
                     LastModifiedOnDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Surname = table.Column<string>(nullable: true)
+                    Surname = table.Column<string>(nullable: true),
+                    IndexId = table.Column<string>(maxLength: 450, nullable: true),
+                    DepartamentiId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,52 +59,23 @@ namespace ApplicationCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbl.Departamentet",
+                name: "tbl.LlojetDepartamenteve",
                 columns: table => new
                 {
                     DepartamentiID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    VeprimetID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tbl.Departamentet", x => x.DepartamentiID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tbl.KerkesatAnkesat",
-                columns: table => new
-                {
-                    KerkesaAnkesaID = table.Column<int>(nullable: false),
-                    RoliID = table.Column<int>(nullable: true),
-                    Departamenti = table.Column<string>(maxLength: 50, nullable: true),
-                    Nenshkrimi = table.Column<string>(maxLength: 50, nullable: true),
-                    PershkrimiIKerkeses = table.Column<string>(maxLength: 500, nullable: true),
+                    EmriDepartamentit = table.Column<string>(maxLength: 450, nullable: true),
+                    InsertBy = table.Column<string>(maxLength: 450, nullable: true),
+                    InsertDate = table.Column<DateTime>(type: "date", nullable: true),
                     IsActive = table.Column<bool>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: true),
-                    IsAnonim = table.Column<bool>(nullable: true),
-                    AnonimID = table.Column<int>(nullable: true),
-                    InsertBy = table.Column<int>(nullable: true),
-                    InsertDate = table.Column<DateTime>(type: "date", nullable: true),
-                    LUB = table.Column<int>(nullable: true),
+                    LUB = table.Column<string>(maxLength: 450, nullable: true),
                     LUD = table.Column<DateTime>(type: "date", nullable: true),
-                    LUN = table.Column<int>(nullable: true)
+                    LUN = table.Column<string>(maxLength: 450, nullable: true)
                 },
                 constraints: table =>
                 {
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tbl.LlojetDepartamenteve",
-                columns: table => new
-                {
-                    DepartamentiId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmriDepartamentit = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tbl.LlojetDepartamenteve", x => x.DepartamentiId);
+                    table.PrimaryKey("PK_tbl.LlojetDepartamenteve", x => x.DepartamentiID);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,50 +85,17 @@ namespace ApplicationCore.Migrations
                     MenaxhimiID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LlojiIKerkeses = table.Column<string>(maxLength: 500, nullable: true),
-                    InsertBy = table.Column<int>(nullable: true),
+                    InsertBy = table.Column<string>(maxLength: 450, nullable: true),
                     InsertDate = table.Column<DateTime>(type: "date", nullable: true),
-                    LUB = table.Column<int>(nullable: true),
+                    LUB = table.Column<string>(maxLength: 450, nullable: true),
                     LUD = table.Column<DateTime>(type: "date", nullable: true),
-                    LUN = table.Column<int>(nullable: true),
+                    LUN = table.Column<string>(maxLength: 450, nullable: true),
                     IsActive = table.Column<bool>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tbl.MenaxhimiKerkesave", x => x.MenaxhimiID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tbl.Veprimet",
-                columns: table => new
-                {
-                    KerkesaID = table.Column<int>(nullable: true),
-                    MenaxhimiID = table.Column<int>(nullable: true),
-                    VeprimiID = table.Column<int>(nullable: false),
-                    Pranimi = table.Column<bool>(nullable: true),
-                    Verifikimi = table.Column<bool>(nullable: true),
-                    Miratimi = table.Column<bool>(nullable: true),
-                    Vendimi = table.Column<bool>(nullable: true),
-                    LlojiIKerkeses = table.Column<string>(maxLength: 50, nullable: true),
-                    Grupi = table.Column<string>(maxLength: 50, nullable: true),
-                    Orari = table.Column<string>(maxLength: 50, nullable: true),
-                    LendetEMbetura = table.Column<string>(maxLength: 500, nullable: true),
-                    LendetEPranuara = table.Column<string>(maxLength: 500, nullable: true),
-                    VitiAkademik = table.Column<string>(maxLength: 50, nullable: true),
-                    RefuzimiTotalPerLende = table.Column<string>(maxLength: 50, nullable: true),
-                    ObligimetEMbetura = table.Column<string>(maxLength: 500, nullable: true),
-                    LendetERefuzuara = table.Column<string>(maxLength: 500, nullable: true),
-                    PagesatEPerfunduara = table.Column<string>(maxLength: 500, nullable: true),
-                    InsertBy = table.Column<int>(nullable: true),
-                    InsertDate = table.Column<DateTime>(type: "date", nullable: true),
-                    LUB = table.Column<int>(nullable: true),
-                    LUD = table.Column<DateTime>(type: "date", nullable: true),
-                    LUN = table.Column<int>(nullable: true),
-                    IsActive = table.Column<bool>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: true)
-                },
-                constraints: table =>
-                {
                 });
 
             migrationBuilder.CreateTable(
@@ -264,6 +204,141 @@ namespace ApplicationCore.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Kerkesat",
+                columns: table => new
+                {
+                    KerkesaAnkesaID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    LlojiKerkeses = table.Column<int>(nullable: true),
+                    DepartamentiID = table.Column<int>(nullable: true),
+                    Nenshkrimi = table.Column<string>(maxLength: 50, nullable: true),
+                    PershkrimiIKerkeses = table.Column<string>(maxLength: 500, nullable: true),
+                    IsActive = table.Column<bool>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: true),
+                    IsAnonim = table.Column<bool>(nullable: true),
+                    AnonimID = table.Column<int>(nullable: true),
+                    InsertBy = table.Column<string>(maxLength: 450, nullable: true),
+                    InsertDate = table.Column<DateTime>(type: "date", nullable: true),
+                    LUB = table.Column<string>(maxLength: 450, nullable: true),
+                    LUD = table.Column<DateTime>(type: "date", nullable: true),
+                    LUN = table.Column<string>(maxLength: 450, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Kerkesat", x => x.KerkesaAnkesaID);
+                    table.ForeignKey(
+                        name: "FK_Kerkesat_tbl.LlojetDepartamenteve",
+                        column: x => x.DepartamentiID,
+                        principalTable: "tbl.LlojetDepartamenteve",
+                        principalColumn: "DepartamentiID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Kerkesat_tbl.MenaxhimiKerkesave",
+                        column: x => x.LlojiKerkeses,
+                        principalTable: "tbl.MenaxhimiKerkesave",
+                        principalColumn: "MenaxhimiID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Kerkesat_AspNetUsers",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Veprimet",
+                columns: table => new
+                {
+                    VeprimiID = table.Column<int>(nullable: false),
+                    KerkesaID = table.Column<int>(nullable: true),
+                    StafId = table.Column<string>(maxLength: 450, nullable: true),
+                    Pranimi = table.Column<bool>(nullable: true),
+                    Verifikimi = table.Column<bool>(nullable: true),
+                    Miratimi = table.Column<bool>(nullable: true),
+                    Vendimi = table.Column<bool>(nullable: true),
+                    Grupi = table.Column<string>(maxLength: 50, nullable: true),
+                    Orari = table.Column<string>(maxLength: 50, nullable: true),
+                    LendetEMbetura = table.Column<string>(maxLength: 500, nullable: true),
+                    LendetEPranuara = table.Column<string>(maxLength: 500, nullable: true),
+                    VitiAkademik = table.Column<string>(maxLength: 50, nullable: true),
+                    RefuzimiTotalPerLende = table.Column<string>(maxLength: 50, nullable: true),
+                    ObligimetEMbetura = table.Column<string>(maxLength: 500, nullable: true),
+                    LendetERefuzuara = table.Column<string>(maxLength: 500, nullable: true),
+                    PagesatEPerfunduara = table.Column<string>(maxLength: 500, nullable: true),
+                    InsertBy = table.Column<string>(maxLength: 450, nullable: true),
+                    InsertDate = table.Column<DateTime>(type: "date", nullable: true),
+                    LUB = table.Column<string>(maxLength: 450, nullable: true),
+                    LUD = table.Column<DateTime>(type: "date", nullable: true),
+                    LUN = table.Column<string>(maxLength: 450, nullable: true),
+                    IsActive = table.Column<bool>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Veprimet", x => x.VeprimiID);
+                    table.ForeignKey(
+                        name: "FK_Veprimet_Kerkesat",
+                        column: x => x.KerkesaID,
+                        principalTable: "Kerkesat",
+                        principalColumn: "KerkesaAnkesaID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbl.Departamentet",
+                columns: table => new
+                {
+                    DepartamentiID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VeprimetID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.ForeignKey(
+                        name: "FK_tbl.Departamentet_tbl.LlojetDepartamenteve",
+                        column: x => x.DepartamentiID,
+                        principalTable: "tbl.LlojetDepartamenteve",
+                        principalColumn: "DepartamentiID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_tbl.Departamentet_Veprimet",
+                        column: x => x.VeprimetID,
+                        principalTable: "Veprimet",
+                        principalColumn: "VeprimiID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VendimiPerfundimtar",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VeprimiId = table.Column<int>(nullable: true),
+                    StaffId = table.Column<string>(maxLength: 450, nullable: true),
+                    Vendimi = table.Column<bool>(nullable: true),
+                    PershkrimiVendimit = table.Column<string>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: true),
+                    InsertBy = table.Column<string>(maxLength: 450, nullable: true),
+                    InsertDate = table.Column<DateTime>(type: "date", nullable: true),
+                    Lud = table.Column<DateTime>(type: "date", nullable: true),
+                    Lub = table.Column<string>(maxLength: 450, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VendimiPerfundimtar", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VendimiPerfundimtar_Veprimet",
+                        column: x => x.VeprimiId,
+                        principalTable: "Veprimet",
+                        principalColumn: "VeprimiID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -302,6 +377,41 @@ namespace ApplicationCore.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "([NormalizedUserName] IS NOT NULL)");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Kerkesat_DepartamentiID",
+                table: "Kerkesat",
+                column: "DepartamentiID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Kerkesat_LlojiKerkeses",
+                table: "Kerkesat",
+                column: "LlojiKerkeses");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Kerkesat_UserId",
+                table: "Kerkesat",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl.Departamentet_DepartamentiID",
+                table: "tbl.Departamentet",
+                column: "DepartamentiID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl.Departamentet_VeprimetID",
+                table: "tbl.Departamentet",
+                column: "VeprimetID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VendimiPerfundimtar_VeprimiId",
+                table: "VendimiPerfundimtar",
+                column: "VeprimiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Veprimet_KerkesaID",
+                table: "Veprimet",
+                column: "KerkesaID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -325,19 +435,22 @@ namespace ApplicationCore.Migrations
                 name: "tbl.Departamentet");
 
             migrationBuilder.DropTable(
-                name: "tbl.KerkesatAnkesat");
+                name: "VendimiPerfundimtar");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Veprimet");
+
+            migrationBuilder.DropTable(
+                name: "Kerkesat");
 
             migrationBuilder.DropTable(
                 name: "tbl.LlojetDepartamenteve");
 
             migrationBuilder.DropTable(
                 name: "tbl.MenaxhimiKerkesave");
-
-            migrationBuilder.DropTable(
-                name: "tbl.Veprimet");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

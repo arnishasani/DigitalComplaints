@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApplicationCore.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20201211200921_migration2")]
-    partial class migration2
+    [Migration("20201214080857_migration1")]
+    partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -171,6 +171,9 @@ namespace ApplicationCore.Migrations
                     b.Property<DateTime?>("CreateOnDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("DepartamentiId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -180,6 +183,10 @@ namespace ApplicationCore.Migrations
 
                     b.Property<bool?>("Gender")
                         .HasColumnType("bit");
+
+                    b.Property<string>("IndexId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -261,8 +268,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnName("DepartamentiID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("InsertBy")
-                        .HasColumnType("int");
+                    b.Property<string>("InsertBy")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<DateTime?>("InsertDate")
                         .HasColumnType("date");
@@ -279,17 +287,19 @@ namespace ApplicationCore.Migrations
                     b.Property<int?>("LlojiKerkeses")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Lub")
+                    b.Property<string>("Lub")
                         .HasColumnName("LUB")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<DateTime?>("Lud")
                         .HasColumnName("LUD")
                         .HasColumnType("date");
 
-                    b.Property<int?>("Lun")
+                    b.Property<string>("Lun")
                         .HasColumnName("LUN")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<string>("Nenshkrimi")
                         .HasColumnType("nvarchar(50)")
@@ -301,8 +311,7 @@ namespace ApplicationCore.Migrations
                         .HasMaxLength(500);
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasMaxLength(450);
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("KerkesaAnkesaId");
 
@@ -346,8 +355,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
-                    b.Property<int?>("InsertBy")
-                        .HasColumnType("int");
+                    b.Property<string>("InsertBy")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<DateTime?>("InsertDate")
                         .HasColumnType("date");
@@ -358,17 +368,19 @@ namespace ApplicationCore.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("Lub")
+                    b.Property<string>("Lub")
                         .HasColumnName("LUB")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<DateTime?>("Lud")
                         .HasColumnName("LUD")
                         .HasColumnType("date");
 
-                    b.Property<int?>("Lun")
+                    b.Property<string>("Lun")
                         .HasColumnName("LUN")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.HasKey("DepartamentiId");
 
@@ -383,8 +395,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("InsertBy")
-                        .HasColumnType("int");
+                    b.Property<string>("InsertBy")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<DateTime?>("InsertDate")
                         .HasColumnType("date");
@@ -400,21 +413,70 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<int?>("Lub")
+                    b.Property<string>("Lub")
                         .HasColumnName("LUB")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<DateTime?>("Lud")
                         .HasColumnName("LUD")
                         .HasColumnType("date");
 
-                    b.Property<int?>("Lun")
+                    b.Property<string>("Lun")
                         .HasColumnName("LUN")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.HasKey("MenaxhimiId");
 
                     b.ToTable("tbl.MenaxhimiKerkesave");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.VendimiPerfundimtar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("InsertBy")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<DateTime?>("InsertDate")
+                        .HasColumnType("date");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Lub")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<DateTime?>("Lud")
+                        .HasColumnType("date");
+
+                    b.Property<string>("PershkrimiVendimit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StaffId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<bool?>("Vendimi")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("VeprimiId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VeprimiId");
+
+                    b.ToTable("VendimiPerfundimtar");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.Veprimet", b =>
@@ -427,8 +489,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("InsertBy")
-                        .HasColumnType("int");
+                    b.Property<string>("InsertBy")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<DateTime?>("InsertDate")
                         .HasColumnType("date");
@@ -458,17 +521,19 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<int?>("Lub")
+                    b.Property<string>("Lub")
                         .HasColumnName("LUB")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<DateTime?>("Lud")
                         .HasColumnName("LUD")
                         .HasColumnType("date");
 
-                    b.Property<int?>("Lun")
+                    b.Property<string>("Lun")
                         .HasColumnName("LUN")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<bool?>("Miratimi")
                         .HasColumnType("bit");
@@ -493,6 +558,10 @@ namespace ApplicationCore.Migrations
                     b.Property<string>("RefuzimiTotalPerLende")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("StafId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<bool?>("Vendimi")
                         .HasColumnType("bit");
@@ -592,6 +661,14 @@ namespace ApplicationCore.Migrations
                         .WithMany()
                         .HasForeignKey("VeprimetId")
                         .HasConstraintName("FK_tbl.Departamentet_Veprimet");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.VendimiPerfundimtar", b =>
+                {
+                    b.HasOne("ApplicationCore.Entities.Veprimet", "Veprimi")
+                        .WithMany("VendimiPerfundimtar")
+                        .HasForeignKey("VeprimiId")
+                        .HasConstraintName("FK_VendimiPerfundimtar_Veprimet");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.Veprimet", b =>

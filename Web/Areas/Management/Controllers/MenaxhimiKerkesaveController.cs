@@ -37,13 +37,14 @@ namespace Web.Areas.Management.Controllers
                     {
                         MenaxhimiId = item.MenaxhimiId,
                         LlojiIkerkeses = item.LlojiIkerkeses,
+                        PershkrimiKerkeses = item.PershkrimiKerkeses,
                         IsActive = item.IsActive,
                         IsDeleted = item.IsDeleted,
-                      //  InsertBy = item.InsertBy,
+                        //  InsertBy = item.InsertBy,
                         InsertDate = item.InsertDate,
                         Lub = item.Lub,
                         Lud = item.Lud,
-                    }) ;
+                    }); ;
                 }
                 model.menaxhimiList = menaxhimetList;
                 return View(model);
@@ -73,6 +74,7 @@ namespace Web.Areas.Management.Controllers
                 {
                     TblMenaxhimiKerkesave modelMenaxhimi = new TblMenaxhimiKerkesave();
                     modelMenaxhimi.LlojiIkerkeses = model.LlojiIkerkeses;
+                    modelMenaxhimi.PershkrimiKerkeses = model.PershkrimiKerkeses;
                     modelMenaxhimi.InsertBy = _userManager.GetUserId(User);
                     modelMenaxhimi.InsertDate = DateTime.Now;
                     modelMenaxhimi.IsActive = true;
