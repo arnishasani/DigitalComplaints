@@ -85,6 +85,7 @@ namespace ApplicationCore.Migrations
                     MenaxhimiID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LlojiIKerkeses = table.Column<string>(maxLength: 500, nullable: true),
+                    PershkrimiKerkeses = table.Column<string>(nullable: true),
                     InsertBy = table.Column<string>(maxLength: 450, nullable: true),
                     InsertDate = table.Column<DateTime>(type: "date", nullable: true),
                     LUB = table.Column<string>(maxLength: 450, nullable: true),

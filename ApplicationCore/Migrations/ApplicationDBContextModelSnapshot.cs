@@ -425,6 +425,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
+                    b.Property<string>("PershkrimiKerkeses")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("MenaxhimiId");
 
                     b.ToTable("tbl.MenaxhimiKerkesave");

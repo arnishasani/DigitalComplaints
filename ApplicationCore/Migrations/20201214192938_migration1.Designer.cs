@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApplicationCore.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20201214080857_migration1")]
+    [Migration("20201214192938_migration1")]
     partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -426,6 +426,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnName("LUN")
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
+
+                    b.Property<string>("PershkrimiKerkeses")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MenaxhimiId");
 
