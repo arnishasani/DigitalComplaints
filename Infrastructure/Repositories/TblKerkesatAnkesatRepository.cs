@@ -30,8 +30,11 @@ namespace Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
-
-        public IEnumerable<ApplicationCore.Entities.Kerkesat> GetAllList(string id)
+        public List<Kerkesat> GetAllAnkesa()
+        {
+            throw new NotImplementedException();
+        }
+        public IEnumerable<Kerkesat> GetAllList(string id)
         {
             try
             {
@@ -46,6 +49,10 @@ namespace Infrastructure.Repositories
         }
 
         public bool Savekerkese(Kerkesat model)
+        {
+            throw new NotImplementedException();
+        }
+        public bool SaveAnkese(Kerkesat model)
         {
             throw new NotImplementedException();
         }

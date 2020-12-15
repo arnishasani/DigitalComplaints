@@ -75,27 +75,117 @@ namespace Web.Areas.Client.Controllers
                 {
                     return View(model);
                 }
+                if(model.KerkesaAnkesaId == 0)
+                {
+                   
+                    Kerkesat kerkesa = new Kerkesat();
+                    //kerkesa.Departamenti = model.Departamenti;
+                    kerkesa.UserId = _userManager.GetUserId(User);
+                    kerkesa.LlojiKerkeses = model.LlojiKerkeses;
+                    kerkesa.Nenshkrimi = model.Nenshkrimi;
+                    kerkesa.PershkrimiIkerkeses = model.PershkrimiIkerkeses;
+                    kerkesa.IsActive = true;
+                    kerkesa.IsDeleted = false;
+                    kerkesa.InsertBy = _userManager.GetUserId(User);
+                    kerkesa.InsertDate = DateTime.Now;
+                    _kerkesatRepository.Add(kerkesa);
+                    _kerkesatRepository.SaveChanges();
+
+                    //var kerkesa = new Kerkesat
+
+                    //UserId = model.UserId,
+                    //KerkesaAnkesaId = model.KerkesaAnkesaId,
+                    //LlojiKerkeses = model.LlojiKerkeses,
+                    //DepartamentiId = model.DepartamentiId,
+                    //Nenshkrimi = model.Nenshkrimi,
+                    //PershkrimiIkerkeses = model.PershkrimiIkerkeses,
+                    //IsActive = model.IsActive,
+                    //IsDeleted = model.IsDeleted,
+                    //IsAnonim = model.IsAnonim,
+                    //AnonimId = model.AnonimId,
+                    //InsertBy = model.InsertBy,
+                    //InsertDate = model.InsertDate,
+                    //Lub = model.Lub,
+                    //Lud = model.Lud,
+                    //Lun = model.Lun,
+
+                }
                 else
                 {
-                    var kerkesa = new Kerkesat
-                    {
-                        UserId = model.UserId,
-                        KerkesaAnkesaId = model.KerkesaAnkesaId,
-                        LlojiKerkeses = model.LlojiKerkeses,
-                        DepartamentiId = model.DepartamentiId,
-                        Nenshkrimi = model.Nenshkrimi,
-                        PershkrimiIkerkeses = model.PershkrimiIkerkeses,
-                        IsActive = model.IsActive,
-                        IsDeleted = model.IsDeleted,
-                        IsAnonim = model.IsAnonim,
-                        AnonimId = model.AnonimId,
-                        InsertBy = model.InsertBy,
-                        InsertDate = model.InsertDate,
-                        Lub = model.Lub,
-                        Lud = model.Lud,
-                        Lun = model.Lun
-                    };
+                    
+                        var existing = _kerkesatRepository.GetById(model.KerkesaAnkesaId);
+                        //existing.Departamenti = model.Departamenti;
+                        existing.Lud = DateTime.Now;
+                        existing.IsActive = model.IsActive;
+                        existing.IsDeleted = model.IsDeleted;
+                        _kerkesatRepository.Update(existing);
+                        _kerkesatRepository.SaveChanges();
+                    
+                }
+                return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Client" });
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+        }
+        public IActionResult AddAnkese()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddAnkese(KerkesaViewModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                if (model.KerkesaAnkesaId == 0)
+                {
+
+                    Kerkesat kerkesa = new Kerkesat();
+                    //kerkesa.Departamenti = model.Departamenti;
+                    kerkesa.UserId = _userManager.GetUserId(User);
+                    kerkesa.LlojiKerkeses = model.LlojiKerkeses;
+                    kerkesa.Nenshkrimi = model.Nenshkrimi;
+                    kerkesa.PershkrimiIkerkeses = model.PershkrimiIkerkeses;
+                    kerkesa.IsActive = true;
+                    kerkesa.IsDeleted = false;
+                    kerkesa.InsertBy = _userManager.GetUserId(User);
+                    kerkesa.InsertDate = DateTime.Now;
+                    _kerkesatRepository.Add(kerkesa);
+                    _kerkesatRepository.SaveChanges();
+
+                    //var kerkesa = new Kerkesat
+
+                    //UserId = model.UserId,
+                    //KerkesaAnkesaId = model.KerkesaAnkesaId,
+                    //LlojiKerkeses = model.LlojiKerkeses,
+                    //DepartamentiId = model.DepartamentiId,
+                    //Nenshkrimi = model.Nenshkrimi,
+                    //PershkrimiIkerkeses = model.PershkrimiIkerkeses,
+                    //IsActive = model.IsActive,
+                    //IsDeleted = model.IsDeleted,
+                    //IsAnonim = model.IsAnonim,
+                    //AnonimId = model.AnonimId,
+                    //InsertBy = model.InsertBy,
+                    //InsertDate = model.InsertDate,
+                    //Lub = model.Lub,
+                    //Lud = model.Lud,
+                    //Lun = model.Lun,
+                }
+                else
+                {
+                    var existing = _kerkesatRepository.GetById(model.KerkesaAnkesaId);
+                    //existing.Departamenti = model.Departamenti;
+                    existing.Lud = DateTime.Now;
+                    existing.IsActive = model.IsActive;
+                    existing.IsDeleted = model.IsDeleted;
+                    _kerkesatRepository.Update(existing);
+                    _kerkesatRepository.SaveChanges();
                 }
                 return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Client" });
             }

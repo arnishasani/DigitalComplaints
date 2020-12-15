@@ -23,7 +23,8 @@ namespace Web.Areas.Client.Models
         public string Lub { get; set; }
         public DateTime? Lud { get; set; }
         public string Lun { get; set; }
-        public virtual TblLlojetDepartamenteve Departamenti { get; set; }
+        public int? Departamenti { get; set; }
+        //public virtual TblLlojetDepartamenteve Departamenti { get; set; }
         public virtual TblMenaxhimiKerkesave LlojiKerkesesNavigation { get; set; }
         public virtual AspNetUsers User { get; set; }
         public virtual ICollection<Veprimet> Veprimet { get; set; }

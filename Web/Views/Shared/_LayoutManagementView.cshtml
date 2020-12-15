@@ -161,8 +161,9 @@
             <!-- Brand Logo -->
             <a asp-area="Management" asp-controller="Home" asp-action="Index" class="brand-link">
                 @*<img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">*@
+        style="opacity: .8">*@
                 <span class="brand-text font-weight-light" style="text-align:center">Digital Management</span>
+
             </a>
 
             <!-- Sidebar -->
@@ -288,6 +289,35 @@
                                             <a asp-area="Client" asp-controller="Home" asp-action="AddKerkese" class="nav-link active">
                                                 <i class="fas fa-circle nav-icon"></i>
                                                 <p>Shto Kerkese</p>
+                                            </a>
+                                        </li>
+                                        @*<li class="nav-item">
+                            <a asp-area="Client" asp-controller="Role" asp-action="Index" class="nav-link active">
+                                <i class="fas fa-circle nav-icon"></i>
+                                <p>Rolet</p>
+                            </a>
+                        </li>*@
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview menu-open">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                                        <p>
+                                            Ankesat
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-area="Client" asp-controller="Home" asp-action="Index" class="nav-link active">
+                                                <i class="fas fa-circle nav-icon"></i>
+                                                <p>Shiko Ankesat</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-area="Client" asp-controller="Home" asp-action="AddAnkese" class="nav-link active">
+                                                <i class="fas fa-circle nav-icon"></i>
+                                                <p>Shto Ankese</p>
                                             </a>
                                         </li>
                                         @*<li class="nav-item">
