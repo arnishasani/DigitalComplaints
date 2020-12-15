@@ -1,18 +1,16 @@
-﻿using System;
+﻿using ApplicationCore.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ApplicationCore.Entities
+namespace Web.Areas.Management.Models
 {
-    public partial class Kerkesat
+    public class SherbimeStudentoreKerkesatViewModel
     {
-        public Kerkesat()
-        {
-            Veprimet = new HashSet<Veprimet>();
-        }
-
         public int KerkesaAnkesaId { get; set; }
         public string UserId { get; set; }
-        public int? LlojiKerkeses { get; set; }
+        public string LlojiKerkeses { get; set; }
         public int? DepartamentiId { get; set; }
         public string Nenshkrimi { get; set; }
         public string PershkrimiIkerkeses { get; set; }
@@ -26,9 +24,12 @@ namespace ApplicationCore.Entities
         public DateTime? Lud { get; set; }
         public string Lun { get; set; }
         public bool? Ankes { get; set; }
-
-        public virtual TblLlojetDepartamenteve Departamenti { get; set; }
-        public virtual TblMenaxhimiKerkesave LlojiKerkesesNavigation { get; set; }
+        public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreKerkesaList {get;set;}
+        public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreAnkesaList {get;set;}
+        public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreAnkesatAnonimeList {get;set;}
+        public string Departamenti { get; set; }
+        //public virtual TblLlojetDepartamenteve Departamenti { get; set; }
+        //public virtual TblMenaxhimiKerkesave LlojiKerkesesNavigation { get; set; }
         public virtual AspNetUsers User { get; set; }
         public virtual ICollection<Veprimet> Veprimet { get; set; }
     }

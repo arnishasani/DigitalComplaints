@@ -20,7 +20,6 @@ namespace Web.Areas.Management.Controllers
         private readonly IStaff _staffRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ILogger _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public StaffController(IStaff staffRepository, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)

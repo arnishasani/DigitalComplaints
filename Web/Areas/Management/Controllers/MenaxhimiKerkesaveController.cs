@@ -44,7 +44,7 @@ namespace Web.Areas.Management.Controllers
                         InsertDate = item.InsertDate,
                         Lub = item.Lub,
                         Lud = item.Lud,
-                    }); ;
+                    }); 
                 }
                 model.menaxhimiList = menaxhimetList;
                 return View(model);
