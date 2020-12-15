@@ -33,11 +33,11 @@ namespace Web.Areas.Management.Controllers
             try
             {
                 var menaxhoKerkesenList = new List<SherbimeStudentoreKerkesatViewModel>();
-                var menaxhoAnkesenList = new List<SherbimeStudentoreKerkesatViewModel>();
-                var menaxhoAnkesatAnonimeList = new List<SherbimeStudentoreKerkesatViewModel>();
+               // var menaxhoAnkesenList = new List<SherbimeStudentoreKerkesatViewModel>();
+               // var menaxhoAnkesatAnonimeList = new List<SherbimeStudentoreKerkesatViewModel>();
                 var modelGetAllRequest = _sherbimeStudentoreRepository.GetAllRequestList();
-                var modelGetAllComplaint = _sherbimeStudentoreRepository.GetAllComplaintList();
-                var modelGetAllAnonymousComplaint = _sherbimeStudentoreRepository.GetAllAnonymousComplaintList();
+              //  var modelGetAllComplaint = _sherbimeStudentoreRepository.GetAllComplaintList();
+               // var modelGetAllAnonymousComplaint = _sherbimeStudentoreRepository.GetAllAnonymousComplaintList();
                 foreach (var item in modelGetAllRequest)
                 {
                     int tempDep = (int)item.DepartamentiId;
@@ -54,53 +54,8 @@ namespace Web.Areas.Management.Controllers
                         PershkrimiIkerkeses = item.PershkrimiIkerkeses,
                         IsActive = item.IsActive,
                         IsDeleted = item.IsDeleted,
-                        InsertBy = item.InsertBy,
-                        InsertDate = item.InsertDate,
-                        Lub = item.Lub,
-                        Lud = item.Lud,
-                        Lun = item.Lun
-                    });
-                }
-                foreach (var item in modelGetAllComplaint)
-                {
-                    int tempDep = (int)item.DepartamentiId;
-                    var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
-                    int temp = (int)item.LlojiKerkeses;
-                    var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
-                    menaxhoAnkesenList.Add(new SherbimeStudentoreKerkesatViewModel
-                    {
-                        KerkesaAnkesaId = item.KerkesaAnkesaId,
-                        UserId = item.UserId,
-                        LlojiKerkeses = gjejLlojinKerkeses.LlojiIkerkeses,
-                        Departamenti = gjejeDepartamentin.EmriDepartamentit,
-                        Nenshkrimi = item.Nenshkrimi,
-                        PershkrimiIkerkeses = item.PershkrimiIkerkeses,
-                        IsActive = item.IsActive,
-                        IsDeleted = item.IsDeleted,
-                        InsertBy = item.InsertBy,
-                        InsertDate = item.InsertDate,
-                        Lub = item.Lub,
-                        Lud = item.Lud,
-                        Lun = item.Lun
-                    });
-                }
-                foreach (var item in modelGetAllAnonymousComplaint)
-                {
-                    int tempDep = (int)item.DepartamentiId;
-                    var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
-                    int temp = (int)item.LlojiKerkeses;
-                    var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
-                    menaxhoAnkesatAnonimeList.Add(new SherbimeStudentoreKerkesatViewModel
-                    {
-                        KerkesaAnkesaId = item.KerkesaAnkesaId,
-                        AnonimId = item.AnonimId,
                         IsAnonim = item.IsAnonim,
-                        LlojiKerkeses = gjejLlojinKerkeses.LlojiIkerkeses,
-                        Departamenti = gjejeDepartamentin.EmriDepartamentit,
-                        Nenshkrimi = item.Nenshkrimi,
-                        PershkrimiIkerkeses = item.PershkrimiIkerkeses,
-                        IsActive = item.IsActive,
-                        IsDeleted = item.IsDeleted,
+                        Ankes = item.Ankes,
                         InsertBy = item.InsertBy,
                         InsertDate = item.InsertDate,
                         Lub = item.Lub,
@@ -108,9 +63,56 @@ namespace Web.Areas.Management.Controllers
                         Lun = item.Lun
                     });
                 }
+                //foreach (var item in modelGetAllComplaint)
+                //{
+                //    int tempDep = (int)item.DepartamentiId;
+                //    var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
+                //    int temp = (int)item.LlojiKerkeses;
+                //    var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
+                //    menaxhoAnkesenList.Add(new SherbimeStudentoreKerkesatViewModel
+                //    {
+                //        KerkesaAnkesaId = item.KerkesaAnkesaId,
+                //        UserId = item.UserId,
+                //        LlojiKerkeses = gjejLlojinKerkeses.LlojiIkerkeses,
+                //        Departamenti = gjejeDepartamentin.EmriDepartamentit,
+                //        Nenshkrimi = item.Nenshkrimi,
+                //        PershkrimiIkerkeses = item.PershkrimiIkerkeses,
+                //        IsActive = item.IsActive,
+                //        IsDeleted = item.IsDeleted,
+                //        InsertBy = item.InsertBy,
+                //        InsertDate = item.InsertDate,
+                //        Lub = item.Lub,
+                //        Lud = item.Lud,
+                //        Lun = item.Lun
+                //    });
+                //}
+                //foreach (var item in modelGetAllAnonymousComplaint)
+                //{
+                //    int tempDep = (int)item.DepartamentiId;
+                //    var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
+                //    int temp = (int)item.LlojiKerkeses;
+                //    var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
+                //    menaxhoAnkesatAnonimeList.Add(new SherbimeStudentoreKerkesatViewModel
+                //    {
+                //        KerkesaAnkesaId = item.KerkesaAnkesaId,
+                //        AnonimId = item.AnonimId,
+                //        IsAnonim = item.IsAnonim,
+                //        LlojiKerkeses = gjejLlojinKerkeses.LlojiIkerkeses,
+                //        Departamenti = gjejeDepartamentin.EmriDepartamentit,
+                //        Nenshkrimi = item.Nenshkrimi,
+                //        PershkrimiIkerkeses = item.PershkrimiIkerkeses,
+                //        IsActive = item.IsActive,
+                //        IsDeleted = item.IsDeleted,
+                //        InsertBy = item.InsertBy,
+                //        InsertDate = item.InsertDate,
+                //        Lub = item.Lub,
+                //        Lud = item.Lud,
+                //        Lun = item.Lun
+                //    });
+                //}
                 model.sherbimeStudentoreKerkesaList = menaxhoKerkesenList;
-                model.sherbimeStudentoreAnkesaList = menaxhoAnkesenList;
-                model.sherbimeStudentoreAnkesatAnonimeList = menaxhoAnkesatAnonimeList;
+                //model.sherbimeStudentoreAnkesaList = menaxhoAnkesenList;
+                //model.sherbimeStudentoreAnkesatAnonimeList = menaxhoAnkesatAnonimeList;
                 return View(model);
             }
             catch (Exception ex)

@@ -224,7 +224,8 @@ namespace ApplicationCore.Migrations
                     InsertDate = table.Column<DateTime>(type: "date", nullable: true),
                     LUB = table.Column<string>(maxLength: 450, nullable: true),
                     LUD = table.Column<DateTime>(type: "date", nullable: true),
-                    LUN = table.Column<string>(maxLength: 450, nullable: true)
+                    LUN = table.Column<string>(maxLength: 450, nullable: true),
+                    Ankes = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {

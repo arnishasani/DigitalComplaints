@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApplicationCore.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20201214192938_migration1")]
+    [Migration("20201215004017_migration1")]
     partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,6 +259,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnName("KerkesaAnkesaID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool?>("Ankes")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("AnonimId")
                         .HasColumnName("AnonimID")
