@@ -258,6 +258,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool?>("Ankes")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("AnonimId")
                         .HasColumnName("AnonimID")
                         .HasColumnType("int");
