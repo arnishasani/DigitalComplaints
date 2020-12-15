@@ -7,6 +7,7 @@ namespace ApplicationCore.Interfaces
 {
     public interface IKerkesat : IRepository<Entities.Kerkesat> {
         IEnumerable<Kerkesat> GetAllList(string id);
+        IEnumerable<Kerkesat> GetAllComplaintList(string id);
         bool AddException(string controller, string action, string exceptionMessage, string comment);
         List<Kerkesat> GetAllKerkesa();
         bool Savekerkese(Kerkesat model);

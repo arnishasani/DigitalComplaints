@@ -38,7 +38,7 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var temp = _digitalComplaintsDB.Kerkesat.Where(x => x.UserId == id && x.IsActive == true && x.IsDeleted == false);
+                var temp = _digitalComplaintsDB.Kerkesat.Where(x => x.UserId == id && x.IsActive == true && x.IsDeleted == false).ToList();
                 return temp;
             }
             catch (Exception)
@@ -55,6 +55,19 @@ namespace Infrastructure.Repositories
         public bool SaveAnkese(Kerkesat model)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<Kerkesat> GetAllComplaintList(string id)
+        {
+            try
+            {
+                var temp = _digitalComplaintsDB.Kerkesat.Where(x => x.IsDeleted == false && x.IsActive == true && x.Ankes == true && x.IsAnonim == false && x.UserId == id).ToList();
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
