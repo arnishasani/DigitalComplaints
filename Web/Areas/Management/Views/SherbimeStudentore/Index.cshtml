@@ -1,0 +1,150 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Web.Areas.Management.Models.SherbimeStudentoreKerkesatViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+}
+
+<div id="datatableID" style="display:none">
+    <label class="help-sidebar" style="margin-left:100px"><input type="radio" asp-for="Ankes" name="ischecked" id="rbisCart" value="1"> Shiko ne Karta</label>
+    <label class="help-sidebar"><input type="radio" id="rbAll" name="ischecked" @(Model.KerkesaAnkesaId == 0 ? "checked" : "" )> Te gjitha </label>
+    <label class="help-sidebar" style="margin-left:100px"><input type="radio" asp-for="Ankes" name="ischecked" id="rbisRequest" value="1"> Vetem Kerkesat</label>
+    <label class="help-sidebar" style="margin-left:100px"><input type="radio" id="rbisComplaint" asp-for="Ankes" name="ischecked" value="2"> Vetem Ankesat</label>
+    <label class="help-sidebar" style="margin-left:100px"><input type="radio" id="rbisAnonymousComplaint" asp-for="Ankes" name="ischecked" value="2"> Vetem Ankesat Anonime</label>
+</div>
+<div id="cardID">
+    <div class="content-header">
+        <h5 class="help-sidebar" style="margin-left:100px"><input type="radio" asp-for="Ankes" name="ischecked" id="rbisDatatable" value="1"> Shiko ne tabel</h5>
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <h1 class="m-0 text-dark" style="text-align:center">Kerkesat</h1>
+                </div>
+                <div class="col-sm-4">
+                    <h1 class="m-0 text-dark" style="text-align:center">Ankesat</h1>
+                </div>
+                <div class="col-sm-4">
+                    <h1 class="m-0 text-dark" style="text-align:center">Ankesat Anonime</h1>
+                </div>
+                @*<div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Starter Page</li>
+                    </ol>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    @foreach (var item in Model.sherbimeStudentoreKerkesaList)
+                    {
+                        if (item.Ankes == false && item.IsAnonim == false)
+                        {
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="m-0">Tipi i Kerkeses : @item.LlojiKerkeses</h5>
+                                </div>
+                                <div class="card-body">
+                                    <label> Pershkrimi i kerkeses : </label><br />
+                                    <p class="card-text">
+                                        @Html.Raw(item.PershkrimiIkerkeses)
+                                    </p>
+                                    <h5 style="text-align:left">Departamenti : @item.Departamenti</h5>
+                                    <h5 style="text-align:left">Eshte paraqitur me : @item.InsertDate</h5>
+                                    <a href="#" style="float:right" class="btn btn-primary">Hap detajet</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="col-lg-4">
+                    @foreach (var item in Model.sherbimeStudentoreKerkesaList)
+                    {
+                        if (item.Ankes == true && item.IsAnonim == false)
+                        {
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="m-0">Tipi Ankeses : @item.LlojiKerkeses</h5>
+                                </div>
+                                <div class="card-body">
+                                    <label> Pershkrimi i Ankeses : </label><br />
+                                    <p class="card-text">
+                                        @Html.Raw(item.PershkrimiIkerkeses)
+                                    </p>
+                                    <h5 style="text-align:left">Departamenti : @item.Departamenti</h5>
+                                    <h5 style="text-align:left">Eshte paraqitur me : @item.InsertDate</h5>
+                                    <a href="#" style="float:right" class="btn btn-primary">Hap detajet</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="col-lg-4">
+                    @foreach (var item in Model.sherbimeStudentoreKerkesaList)
+                    {
+                        if (item.Ankes == true && item.IsAnonim == true)
+                        {
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="m-0">Tipi Ankeses Anonime : @item.LlojiKerkeses</h5>
+                                </div>
+                                <div class="card-body">
+                                    <label> Pershkrimi i Ankeses Anonime :</label><br />
+                                    <p class="card-text">
+                                        @Html.Raw(item.PershkrimiIkerkeses)
+                                    </p>
+                                    <h5 style="text-align:left">Departamenti : @item.Departamenti</h5>
+                                    <h5 style="text-align:left">Eshte anonime : Po</h5>
+                                    <h5 style="text-align:left">Eshte paraqitur me : @item.InsertDate</h5>
+
+                                    <a href="#" style="float:right" class="btn btn-primary">Hap detajet</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $('#rbAll').click(function () {
+            if ($(this).is(':checked')) {
+                $('#cardID').hide();
+                //    $("#summernote").val(null);
+                //    $('.link-div').show();
+            }
+        });
+        $('#rbisCart').click(function () {
+            if ($(this).is(':checked')) {
+                $('#cardID').show();
+                $('#datatableID').hide();
+            }
+        })
+        $('#rbisDatatable').click(function () {
+            if ($(this).is(':checked')) {
+                $('#cardID').hide();
+                $('#datatableID').show();
+            }
+        })
+                    //$('#rbIsDescription').click(function () {
+                    //    if ($(this).is(':checked')) {
+                    //        $('.link-div').hide();
+                    //        $("#idinputLink").val(null);
+                    //        $('#description-div').show();
+                    //    }
+                    //});
+                    //$('#rbIsNothing').click(function () {
+                    //    if ($(this).is(':checked')) {
+                    //        $('.link-div').hide();
+                    //        $("#summernote").val(null);
+                    //        $("#idinputLink").val(null);
+                    //        $('#description-div').hide();
+                    //    }
+                    //});
+    </script>
+}

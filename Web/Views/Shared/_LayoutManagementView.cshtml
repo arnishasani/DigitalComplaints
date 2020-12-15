@@ -15,8 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>@ViewData["Title"] - Management</title>
 
+    <title>@ViewData["Title"] - Management</title>
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="~/css/all.min.css">
@@ -268,6 +268,38 @@
                                     </ul>
                                 </li>
                             }
+                            else if (User.IsInRole("SherbimeStudentore"))
+                            {
+                                <li class="nav-item has-treeview menu-open">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                                        <p>
+                                            Kerkesat
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-area="Management" asp-controller="SherbimeStudentore" asp-action="Index" class="nav-link active">
+                                                <i class="fas fa-circle nav-icon"></i>
+                                                <p>Shiko Kerkesat</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-area="Management" asp-controller="SherbimeStudentore" asp-action="KerkesatNeShqyrtim" class="nav-link active">
+                                                <i class="fas fa-circle nav-icon"></i>
+                                                <p>Kerkesat ne shqyrtim</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-area="Management" asp-controller="SherbimeStudentore" asp-action="KerkesatEPerfunduara" class="nav-link active">
+                                                <i class="fas fa-circle nav-icon"></i>
+                                                <p>Kerkesat e perfunduara</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
                             else
                             {
                                 <li class="nav-item has-treeview menu-open">
@@ -342,26 +374,26 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             @RenderBody()
-            <!-- Content Header (Page header) -->
+             @*Content Header (Page header)*@ 
             <!--<div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0 text-dark">Starter Page</h1>
                         </div>-->
-            <!-- /.col -->
+             @*/.col*@ 
             <!--<div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Starter Page</li>
                 </ol>
             </div>-->
-            <!-- /.col -->
-            <!--</div>--><!-- /.row -->
-            <!--</div>--><!-- /.container-fluid -->
+             @*/.col*@ 
+            <!--</div>--> @*/.row*@ 
+            <!--</div>--> @*/.container-fluid*@ 
             <!--</div>-->
-            <!-- /.content-header -->
-            <!-- Main content -->
+             @*/.content-header*@ 
+             @*Main content*@ 
             <!--<div class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -392,9 +424,9 @@
                                     <a href="#" class="card-link">Another link</a>
                                 </div>
                             </div>-->
-            <!-- /.card -->
+             @*/.card*@ 
             <!--</div>-->
-            <!-- /.col-md-6 -->
+             @*/.col-md-6*@ 
             <!--<div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
@@ -420,12 +452,12 @@
                     </div>
                 </div>
             </div>-->
-            <!-- /.col-md-6 -->
+             @*/.col-md-6*@ 
             <!--</div>-->
-            <!-- /.row -->
-            <!--</div>--><!-- /.container-fluid -->
+            @* /.row*@ 
+            <!--</div>--> @*/.container-fluid*@ 
             <!--</div>-->
-            <!-- /.content -->
+             @*/.content*@ 
         </div>
         <!-- /.content-wrapper -->
         <!-- Control Sidebar -->

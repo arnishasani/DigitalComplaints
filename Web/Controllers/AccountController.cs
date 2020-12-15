@@ -74,6 +74,10 @@ namespace Web.Controllers
                         {
                             return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Management" });
                         }
+                        if (roles[0] == "SherbimeStudentore")
+                        {
+                            return RedirectToAction(nameof(SherbimeStudentoreController.Index), "SherbimeStudentore", new { area = "Management" });
+                        }
                         if (roles[0] == "Student")
                         {
                             return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Client" });

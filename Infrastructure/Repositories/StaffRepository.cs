@@ -27,7 +27,7 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var temp = _digitalComplaintsDB.AspNetUserRoles.Where(x => x.RoleId == "1" || x.RoleId == "2").Select(x => x.User).Where(x=>x.IsDeleted == false || x.IsDeleted == null).ToList();
+                var temp = _digitalComplaintsDB.AspNetUserRoles.Where(x => x.RoleId == "1" || x.RoleId == "2" || x.RoleId == "4").Select(x => x.User).Where(x=>x.IsDeleted == false || x.IsDeleted == null).ToList();
                 return temp;
             }
             catch (Exception ex)

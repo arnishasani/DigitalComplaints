@@ -258,6 +258,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool?>("Ankes")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("AnonimId")
                         .HasColumnName("AnonimID")
                         .HasColumnType("int");
@@ -424,6 +427,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnName("LUN")
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
+
+                    b.Property<string>("PershkrimiKerkeses")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MenaxhimiId");
 

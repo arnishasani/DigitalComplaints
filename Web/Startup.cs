@@ -98,6 +98,7 @@ namespace Web
             services.AddTransient<IStaff, StaffRepository>();
             services.AddTransient<ILlojetDepartamenteve, LlojetDepartamenteveRepository>();
             services.AddTransient<IMenaxhimiK, MenaxhimiKerkesaveRepository>();
+            services.AddTransient<ISherbimeStudentore, SherbimeStudentoreRepository>();
             services.AddControllersWithViews();
         }
 
