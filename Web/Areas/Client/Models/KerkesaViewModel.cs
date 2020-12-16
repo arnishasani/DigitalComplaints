@@ -15,6 +15,7 @@ namespace Web.Areas.Client.Models
         public int? DepartamentiId { get; set; }
         public string EmriDepartamentit { get; set; }
         public string Nenshkrimi { get; set; }
+        public bool? Ankes { get; set; }
         public string PershkrimiIkerkeses { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsDeleted { get; set; }
@@ -31,6 +32,7 @@ namespace Web.Areas.Client.Models
         public virtual AspNetUsers User { get; set; }
         public virtual ICollection<Veprimet> Veprimet { get; set; }
         public List<KerkesaViewModel> kerkesalist { get; set; }
+        public List<KerkesaViewModel> departamentetlist { get; set; }
 
 
     }
