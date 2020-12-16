@@ -24,6 +24,8 @@ namespace Web.Areas.Management.Models
         public DateTime? Lud { get; set; }
         public string Lun { get; set; }
         public bool? Ankes { get; set; }
+
+        public string IndexId { get; set; }
         public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreKerkesaList {get;set;}
         public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreAnkesaList {get;set;}
         public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreAnkesatAnonimeList {get;set;}

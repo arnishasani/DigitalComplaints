@@ -99,6 +99,7 @@ namespace Web
             services.AddTransient<ILlojetDepartamenteve, LlojetDepartamenteveRepository>();
             services.AddTransient<IMenaxhimiK, MenaxhimiKerkesaveRepository>();
             services.AddTransient<ISherbimeStudentore, SherbimeStudentoreRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
             services.AddControllersWithViews();
         }
 

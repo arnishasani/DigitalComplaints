@@ -16,16 +16,18 @@ namespace Web.Areas.Management.Controllers
         private readonly ISherbimeStudentore _sherbimeStudentoreRepository;
         private readonly ILlojetDepartamenteve _llojetDepartamenveRepository;
         private readonly IMenaxhimiK _llojetEKerkesaveRepository;
+        private readonly IUserRepository _userRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public SherbimeStudentoreController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ISherbimeStudentore sherbimeStudentore, IMenaxhimiK llojetEKerkesave, ILlojetDepartamenteve llojetDepartamenve)
+        public SherbimeStudentoreController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ISherbimeStudentore sherbimeStudentore, IMenaxhimiK llojetEKerkesave, ILlojetDepartamenteve llojetDepartamenve, IUserRepository userRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _sherbimeStudentoreRepository = sherbimeStudentore;
             _llojetEKerkesaveRepository = llojetEKerkesave;
             _llojetDepartamenveRepository = llojetDepartamenve;
+            _userRepository = userRepository;
         }
         public IActionResult Index()
         {
@@ -55,6 +57,7 @@ namespace Web.Areas.Management.Controllers
                         IsActive = item.IsActive,
                         IsDeleted = item.IsDeleted,
                         IsAnonim = item.IsAnonim,
+                        AnonimId = item.AnonimId,
                         Ankes = item.Ankes,
                         InsertBy = item.InsertBy,
                         InsertDate = item.InsertDate,
@@ -129,6 +132,41 @@ namespace Web.Areas.Management.Controllers
         public IActionResult KerkesatEPerfunduara()
         {
             return View();
+        }
+        public IActionResult Details(int id)
+        {
+            try
+            {
+                var kerkesA = _sherbimeStudentoreRepository.GetById(id);
+                int tempDep = (int)kerkesA.DepartamentiId;
+                var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
+                int temp = (int)kerkesA.LlojiKerkeses;
+                var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
+               // var tempUser = _userRepository.GetByStringId(kerkesA.InsertBy);
+                var vm = new SherbimeStudentoreKerkesatViewModel()
+                {
+                    KerkesaAnkesaId = kerkesA.KerkesaAnkesaId,
+                    LlojiKerkeses = gjejLlojinKerkeses.LlojiIkerkeses,
+                    Departamenti = gjejeDepartamentin.EmriDepartamentit,
+                    Nenshkrimi = kerkesA.Nenshkrimi,
+                    PershkrimiIkerkeses = kerkesA.PershkrimiIkerkeses,
+                    IsActive = kerkesA.IsActive,
+                    IsDeleted = kerkesA.IsDeleted,
+                    IsAnonim = kerkesA.IsAnonim,
+                    AnonimId = kerkesA.AnonimId,
+                    Ankes = kerkesA.Ankes,
+                    InsertBy = kerkesA.InsertBy,
+                    InsertDate = kerkesA.InsertDate,
+                    Lub = kerkesA.Lub,
+                    Lud = kerkesA.Lud,
+                    Lun = kerkesA.Lun
+                };
+                return View(vm);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

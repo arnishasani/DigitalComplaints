@@ -1,0 +1,109 @@
+﻿@using Web.Areas.Management.Models
+@model SherbimeStudentoreKerkesatViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+}
+<div style="padding-left:30em; padding-top:7em; padding-right:8em;">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            @if (Model.Ankes == false)
+                            {
+                                <label>Tipi i kerkeses :</label><h5>@Model.LlojiKerkeses</h5>
+                            }
+                            else if (Model.Ankes == true && Model.IsAnonim == false)
+                            {
+                                <label>Tipi i ankeses :</label><h5>@Model.LlojiKerkeses</h5>
+                            }
+                            else if (Model.Ankes == true && Model.IsAnonim == true && Model.AnonimId != null)
+                            {
+                                <label>Tipi i ankeses anonime :</label><h5>@Model.LlojiKerkeses</h5>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content" id="detajet">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            @if (Model.Ankes == false)
+                            {
+                                <label> Pershkrimi i Kerkeses : </label><br />
+                                <p class="card-text">
+                                    @Html.Raw(Model.PershkrimiIkerkeses)
+                                </p>
+                            }
+                            else if (Model.Ankes == true && Model.IsAnonim == false)
+                            {
+                                <label> Pershkrimi i Ankeses : </label><br />
+                                <p class="card-text">
+                                    @Html.Raw(Model.PershkrimiIkerkeses)
+                                </p>
+                            }
+                            else if (Model.Ankes == true && Model.IsAnonim == true && Model.AnonimId != null)
+                            {
+                                <label> Pershkrimi i Ankeses Anonime : </label><br />
+                                <p class="card-text">
+                                    @Html.Raw(Model.PershkrimiIkerkeses)
+                                </p>
+                            }
+
+                            <label> Departamenti :</label><h5> @Model.Departamenti</h5> <br />
+                            <label> Eshte paraqitur me daten :</label><h5> @Model.InsertDate </h5> <br />
+                            @if (Model.Ankes == true && Model.IsAnonim == true && Model.AnonimId != null)
+                            {
+                                <label> Autori i kerkeses :</label><h5> Anonim </h5> <br />
+                                <label> Anonim ID :</label><h5> KSDA4841</h5> <br />
+                            }
+                            else
+                            {
+                                <label> Autori i kerkeses :</label><h5> Arnis Hasani </h5> <br />
+                                <label> Index ID :</label><h5> 180110K</h5> <br />
+                            }
+                            <a href="#" style="float:left" class="card-link">Refuzoj</a>
+                            <a href="#" style="float:right" onclick="showDiv();" class="card-link">Vazhdo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="vazhdo" style="display:none">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                          
+                            <a href="#" style="float:left" onclick="back();" class="card-link">Kthehu mbrapa</a>
+                            <a href="#" style="float:right" onclick="showDiv();" class="card-link">Aprovoj</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{ 
+<script>
+    function showDiv() {
+        $('#detajet').hide();
+        $('#vazhdo').show();
+    }
+    function back() {
+        $('#detajet').show();
+        $('#vazhdo').hide();
+    }
+</script>
+}
