@@ -14,5 +14,30 @@ namespace Infrastructure.Repositories
         {
             _digitalComplaintsDB = digitalComplaintsDB;
         }
+
+        public bool DeleteKerkese(Veprimet model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Veprimet> GetAllAnonymousComplaintList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Veprimet> GetAllComplaintList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Veprimet> GetAllRequestList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateKerkese(Veprimet model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

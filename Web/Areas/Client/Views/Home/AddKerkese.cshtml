@@ -1,6 +1,8 @@
 ﻿
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Web.Areas.Client.Models;
+@using ApplicationCore.Interfaces;
+@inject IMenaxhimiK kerkesatRepository
 @model KerkesaViewModel
 @{
     ViewData["Title"] = "AddKerkese";
@@ -18,14 +20,31 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label asp-for="Departamenti">Departamenti</label>
-                                                <input name="Departamenti" asp-for="Departamenti" class="form-control" />
+                                                <div class="input-box ">
+                                                    <label asp-for="DepartamentiId">Departamenti </label>
+                                                    <select name="DepartamentiId" asp-for="DepartamentiId" class="form-control">
+                                                        <option value="" disabled selected>-- zgjedh departamentin --</option>
+                                                        @foreach (var item in Model.departamentetlist)
+                                                        {
+                                                            <option value="@item.DepartamentiId" >@item.EmriDepartamentit</option>
+                                                        }
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label asp-for="LlojiKerkeses">Lloji i kerkeses</label>
-                                                <input name="LlojiKerkeses" asp-for="LlojiKerkeses" class="form-control" />
+                                                <div class="input-box ">
+                                                    <label  asp-for="LlojiKerkeses">Lloji i kerkeses </label>
+                                                    <select name="LlojiKerkeses" asp-for="LlojiKerkeses" class="form-control">
+                                                        <option value="" disabled selected>-- zgjedh llojin e kerkeses --</option>
+                                                        @{ var llojet = kerkesatRepository.GetAllList(); }
+                                                        @foreach (var item in llojet)
+                                                        {
+                                                            <option value="@item.MenaxhimiId">@item.LlojiIkerkeses</option>
+                                                        }
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -34,14 +53,14 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label asp-for="Nenshkrimi">Nenshkrimi</label>
+                                                <label asp-for="Nenshkrimi">Emri dhe mbiemri</label>
                                                 <input name="Nenshkrimi " asp-for="Nenshkrimi" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label asp-for="PershkrimiIkerkeses"> PershkrimiIKerkese</label>
-                                                <input name="PershkrimiIkerkeses" asp-for="PershkrimiIkerkeses" class="form-control" />
+                                                <textarea maxlength="5001" class="form-control " id="summernote" asp-for="PershkrimiIkerkeses"></textarea>
                                             </div>
                                         </div>
                                     </div>

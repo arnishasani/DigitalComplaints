@@ -1,15 +1,13 @@
-﻿using System;
+﻿using ApplicationCore.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ApplicationCore.Entities
+namespace Web.Areas.Management.Models
 {
-    public partial class Veprimet
+    public class VeprimetViewModel
     {
-        public Veprimet()
-        {
-            VendimiPerfundimtar = new HashSet<VendimiPerfundimtar>();
-        }
-
         public int VeprimiId { get; set; }
         public int? KerkesaId { get; set; }
         public string StafId { get; set; }
@@ -17,7 +15,6 @@ namespace ApplicationCore.Entities
         public bool? Verifikimi { get; set; }
         public bool? Miratimi { get; set; }
         public bool? Vendimi { get; set; }
-        public string KomentiVeprimit { get; set; }
         public string Grupi { get; set; }
         public string Orari { get; set; }
         public string LendetEmbetura { get; set; }
@@ -34,7 +31,8 @@ namespace ApplicationCore.Entities
         public string Lun { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsDeleted { get; set; }
-
+        public string KomentiVeprimit { get; set; }
+        public List<Kerkesat> kerkesatList { get; set; }
         public virtual Kerkesat Kerkesa { get; set; }
         public virtual ICollection<VendimiPerfundimtar> VendimiPerfundimtar { get; set; }
     }

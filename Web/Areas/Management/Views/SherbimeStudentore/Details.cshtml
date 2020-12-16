@@ -35,67 +35,52 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-body">
-                            @if (Model.Ankes == false)
-                            {
-                                <label> Pershkrimi i Kerkeses : </label><br />
-                                <p class="card-text">
-                                    @Html.Raw(Model.PershkrimiIkerkeses)
-                                </p>
-                            }
-                            else if (Model.Ankes == true && Model.IsAnonim == false)
-                            {
-                                <label> Pershkrimi i Ankeses : </label><br />
-                                <p class="card-text">
-                                    @Html.Raw(Model.PershkrimiIkerkeses)
-                                </p>
-                            }
-                            else if (Model.Ankes == true && Model.IsAnonim == true && Model.AnonimId != null)
-                            {
-                                <label> Pershkrimi i Ankeses Anonime : </label><br />
-                                <p class="card-text">
-                                    @Html.Raw(Model.PershkrimiIkerkeses)
-                                </p>
-                            }
+                        <div class="card">
+                            <div class="card-body">
+                                @if (Model.Ankes == false)
+                                {
+                                    <label> Pershkrimi i Kerkeses : </label><br />
+                                    <p class="card-text">
+                                        @Html.Raw(Model.PershkrimiIkerkeses)
+                                    </p>
+                                }
+                                else if (Model.Ankes == true && Model.IsAnonim == false)
+                                {
+                                    <label> Pershkrimi i Ankeses : </label><br />
+                                    <p class="card-text">
+                                        @Html.Raw(Model.PershkrimiIkerkeses)
+                                    </p>
+                                }
+                                else if (Model.Ankes == true && Model.IsAnonim == true && Model.AnonimId != null)
+                                {
+                                    <label> Pershkrimi i Ankeses Anonime : </label><br />
+                                    <p class="card-text">
+                                        @Html.Raw(Model.PershkrimiIkerkeses)
+                                    </p>
+                                }
 
-                            <label> Departamenti :</label><h5> @Model.Departamenti</h5> <br />
-                            <label> Eshte paraqitur me daten :</label><h5> @Model.InsertDate </h5> <br />
-                            @if (Model.Ankes == true && Model.IsAnonim == true && Model.AnonimId != null)
-                            {
-                                <label> Autori i kerkeses :</label><h5> Anonim </h5> <br />
-                                <label> Anonim ID :</label><h5> KSDA4841</h5> <br />
-                            }
-                            else
-                            {
-                                <label> Autori i kerkeses :</label><h5> Arnis Hasani </h5> <br />
-                                <label> Index ID :</label><h5> 180110K</h5> <br />
-                            }
-                            <a href="#" style="float:left" class="card-link">Refuzoj</a>
-                            <a href="#" style="float:right" onclick="showDiv();" class="card-link">Vazhdo</a>
+                                <label> Departamenti :</label><h5> @Model.Departamenti</h5> <br />
+                                <label> Eshte paraqitur me daten :</label><h5> @Model.InsertDate </h5> <br />
+                                @if (Model.Ankes == true && Model.IsAnonim == true && Model.AnonimId != null)
+                                {
+                                    <label> Autori i kerkeses :</label><h5> Anonim </h5> <br />
+                                    <label> Anonim ID :</label><h5> KSDA4841</h5> <br />
+                                }
+                                else
+                                {
+                                    <label> Autori i kerkeses :</label><h5> Arnis Hasani </h5> <br />
+                                    <label> Index ID :</label><h5> 180110K</h5> <br />
+                                }
+                                <a href="/Management/SherbimetStudentore/Index" style="float:left" class="card-link">Kthehu mbrapa</a>
+                                <a href="/Management/Veprimet/AddVeprim/@Model.KerkesaAnkesaId" style="float:right" class="card-link">Aprovoj</a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content" id="vazhdo" style="display:none">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-body">
-                          
-                            <a href="#" style="float:left" onclick="back();" class="card-link">Kthehu mbrapa</a>
-                            <a href="#" style="float:right" onclick="showDiv();" class="card-link">Aprovoj</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@section scripts{ 
+@*@section scripts{ 
 <script>
     function showDiv() {
         $('#detajet').hide();
@@ -105,5 +90,5 @@
         $('#detajet').show();
         $('#vazhdo').hide();
     }
-</script>
+</script>*@
 }

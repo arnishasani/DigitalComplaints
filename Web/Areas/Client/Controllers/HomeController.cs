@@ -19,14 +19,16 @@ namespace Web.Areas.Client.Controllers
         private readonly IMenaxhimiK _llojetEKerkesaveRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserRepository _userRepository;
 
-        public HomeController(IKerkesat kerkesatRepository, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ILlojetDepartamenteve llojetDepartamenveRepository, IMenaxhimiK llojetEKerkesaveRepository)
+        public HomeController(IKerkesat kerkesatRepository, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ILlojetDepartamenteve llojetDepartamenveRepository, IMenaxhimiK llojetEKerkesaveRepository, IUserRepository userRepository)
         {
             _kerkesatRepository = kerkesatRepository;
             _signInManager = signInManager;
             _userManager = userManager;
             _llojetDepartamenveRepository = llojetDepartamenveRepository;
             _llojetEKerkesaveRepository = llojetEKerkesaveRepository;
+            _userRepository = userRepository;
         }
         public IActionResult Index()
         {
@@ -42,6 +44,7 @@ namespace Web.Areas.Client.Controllers
                     var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
                     int temp = (int)item.LlojiKerkeses;
                     var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
+                    var gjejuserin = _userRepository.GetByStringId(item.UserId);
                     kerkesatList.Add(new KerkesaViewModel
                     {
                         UserId = item.UserId,
@@ -53,8 +56,9 @@ namespace Web.Areas.Client.Controllers
                         IsActive = item.IsActive,
                         IsDeleted = item.IsDeleted,
                         IsAnonim = item.IsAnonim,
+                        Ankes=item.Ankes,
                         AnonimId = item.AnonimId,
-                        InsertBy = item.InsertBy,
+                        InsertBy = gjejuserin.Email,
                         InsertDate = item.InsertDate,
                         Lub = item.Lub,
                         Lud = item.Lud,
@@ -83,6 +87,7 @@ namespace Web.Areas.Client.Controllers
                     var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
                     int temp = (int)item.LlojiKerkeses;
                     var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
+                    var gjejuserin = _userRepository.GetByStringId(item.UserId);
                     kerkesatList.Add(new KerkesaViewModel
                     {
                         UserId = item.UserId,
@@ -94,8 +99,9 @@ namespace Web.Areas.Client.Controllers
                         IsActive = item.IsActive,
                         IsDeleted = item.IsDeleted,
                         IsAnonim = item.IsAnonim,
+                        Ankes=item.Ankes,
                         AnonimId = item.AnonimId,
-                        InsertBy = item.InsertBy,
+                        InsertBy = gjejuserin.Email,
                         InsertDate = item.InsertDate,
                         Lub = item.Lub,
                         Lud = item.Lud,
@@ -113,7 +119,32 @@ namespace Web.Areas.Client.Controllers
         [HttpGet]
         public IActionResult AddKerkese()
         {
-            return View();
+            var model = new KerkesaViewModel();
+            try
+            {
+                var departamentetList = new List<KerkesaViewModel>();
+                var modeelDepartamentet = _llojetDepartamenveRepository.GetAllList();
+                foreach (var item in modeelDepartamentet)
+                {
+                    departamentetList.Add(new KerkesaViewModel
+                    {
+                        DepartamentiId = item.DepartamentiId,
+                        EmriDepartamentit = item.EmriDepartamentit,
+                        InsertBy = _userManager.GetUserName(User),
+                        IsActive = item.IsActive,
+                        IsDeleted = item.IsDeleted,
+                        InsertDate = item.InsertDate,
+                        Lud = item.Lud,
+
+                    });;
+                }
+                model.departamentetlist = departamentetList;
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         [HttpPost]
         public IActionResult AddKerkese(KerkesaViewModel model)
@@ -138,32 +169,13 @@ namespace Web.Areas.Client.Controllers
                     kerkesa.AnonimId = null;
                     kerkesa.Ankes = false;
                     kerkesa.InsertBy = _userManager.GetUserId(User);
+                    kerkesa.Pranuar = false;
                     kerkesa.InsertDate = DateTime.Now;
                     _kerkesatRepository.Add(kerkesa);
                     _kerkesatRepository.SaveChanges();
-
-                    //var kerkesa = new Kerkesat
-
-                    //UserId = model.UserId,
-                    //KerkesaAnkesaId = model.KerkesaAnkesaId,
-                    //LlojiKerkeses = model.LlojiKerkeses,
-                    //DepartamentiId = model.DepartamentiId,
-                    //Nenshkrimi = model.Nenshkrimi,
-                    //PershkrimiIkerkeses = model.PershkrimiIkerkeses,
-                    //IsActive = model.IsActive,
-                    //IsDeleted = model.IsDeleted,
-                    //IsAnonim = model.IsAnonim,
-                    //AnonimId = model.AnonimId,
-                    //InsertBy = model.InsertBy,
-                    //InsertDate = model.InsertDate,
-                    //Lub = model.Lub,
-                    //Lud = model.Lud,
-                    //Lun = model.Lun,
-
                 }
                 else
                 {
-                    
                         var existing = _kerkesatRepository.GetById(model.KerkesaAnkesaId);
                         //existing.Departamenti = model.Departamenti;
                         existing.Lud = DateTime.Now;
@@ -171,19 +183,41 @@ namespace Web.Areas.Client.Controllers
                         existing.IsDeleted = model.IsDeleted;
                         _kerkesatRepository.Update(existing);
                         _kerkesatRepository.SaveChanges();
-                    
                 }
                 return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Client" });
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
         public IActionResult AddAnkese()
         {
-            return View();
+            var model = new KerkesaViewModel();
+            try
+            {
+                var departamentetList = new List<KerkesaViewModel>();
+                var modeelDepartamentet = _llojetDepartamenveRepository.GetAllList();
+                foreach (var item in modeelDepartamentet)
+                {
+                    departamentetList.Add(new KerkesaViewModel
+                    {
+                        DepartamentiId = item.DepartamentiId,
+                        EmriDepartamentit = item.EmriDepartamentit,
+                        InsertBy = _userManager.GetUserName(User),
+                        IsActive = item.IsActive,
+                        IsDeleted = item.IsDeleted,
+                        InsertDate = item.InsertDate,
+                        Lud = item.Lud
+                    });
+                }
+                model.departamentetlist = departamentetList;
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         [HttpPost]
         public IActionResult AddAnkese(KerkesaViewModel model)
@@ -208,6 +242,7 @@ namespace Web.Areas.Client.Controllers
                     kerkesa.IsAnonim = false;
                     kerkesa.AnonimId = null;
                     kerkesa.InsertBy = _userManager.GetUserId(User);
+                    kerkesa.Pranuar = false;
                     kerkesa.InsertDate = DateTime.Now;
                     _kerkesatRepository.Add(kerkesa);
                     _kerkesatRepository.SaveChanges();
