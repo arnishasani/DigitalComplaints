@@ -11,7 +11,9 @@ namespace Web.Areas.Client.Models
         public int KerkesaAnkesaId { get; set; }
         public string UserId { get; set; }
         public int? LlojiKerkeses { get; set; }
+        public string EmriKerkeses { get; set; }
         public int? DepartamentiId { get; set; }
+        public string EmriDepartamentit { get; set; }
         public string Nenshkrimi { get; set; }
         public string PershkrimiIkerkeses { get; set; }
         public bool? IsActive { get; set; }
@@ -23,7 +25,8 @@ namespace Web.Areas.Client.Models
         public string Lub { get; set; }
         public DateTime? Lud { get; set; }
         public string Lun { get; set; }
-        public virtual TblLlojetDepartamenteve Departamenti { get; set; }
+        public int? Departamenti { get; set; }
+        //public virtual TblLlojetDepartamenteve Departamenti { get; set; }
         public virtual TblMenaxhimiKerkesave LlojiKerkesesNavigation { get; set; }
         public virtual AspNetUsers User { get; set; }
         public virtual ICollection<Veprimet> Veprimet { get; set; }

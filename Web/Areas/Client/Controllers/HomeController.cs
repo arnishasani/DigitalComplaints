@@ -15,14 +15,18 @@ namespace Web.Areas.Client.Controllers
     public class HomeController : Controller
     {
         private readonly IKerkesat _kerkesatRepository;
+        private readonly ILlojetDepartamenteve _llojetDepartamenveRepository;
+        private readonly IMenaxhimiK _llojetEKerkesaveRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public HomeController(IKerkesat kerkesatRepository, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public HomeController(IKerkesat kerkesatRepository, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ILlojetDepartamenteve llojetDepartamenveRepository, IMenaxhimiK llojetEKerkesaveRepository)
         {
             _kerkesatRepository = kerkesatRepository;
             _signInManager = signInManager;
             _userManager = userManager;
+            _llojetDepartamenveRepository = llojetDepartamenveRepository;
+            _llojetEKerkesaveRepository = llojetEKerkesaveRepository;
         }
         public IActionResult Index()
         {
@@ -34,12 +38,57 @@ namespace Web.Areas.Client.Controllers
                 var model1 = _kerkesatRepository.GetAllList(currentUserId);
                 foreach (var item in model1)
                 {
+                    int tempDep = (int)item.DepartamentiId;
+                    var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
+                    int temp = (int)item.LlojiKerkeses;
+                    var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
                     kerkesatList.Add(new KerkesaViewModel
                     {
                         UserId = item.UserId,
                         KerkesaAnkesaId = item.KerkesaAnkesaId,
-                        LlojiKerkeses = item.LlojiKerkeses,
-                        DepartamentiId = item.DepartamentiId,
+                        EmriKerkeses = gjejLlojinKerkeses.LlojiIkerkeses,
+                        EmriDepartamentit = gjejeDepartamentin.EmriDepartamentit,
+                        Nenshkrimi = item.Nenshkrimi,
+                        PershkrimiIkerkeses = item.PershkrimiIkerkeses,
+                        IsActive = item.IsActive,
+                        IsDeleted = item.IsDeleted,
+                        IsAnonim = item.IsAnonim,
+                        AnonimId = item.AnonimId,
+                        InsertBy = item.InsertBy,
+                        InsertDate = item.InsertDate,
+                        Lub = item.Lub,
+                        Lud = item.Lud,
+                        Lun = item.Lun
+                    });
+                }
+                model.kerkesalist = kerkesatList;
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IActionResult IndexAnkes()
+        {
+            var model = new KerkesaViewModel();
+            try
+            {
+                var currentUserId = _userManager.GetUserId(User);
+                var kerkesatList = new List<KerkesaViewModel>();
+                var model1 = _kerkesatRepository.GetAllComplaintList(currentUserId);
+                foreach (var item in model1)
+                {
+                    int tempDep = (int)item.DepartamentiId;
+                    var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
+                    int temp = (int)item.LlojiKerkeses;
+                    var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
+                    kerkesatList.Add(new KerkesaViewModel
+                    {
+                        UserId = item.UserId,
+                        KerkesaAnkesaId = item.KerkesaAnkesaId,
+                        EmriKerkeses = gjejLlojinKerkeses.LlojiIkerkeses,
+                        EmriDepartamentit = gjejeDepartamentin.EmriDepartamentit,
                         Nenshkrimi = item.Nenshkrimi,
                         PershkrimiIkerkeses = item.PershkrimiIkerkeses,
                         IsActive = item.IsActive,
@@ -75,29 +124,121 @@ namespace Web.Areas.Client.Controllers
                 {
                     return View(model);
                 }
-                else
+                if(model.KerkesaAnkesaId == 0)
                 {
-                    var kerkesa = new Kerkesat
-                    {
-                        UserId = model.UserId,
-                        KerkesaAnkesaId = model.KerkesaAnkesaId,
-                        LlojiKerkeses = model.LlojiKerkeses,
-                        DepartamentiId = model.DepartamentiId,
-                        Nenshkrimi = model.Nenshkrimi,
-                        PershkrimiIkerkeses = model.PershkrimiIkerkeses,
-                        IsActive = model.IsActive,
-                        IsDeleted = model.IsDeleted,
-                        IsAnonim = model.IsAnonim,
-                        AnonimId = model.AnonimId,
-                        InsertBy = model.InsertBy,
-                        InsertDate = model.InsertDate,
-                        Lub = model.Lub,
-                        Lud = model.Lud,
-                        Lun = model.Lun
-                    };
+                    Kerkesat kerkesa = new Kerkesat();
+                    kerkesa.DepartamentiId = model.DepartamentiId;
+                    kerkesa.UserId = _userManager.GetUserId(User);
+                    kerkesa.LlojiKerkeses = model.LlojiKerkeses;
+                    kerkesa.Nenshkrimi = model.Nenshkrimi;
+                    kerkesa.PershkrimiIkerkeses = model.PershkrimiIkerkeses;
+                    kerkesa.IsActive = true;
+                    kerkesa.IsDeleted = false;
+                    kerkesa.IsAnonim = false;
+                    kerkesa.AnonimId = null;
+                    kerkesa.Ankes = false;
+                    kerkesa.InsertBy = _userManager.GetUserId(User);
+                    kerkesa.InsertDate = DateTime.Now;
+                    _kerkesatRepository.Add(kerkesa);
+                    _kerkesatRepository.SaveChanges();
+
+                    //var kerkesa = new Kerkesat
+
+                    //UserId = model.UserId,
+                    //KerkesaAnkesaId = model.KerkesaAnkesaId,
+                    //LlojiKerkeses = model.LlojiKerkeses,
+                    //DepartamentiId = model.DepartamentiId,
+                    //Nenshkrimi = model.Nenshkrimi,
+                    //PershkrimiIkerkeses = model.PershkrimiIkerkeses,
+                    //IsActive = model.IsActive,
+                    //IsDeleted = model.IsDeleted,
+                    //IsAnonim = model.IsAnonim,
+                    //AnonimId = model.AnonimId,
+                    //InsertBy = model.InsertBy,
+                    //InsertDate = model.InsertDate,
+                    //Lub = model.Lub,
+                    //Lud = model.Lud,
+                    //Lun = model.Lun,
 
                 }
+                else
+                {
+                    
+                        var existing = _kerkesatRepository.GetById(model.KerkesaAnkesaId);
+                        //existing.Departamenti = model.Departamenti;
+                        existing.Lud = DateTime.Now;
+                        existing.IsActive = model.IsActive;
+                        existing.IsDeleted = model.IsDeleted;
+                        _kerkesatRepository.Update(existing);
+                        _kerkesatRepository.SaveChanges();
+                    
+                }
                 return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Client" });
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public IActionResult AddAnkese()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddAnkese(KerkesaViewModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                if (model.KerkesaAnkesaId == 0)
+                {
+                    Kerkesat kerkesa = new Kerkesat();
+                    kerkesa.DepartamentiId = 1;
+                    kerkesa.UserId = _userManager.GetUserId(User);
+                    kerkesa.LlojiKerkeses = 4;
+                    kerkesa.Nenshkrimi = model.Nenshkrimi;
+                    kerkesa.PershkrimiIkerkeses = model.PershkrimiIkerkeses;
+                    kerkesa.IsActive = true;
+                    kerkesa.IsDeleted = false;
+                    kerkesa.Ankes = true;
+                    kerkesa.IsAnonim = false;
+                    kerkesa.AnonimId = null;
+                    kerkesa.InsertBy = _userManager.GetUserId(User);
+                    kerkesa.InsertDate = DateTime.Now;
+                    _kerkesatRepository.Add(kerkesa);
+                    _kerkesatRepository.SaveChanges();
+                    //var kerkesa = new Kerkesat
+                    //UserId = model.UserId,
+                    //KerkesaAnkesaId = model.KerkesaAnkesaId,
+                    //LlojiKerkeses = model.LlojiKerkeses,
+                    //DepartamentiId = model.DepartamentiId,
+                    //Nenshkrimi = model.Nenshkrimi,
+                    //PershkrimiIkerkeses = model.PershkrimiIkerkeses,
+                    //IsActive = model.IsActive,
+                    //IsDeleted = model.IsDeleted,
+                    //IsAnonim = model.IsAnonim,
+                    //AnonimId = model.AnonimId,
+                    //InsertBy = model.InsertBy,
+                    //InsertDate = model.InsertDate,
+                    //Lub = model.Lub,
+                    //Lud = model.Lud,
+                    //Lun = model.Lun,
+                }
+                else
+                {
+                    var existing = _kerkesatRepository.GetById(model.KerkesaAnkesaId);
+                    //existing.Departamenti = model.Departamenti;
+                    existing.Lud = DateTime.Now;
+                    existing.IsActive = model.IsActive;
+                    existing.IsDeleted = model.IsDeleted;
+                    _kerkesatRepository.Update(existing);
+                    _kerkesatRepository.SaveChanges();
+                }
+                return RedirectToAction(nameof(HomeController.IndexAnkes), "Home", new { area = "Client" });
             }
             catch (Exception ex)
             {
