@@ -71,7 +71,7 @@ namespace Web.Areas.Management.Controllers
                     _menaxhimiKerkesaveRepository.Update(kerkesauGjet);
                     _menaxhimiKerkesaveRepository.SaveChanges();
                 }
-                return RedirectToAction(nameof(SherbimeStudentoreController.Index), "SherbimetStudentore", new { area = "Management" });
+                return RedirectToAction(nameof(SherbimeStudentoreController.Index), "SherbimeStudentore", new { area = "Management" });
             }
             catch (Exception ex)
             {

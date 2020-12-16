@@ -134,8 +134,9 @@ namespace Web.Areas.Client.Controllers
                         IsActive = item.IsActive,
                         IsDeleted = item.IsDeleted,
                         InsertDate = item.InsertDate,
-                        Lud = item.Lud
-                    });
+                        Lud = item.Lud,
+
+                    });;
                 }
                 model.departamentetlist = departamentetList;
                 return View(model);
@@ -168,6 +169,7 @@ namespace Web.Areas.Client.Controllers
                     kerkesa.AnonimId = null;
                     kerkesa.Ankes = false;
                     kerkesa.InsertBy = _userManager.GetUserId(User);
+                    kerkesa.Pranuar = false;
                     kerkesa.InsertDate = DateTime.Now;
                     _kerkesatRepository.Add(kerkesa);
                     _kerkesatRepository.SaveChanges();
@@ -240,6 +242,7 @@ namespace Web.Areas.Client.Controllers
                     kerkesa.IsAnonim = false;
                     kerkesa.AnonimId = null;
                     kerkesa.InsertBy = _userManager.GetUserId(User);
+                    kerkesa.Pranuar = false;
                     kerkesa.InsertDate = DateTime.Now;
                     _kerkesatRepository.Add(kerkesa);
                     _kerkesatRepository.SaveChanges();
