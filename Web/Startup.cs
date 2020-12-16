@@ -100,6 +100,7 @@ namespace Web
             services.AddTransient<IMenaxhimiK, MenaxhimiKerkesaveRepository>();
             services.AddTransient<ISherbimeStudentore, SherbimeStudentoreRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IVeprimet, VeprimetRepository>();
             services.AddControllersWithViews();
         }
 

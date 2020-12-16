@@ -54,7 +54,7 @@ namespace Infrastructure.Repositories
             try
             {
                 //var temp = _digitalComplaintsDB.Kerkesat.Where(x => x.IsDeleted == false && x.IsActive == true && x.Ankes == false && x.IsAnonim == false).ToList();
-                var temp = _digitalComplaintsDB.Kerkesat.Where(x => x.IsDeleted == false && x.IsActive == true).ToList();
+                var temp = _digitalComplaintsDB.Kerkesat.Where(x => x.Pranuar == false && x.IsDeleted == false && x.IsActive == true).ToList();
                 return temp;
             }
             catch (Exception ex)

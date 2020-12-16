@@ -26,6 +26,7 @@ namespace ApplicationCore.Entities
         public DateTime? Lud { get; set; }
         public string Lun { get; set; }
         public bool? Ankes { get; set; }
+        public bool? Pranuar { get; set; }
 
         public virtual TblLlojetDepartamenteve Departamenti { get; set; }
         public virtual TblMenaxhimiKerkesave LlojiKerkesesNavigation { get; set; }
