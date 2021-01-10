@@ -17,7 +17,6 @@ namespace ApplicationCore.Entities
         public bool? Verifikimi { get; set; }
         public bool? Miratimi { get; set; }
         public bool? Vendimi { get; set; }
-        public string KomentiVeprimit { get; set; }
         public string Grupi { get; set; }
         public string Orari { get; set; }
         public string LendetEmbetura { get; set; }

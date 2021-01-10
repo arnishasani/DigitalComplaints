@@ -36,6 +36,20 @@ namespace Infrastructure.Repositories
             }
         }
 
+        public int GetMax()
+        {
+            try
+            {
+                var temp = _digitalComplaintsDB.TblMenaxhimiKerkesave.Max(u => u.MenaxhimiId);
+                return temp;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public bool UpdateMenaxhim(TblMenaxhimiKerkesave model)
         {
             throw new NotImplementedException();

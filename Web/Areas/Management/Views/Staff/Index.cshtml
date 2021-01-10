@@ -21,6 +21,7 @@
                                     <table id="staff-table" class="table table-bordered table-striped table-hover table-fw-widget">
                                         <thead>
                                             <tr>
+                                                <th class="text-center">Roli</th>
                                                 <th class="text-center">Name</th>
                                                 <th class="text-center">Surname</th>
                                                 <th class="text-center">Email</th>
@@ -29,8 +30,7 @@
                                                 <th class="text-center">Gender</th>
                                                 <th class="text-center">Is Active</th>
                                                 <th class="text-center">Is Delete</th>
-                                                <th class="text-center">CreateOnDate</th>
-                                                <th class="text-center">LastModifiedOnDate</th>
+                                                <th class="text-center">Create On Date</th>
                                                 <th class="text-center">Veprimet</th>
                                             </tr>
                                         </thead>
@@ -41,6 +41,47 @@
                                             @foreach (var item in Model.Staff)
                                             {
                                                 <tr>
+                                                    @if (item.Roli == "SuperAdmin")
+                                                    {
+                                                        <td><a class="text-center" style=" color: inherit;">Super Admin</a></td>
+                                                    }
+                                                    else if (item.Roli == "Admin")
+                                                    {
+                                                        <td><a class="text-center" style=" color: inherit;">Admin</a></td>
+                                                    }
+                                                    else if (item.Roli == "SherbimeStudentore")
+                                                    {
+                                                        <td><a class="text-center" style=" color: inherit;">Sherbime Studentore</a></td>
+                                                    }
+                                                    else if (item.Roli == "DepShkenca")
+                                                    {
+                                                        <td><a class="text-center" style=" color: inherit;">Departamenti Shkenca</a></td>
+                                                    }
+                                                    else if (item.Roli == "DepEkonomik")
+                                                    {
+                                                        <td><a class="text-center" style=" color: inherit;">Departamenti Ekonomik</a></td>
+                                                    }
+                                                    else if (item.Roli == "ZyraFinancave")
+                                                    {
+                                                        <td><a class="text-center" style=" color: inherit;">Zyra Financave</a></td>
+                                                    }
+                                                    else if (item.Roli == "Rektorati")
+                                                    {
+                                                        <td><a class="text-center" style=" color: inherit;">Rektor</a></td>
+                                                    }
+                                                    else if (item.Roli == "Sekretari")
+                                                    {
+                                                        <td><a class="text-center" style=" color: inherit;">Sekretar</a></td>
+                                                    }
+                                                    else if (item.Roli == "ZyraCilesis")
+                                                    {
+                                                        <td><a class="text-center" style=" color: inherit;">Zyra Cilesis</a></td>
+                                                    }
+                                                    else if (item.Roli == "ZyraIt")
+                                                    {
+                                                        <td><a class="text-center" style=" color: inherit;">Zyra It-s</a></td>
+                                                    }
+                                                    <td><a class="text-center" style=" color: inherit;">@item.Roli</a></td>
                                                     <td><a class="text-center" style=" color: inherit;">@item.Name</a></td>
                                                     <td><a class="text-center" style=" color: inherit;">@item.Surname</a></td>
                                                     <td><a class="text-center" style=" color: inherit;">@item.Email</a></td>
@@ -80,7 +121,7 @@
                                                     </td>
                                                     <td><a class="text-center" style=" color: inherit;">@item.CreateOnDate</a></td>
                                                     <td><a class="text-center" style=" color: inherit;">@item.LastModifiedOnDate</a></td>
-                                                    <td><a  class="btn mb-1 btn-primary btn-sm " href="/Management/Staff/Details/@item.StaffID">Details</a> | <a class="btn mb-1 btn-danger btn-sm"  onclick="ConfirmDelete('@item.StaffID')" id="btnContinueDelete">Delete</a></td>
+                                                    <td><a class="btn mb-1 btn-primary btn-sm " href="/Management/Staff/Details/@item.StaffID">Details</a> | <a class="btn mb-1 btn-danger btn-sm" onclick="ConfirmDelete('@item.StaffID')" id="btnContinueDelete">Delete</a></td>
                                                     @*<td class="text-center">
                                                             <div class="btn-group btn-hspace">
                                                                 <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="true"><span class="icon mdi mdi-chevron-down"></span></button>

@@ -39,10 +39,19 @@ namespace Web.Areas.Management.Models
         public int AccessFailedCount { get; set; }
         public DateTime? Birthday { get; set; }
         public string CreateByUserId { get; set; }
+        public string Roli { get; set; }
         public DateTime? CreateOnDate { get; set; }
         public bool? Gender { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsDeleted { get; set; }
+        public bool SherbimeStudentore { get; set; }
+        public bool DepShkenca { get; set; }
+        public bool DepEkonomik { get; set; }
+        public bool ZyraFinancave { get; set; }
+        public bool Rektorati { get; set; }
+        public bool Sekretari { get; set; }
+        public bool ZyraCilesise { get; set; }
+        public bool ZyraIT { get; set; }
         public string LastModifiedByUserId { get; set; }
         public DateTime? LastModifiedOnDate { get; set; }
         public string Name { get; set; }

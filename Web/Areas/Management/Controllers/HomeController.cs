@@ -1,7 +1,9 @@
 ﻿using ApplicationCore.Interfaces;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -52,6 +54,7 @@ namespace Web.Areas.Management.Controllers
             }
             return View();
         }
+     
         public IActionResult Create()
         {
             return View();

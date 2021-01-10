@@ -16,6 +16,15 @@ namespace Web.Areas.Management.Models
         public string Lub { get; set; }
         public DateTime? Lud { get; set; }
         public string Lun { get; set; }
+        public bool ZyraPerSherbim { get; set; }
+        public bool DepShkenca { get; set; }
+        public bool DepEkonomik { get; set; }
+        public bool ZyraFinancave { get; set; }
+        public bool Rektorati { get; set; }
+        public bool Sekretari { get; set; }
+        public bool ZyraCilesis { get; set; }
+        public bool Studenti { get; set; }
+        public bool ZyraIt { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsDeleted { get; set; }
 

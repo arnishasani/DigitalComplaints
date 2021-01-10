@@ -35,13 +35,32 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <a asp-area="Management" asp-action="Index" asp-controller="MenaxhimiKerkesave" class="btn  btn-default btn-xl">Cancel</a>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label>Kerkesa do te percillet tek departamentet : </label>
+                                                    <br />
+                                                    <label><input type="checkbox" asp-for="ZyraPerSherbim" name="ZyrPerSherbim" value="true" checked disabled /> 1. Sherbimi studentor</label> <br />
+                                                    <label><input type="checkbox" asp-for="DepShkenca" name="DepShkenca" value="true"/> 2. Departamenti i shkencave</label> <br />
+                                                    <label><input type="checkbox" asp-for="DepEkonomik" name="DepEkonomik" value="true"/> 3. Departamenti i ekonomikut</label> <br />
+                                                    <label><input type="checkbox" asp-for="ZyraFinancave" name="ZyraFinancave" value="true"/> 4. Zyra e financave</label> <br />
+                                                    <label><input type="checkbox" asp-for="Rektorati" name="Rektorati" value="true"/> 5. Zyra e Rektorit</label> <br />
+                                                    <label><input type="checkbox" asp-for="Sekretari" name="Sekretari" value="true"/> 6. Zyra e Sekretares</label> <br />
+                                                    <label><input type="checkbox" asp-for="ZyraCilesis" name="ZyraCilesis" value="true"/> 7. Zyra e Cilesise</label> <br />
+                                                    <label><input type="checkbox" asp-for="ZyraIt" name="ZyraIt" value="true"/> 7. Zyra e IT-së</label> <br />
+                                                    <label><input type="checkbox" asp-for="Studenti" name="Studenti" value="true" checked disabled/> 8. Studenti</label> <br />
+                                                </div> 
                                             </div>
-                                            <div class="col-md-4">
-                                                <button type="submit" class="btn btn-success btn-xl"><i class="fa fa-save"></i>Save</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <a asp-area="Management" asp-action="Index" asp-controller="MenaxhimiKerkesave" class="btn  btn-default btn-xl float-left">Cancel</a>
+                                                    <button type="submit" class="btn btn-success btn-xl float-right"><i class="fa fa-save"></i> Save</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +81,7 @@
 
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.0.3/jquery-confirm.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.0.3/jquery-confirm.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -75,53 +94,53 @@
         });
     </script>
     <script>
-                var validobj;
-                $(function () {
-                        validobj = $("#kerkeseID").validate({
-                            invalidHandler: function (event, validator) {
-                                var errors = validator.numberOfInvalids();
-                                if (errors) {
-                                    $(".btn-toolbar").show();
-                                }
-                            },
-                            ignore: ".note-editable.panel-body",
-                            errorElement: 'div',
-                            errorClass: 'error',
-                            errorPlacement: function (error, element) {
-                                error.appendTo(element.parent());
-                                if (element.parent('.input-group').length) {
-                                    error.insertAfter(element.parent());
-                                } else {
-                                    error.appendTo(element.parent());
-                                }
-                            },
-                            rules: {
-                                LlojiIkerkeses:
-                                {
-                                    required: true,
-                                    minlength: 3,
-                                    normalizer: function (value) {
-                                        return $.trim(value);
-                                    }
-                                },
-                            },
-                            messages: {
-                                LlojiIkerkeses: {
-                                    required: '<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">Ju lutem plotsoni fushen e kerkuar</li></ul>',
-                                    minlength: '<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">Minimumi 3 karaktere</li></ul>'
-                                }
-                            },
-                            submitHandler: function (form) {
-                                if (submitted) {
-                                    event.preventDefault();
-                                    return false;
-                                }
-                                else {
-                                    submitted = true;
-                                    form.submit();
-                                }
-                            }
-                        });
-                });
+        var validobj;
+        $(function () {
+            validobj = $("#kerkeseID").validate({
+                invalidHandler: function (event, validator) {
+                    var errors = validator.numberOfInvalids();
+                    if (errors) {
+                        $(".btn-toolbar").show();
+                    }
+                },
+                ignore: ".note-editable.panel-body",
+                errorElement: 'div',
+                errorClass: 'error',
+                errorPlacement: function (error, element) {
+                    error.appendTo(element.parent());
+                    if (element.parent('.input-group').length) {
+                        error.insertAfter(element.parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+                },
+                rules: {
+                    LlojiIkerkeses:
+                    {
+                        required: true,
+                        minlength: 3,
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
+                    },
+                },
+                messages: {
+                    LlojiIkerkeses: {
+                        required: '<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">Ju lutem plotsoni fushen e kerkuar</li></ul>',
+                        minlength: '<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">Minimumi 3 karaktere</li></ul>'
+                    }
+                },
+                submitHandler: function (form) {
+                    if (submitted) {
+                        event.preventDefault();
+                        return false;
+                    }
+                    else {
+                        submitted = true;
+                        form.submit();
+                    }
+                }
+            });
+        });
     </script>
 }

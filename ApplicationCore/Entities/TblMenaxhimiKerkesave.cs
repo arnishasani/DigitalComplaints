@@ -8,6 +8,7 @@ namespace ApplicationCore.Entities
         public TblMenaxhimiKerkesave()
         {
             Kerkesat = new HashSet<Kerkesat>();
+            MenaxhimiKerkesaveRolet = new HashSet<MenaxhimiKerkesaveRolet>();
         }
 
         public int MenaxhimiId { get; set; }
@@ -22,5 +23,6 @@ namespace ApplicationCore.Entities
         public bool? IsDeleted { get; set; }
 
         public virtual ICollection<Kerkesat> Kerkesat { get; set; }
+        public virtual ICollection<MenaxhimiKerkesaveRolet> MenaxhimiKerkesaveRolet { get; set; }
     }
 }
