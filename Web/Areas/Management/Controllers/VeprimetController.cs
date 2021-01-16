@@ -119,6 +119,7 @@ namespace Web.Areas.Management.Controllers
                             veprimiUGjet.Orari = model.Orari;
                             _veprimetRepository.Update(veprimiUGjet);
                             _veprimetRepository.SaveChanges();
+
                         }
                     }
                     else if (User.IsInRole("DepEkonomik"))
