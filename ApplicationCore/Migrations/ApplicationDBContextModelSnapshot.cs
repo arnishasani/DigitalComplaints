@@ -295,7 +295,7 @@ namespace ApplicationCore.Migrations
 
                     b.Property<DateTime?>("Lud")
                         .HasColumnName("LUD")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Lun")
                         .HasColumnName("LUN")
@@ -311,6 +311,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
+                    b.Property<bool?>("Pranuar")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -323,6 +326,33 @@ namespace ApplicationCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Kerkesat");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.MenaxhimiKerkesaveRolet", b =>
+                {
+                    b.Property<int>("MenaxhimiId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("MenaxhimiID")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LlojiKerkesesId")
+                        .HasColumnName("LlojiKerkesesID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoliId")
+                        .IsRequired()
+                        .HasColumnName("RoliID")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.HasKey("MenaxhimiId");
+
+                    b.HasIndex("LlojiKerkesesId");
+
+                    b.HasIndex("RoliId");
+
+                    b.ToTable("MenaxhimiKerkesaveRolet");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.TblDepartamentet", b =>
@@ -486,8 +516,16 @@ namespace ApplicationCore.Migrations
             modelBuilder.Entity("ApplicationCore.Entities.Veprimet", b =>
                 {
                     b.Property<int>("VeprimiId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnName("VeprimiID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool?>("DepEkonomik")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("DepShkenca")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Grupi")
                         .HasColumnType("nvarchar(50)")
@@ -497,8 +535,9 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime?>("InsertDate")
-                        .HasColumnType("date");
+                    b.Property<string>("InsertDate")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -556,12 +595,24 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
+                    b.Property<bool?>("Perfunduar")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("Pranimi")
                         .HasColumnType("bit");
 
                     b.Property<string>("RefuzimiTotalPerLende")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<bool?>("Rektorati")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Sekretari")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("SherbimeStudentore")
+                        .HasColumnType("bit");
 
                     b.Property<string>("StafId")
                         .HasColumnType("nvarchar(450)")
@@ -576,6 +627,15 @@ namespace ApplicationCore.Migrations
                     b.Property<string>("VitiAkademik")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<bool?>("ZyraCilesis")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("ZyraFinancave")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("ZyraIt")
+                        .HasColumnType("bit");
 
                     b.HasKey("VeprimiId");
 
@@ -651,6 +711,21 @@ namespace ApplicationCore.Migrations
                         .WithMany("Kerkesat")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Kerkesat_AspNetUsers");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.MenaxhimiKerkesaveRolet", b =>
+                {
+                    b.HasOne("ApplicationCore.Entities.TblMenaxhimiKerkesave", "LlojiKerkeses")
+                        .WithMany("MenaxhimiKerkesaveRolet")
+                        .HasForeignKey("LlojiKerkesesId")
+                        .HasConstraintName("FK_MenaxhimiKerkesaveRolet_tbl.MenaxhimiKerkesave")
+                        .IsRequired();
+
+                    b.HasOne("ApplicationCore.Entities.AspNetRoles", "Roli")
+                        .WithMany("MenaxhimiKerkesaveRolet")
+                        .HasForeignKey("RoliId")
+                        .HasConstraintName("FK_MenaxhimiKerkesaveRolet_AspNetRoles")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.TblDepartamentet", b =>

@@ -1,10 +1,10 @@
 ﻿@model Web.Areas.Client.Models.KerkesaViewModel
 @{
     ViewData["Title"] = "IndexAnkes";
-    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+    Layout = "~/Views/Shared/StudentView.cshtml";
 }
 
-<div class="row">
+<div class="row" style="padding-left:6em;padding-right:6em">
     <div class="col-md-12">
         <br />
         <div class="alert alert-primary mb-0">
@@ -20,9 +20,9 @@
                     {
                         @if (item.Ankes == true && item.IsAnonim == false && item.AnonimId == null)
                         {
-                            @*@{ 
-                                var data =(DateTime) item.InsertDate;
-                            }*@
+                            @*@{
+                                    var data =(DateTime) item.InsertDate;
+                                }*@
                             <div class="col-lg-3 col-sm-6">
 
                                 <div class="card gradient" style="background-image:none; background-color:#e3e3fe">
@@ -38,7 +38,7 @@
                                         <h2 class="display-3 degree">Nr @(i+=1)</h2>
                                     </div>
                                     <div class="d-flex justify-content-between mb-4">
-                                        <p><i class="fa fa-user" ></i> @item.InsertBy</p>
+                                        <p><i class="fa fa-user"></i> @item.InsertBy</p>
                                         <p><i class="fa fa-save"></i> ID: 180029K</p>
                                     </div>
                                     <div class="progress md-progress">
@@ -70,23 +70,25 @@
                                         <hr class="">
                                         <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 deep-purple-text collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Shiko me shume</a>
                                     </div>
-                                    <div id="myModal" class="modal fade delete-modal" role="dialog">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body text-center">
-                                                    <h3>Are you sure want to delete this Course?</h3>
-                                                    <div class="m-t-20">
-                                                        <a href="#" class="btn mb-3 btn-primary btn-sm" data-dismiss="modal">Close</a>
-                                                        <button onclick="DeleteCourse()" id="btnContinueDelete" class="btn mb-3 btn-primary btn-sm">("Delete")</button>
+                                    @*<div id="myModal" class="modal fade delete-modal" role="dialog">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body text-center">
+                                                        <h3>Are you sure want to delete this Course?</h3>
+                                                        <div class="m-t-20">
+                                                            <a href="#" class="btn mb-3 btn-primary btn-sm" data-dismiss="modal">Close</a>
+                                                            <button onclick="DeleteCourse()" id="btnContinueDelete" class="btn mb-3 btn-primary btn-sm">("Delete")</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <input type="hidden" id="hiddenCourseId" />
-                                    </div>
+                                            <input type="hidden" id="hiddenCourseId" />
+                                        </div>*@
                                 </div>
-                            </div>
 
+                                <br />
+                                <br />
+                            </div>
                         }
                     }
                 </div>

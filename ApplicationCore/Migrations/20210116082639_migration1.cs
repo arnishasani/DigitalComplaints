@@ -223,9 +223,10 @@ namespace ApplicationCore.Migrations
                     InsertBy = table.Column<string>(maxLength: 450, nullable: true),
                     InsertDate = table.Column<DateTime>(type: "date", nullable: true),
                     LUB = table.Column<string>(maxLength: 450, nullable: true),
-                    LUD = table.Column<DateTime>(type: "date", nullable: true),
+                    LUD = table.Column<DateTime>(type: "datetime", nullable: true),
                     LUN = table.Column<string>(maxLength: 450, nullable: true),
-                    Ankes = table.Column<bool>(nullable: true)
+                    Ankes = table.Column<bool>(nullable: true),
+                    Pranuar = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -251,10 +252,37 @@ namespace ApplicationCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MenaxhimiKerkesaveRolet",
+                columns: table => new
+                {
+                    MenaxhimiID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LlojiKerkesesID = table.Column<int>(nullable: false),
+                    RoliID = table.Column<string>(maxLength: 450, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MenaxhimiKerkesaveRolet", x => x.MenaxhimiID);
+                    table.ForeignKey(
+                        name: "FK_MenaxhimiKerkesaveRolet_tbl.MenaxhimiKerkesave",
+                        column: x => x.LlojiKerkesesID,
+                        principalTable: "tbl.MenaxhimiKerkesave",
+                        principalColumn: "MenaxhimiID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MenaxhimiKerkesaveRolet_AspNetRoles",
+                        column: x => x.RoliID,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Veprimet",
                 columns: table => new
                 {
-                    VeprimiID = table.Column<int>(nullable: false),
+                    VeprimiID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     KerkesaID = table.Column<int>(nullable: true),
                     StafId = table.Column<string>(maxLength: 450, nullable: true),
                     Pranimi = table.Column<bool>(nullable: true),
@@ -271,12 +299,21 @@ namespace ApplicationCore.Migrations
                     LendetERefuzuara = table.Column<string>(maxLength: 500, nullable: true),
                     PagesatEPerfunduara = table.Column<string>(maxLength: 500, nullable: true),
                     InsertBy = table.Column<string>(maxLength: 450, nullable: true),
-                    InsertDate = table.Column<DateTime>(type: "date", nullable: true),
+                    InsertDate = table.Column<string>(maxLength: 100, nullable: true),
                     LUB = table.Column<string>(maxLength: 450, nullable: true),
                     LUD = table.Column<DateTime>(type: "date", nullable: true),
                     LUN = table.Column<string>(maxLength: 450, nullable: true),
                     IsActive = table.Column<bool>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: true),
+                    Perfunduar = table.Column<bool>(nullable: true),
+                    ZyraCilesis = table.Column<bool>(nullable: true),
+                    ZyraIt = table.Column<bool>(nullable: true),
+                    SherbimeStudentore = table.Column<bool>(nullable: true),
+                    DepShkenca = table.Column<bool>(nullable: true),
+                    DepEkonomik = table.Column<bool>(nullable: true),
+                    ZyraFinancave = table.Column<bool>(nullable: true),
+                    Rektorati = table.Column<bool>(nullable: true),
+                    Sekretari = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -396,6 +433,16 @@ namespace ApplicationCore.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MenaxhimiKerkesaveRolet_LlojiKerkesesID",
+                table: "MenaxhimiKerkesaveRolet",
+                column: "LlojiKerkesesID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MenaxhimiKerkesaveRolet_RoliID",
+                table: "MenaxhimiKerkesaveRolet",
+                column: "RoliID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tbl.Departamentet_DepartamentiID",
                 table: "tbl.Departamentet",
                 column: "DepartamentiID");
@@ -432,6 +479,9 @@ namespace ApplicationCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "MenaxhimiKerkesaveRolet");
 
             migrationBuilder.DropTable(
                 name: "tbl.Departamentet");
