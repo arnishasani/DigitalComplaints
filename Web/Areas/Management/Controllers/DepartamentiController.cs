@@ -80,7 +80,7 @@ namespace Web.Areas.Management.Controllers
                     }
                     else
                     {
-                        var existing = _departamentetRepository.GetById(model.DepartamentiId);
+                        var existing = _departamentetRepository.GetByIdInt(model.DepartamentiId);
                         existing.EmriDepartamentit = model.EmriDepartamentit;
                         existing.Lud = DateTime.Now;
                         existing.IsActive = model.IsActive;
@@ -101,7 +101,7 @@ namespace Web.Areas.Management.Controllers
             try
             {
                 int departID = int.Parse(id);
-                var depart = _departamentetRepository.GetById(departID);
+                var depart = _departamentetRepository.GetByIdInt(departID);
                 var vm = new DepartamentiViewModel()
                 {
                     EmriDepartamentit = depart.EmriDepartamentit,
@@ -125,7 +125,7 @@ namespace Web.Areas.Management.Controllers
         {
             try
             {
-                var staff = _departamentetRepository.GetById(id);
+                var staff = _departamentetRepository.GetByIdInt(id);
                 if (staff != null)
                 {
 

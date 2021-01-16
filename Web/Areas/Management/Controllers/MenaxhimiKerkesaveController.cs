@@ -161,7 +161,7 @@ namespace Web.Areas.Management.Controllers
         {
             try
             {
-                var kerkesa = _menaxhimiRepository.GetById(id);
+                var kerkesa = _menaxhimiRepository.GetByIdInt(id);
                 if (kerkesa != null)
                 {
                     kerkesa.IsDeleted = true;

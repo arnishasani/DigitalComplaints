@@ -41,9 +41,9 @@ namespace Web.Areas.Client.Controllers
                 foreach (var item in model1)
                 {
                     int tempDep = (int)item.DepartamentiId;
-                    var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
+                    var gjejeDepartamentin = _llojetDepartamenveRepository.GetByIdInt(tempDep);
                     int temp = (int)item.LlojiKerkeses;
-                    var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
+                    var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetByIdInt(temp);
                     var gjejuserin = _userRepository.GetByStringId(item.UserId);
                     kerkesatList.Add(new KerkesaViewModel
                     {
@@ -84,9 +84,9 @@ namespace Web.Areas.Client.Controllers
                 foreach (var item in model1)
                 {
                     int tempDep = (int)item.DepartamentiId;
-                    var gjejeDepartamentin = _llojetDepartamenveRepository.GetById(tempDep);
+                    var gjejeDepartamentin = _llojetDepartamenveRepository.GetByIdInt(tempDep);
                     int temp = (int)item.LlojiKerkeses;
-                    var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetById(temp);
+                    var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetByIdInt(temp);
                     var gjejuserin = _userRepository.GetByStringId(item.UserId);
                     kerkesatList.Add(new KerkesaViewModel
                     {
@@ -176,7 +176,7 @@ namespace Web.Areas.Client.Controllers
                 }
                 else
                 {
-                        var existing = _kerkesatRepository.GetById(model.KerkesaAnkesaId);
+                        var existing = _kerkesatRepository.GetByIdInt(model.KerkesaAnkesaId);
                         //existing.Departamenti = model.Departamenti;
                         existing.Lud = DateTime.Now;
                         existing.IsActive = model.IsActive;
@@ -265,7 +265,7 @@ namespace Web.Areas.Client.Controllers
                 }
                 else
                 {
-                    var existing = _kerkesatRepository.GetById(model.KerkesaAnkesaId);
+                    var existing = _kerkesatRepository.GetByIdInt(model.KerkesaAnkesaId);
                     //existing.Departamenti = model.Departamenti;
                     existing.Lud = DateTime.Now;
                     existing.IsActive = model.IsActive;

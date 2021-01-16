@@ -113,7 +113,7 @@ namespace Infrastructure.Repositories
                 throw;
             }
         }
-        public T GetById(int id)
+        public T GetByIdInt(int id)
         {
             try
             {

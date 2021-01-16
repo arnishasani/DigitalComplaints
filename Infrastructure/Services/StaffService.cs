@@ -50,7 +50,7 @@ namespace Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public AspNetUsers GetById(int id)
+        public AspNetUsers GetByIdInt(int id)
         {
             throw new NotImplementedException();
         }

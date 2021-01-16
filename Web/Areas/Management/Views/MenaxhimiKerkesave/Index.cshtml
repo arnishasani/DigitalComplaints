@@ -43,46 +43,48 @@
                                             }
                                             @foreach (var item in Model.menaxhimiList)
                                             {
-                                                <tr>
-                                                    <td><a class="text-center" style=" color: inherit;">@item.LlojiIkerkeses</a></td>
-                                                    <td><a class="text-center" style=" color: inherit;">@Html.Raw(item.PershkrimiKerkeses)</a></td>
-                                                    <td>
-                                                        @if (item.IsActive == true)
-                                                        {
-                                                            <a class="text-center" style=" color: inherit;">Po</a>
+                                            <tr>
+                                                <td>@item.MenaxhimiId</td>
+                                                <td><a class="text-center" style=" color: inherit;">@item.LlojiIkerkeses</a></td>
+                                                <td><a class="text-center" style=" color: inherit;">@Html.Raw(item.PershkrimiKerkeses)</a></td>
+                                                <td>
+                                                    @if (item.IsActive == true)
+                                                    {
+                                                        <a class="text-center" style=" color: inherit;">Po</a>
 
-                                                        }
-                                                        else
-                                                        {
-                                                            <a class="text-center" style=" color: inherit;">Jo</a>
-                                                        }
-                                                    </td>
-                                                    <td>
-                                                        @if (item.IsDeleted == true)
-                                                        {
-                                                            <a class="text-center" style=" color: inherit;">Po</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="text-center" style=" color: inherit;">Jo</a>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (item.IsDeleted == true)
+                                                    {
+                                                        <a class="text-center" style=" color: inherit;">Po</a>
 
-                                                        }
-                                                        else
-                                                        {
-                                                            <a class="text-center" style=" color: inherit;">Jo</a>
-                                                        }
-                                                    </td>
-                                                    <td><a class="text-center" style=" color: inherit;">@item.InsertBy</a></td>
-                                                    <td><a class="text-center" style=" color: inherit;">@item.InsertDate</a></td>
-                                                    <td><a class="text-center" style=" color: inherit;">@item.Lub</a></td>
-                                                    <td><a class="btn mb-1 btn-primary btn-sm " href="/Management/Staff/Details/@item.MenaxhimiId">Details</a> | <a class="btn mb-1 btn-danger btn-sm" onclick="ConfirmDelete('@item.MenaxhimiId')" id="btnContinueDelete">Delete</a></td>
-                                                    @*<td class="text-center">
-                                                            <div class="btn-group btn-hspace">
-                                                                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="true"><span class="icon mdi mdi-chevron-down"></span></button>
-                                                                <ul role="menu" class="dropdown-menu pull-right">
-                                                                    <li><a asp-action="details" asp-controller="Announcement" asp-route-id="@item.Id" asp-area="StoreManagement"><i class="fa fa-eye text-primary"></i> @SharedLocalizer["ViewAnnouncements"] </a></li>
-                                                                    <li><a asp-action="add" asp-route-id="@item.Id" asp-controller="Announcement"><i class="fa fa-pencil text-warning"></i> @SharedLocalizer["Edit"] </a></li>
-                                                                    <li><a href="javascript:void(0)" class="js-delete" data-id="@item.Id"><i class="fa fa-remove text-danger"></i> @SharedLocalizer["Delete"] </a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </td>*@
-                                                </tr>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="text-center" style=" color: inherit;">Jo</a>
+                                                    }
+                                                </td>
+                                                <td><a class="text-center" style=" color: inherit;">@item.InsertBy</a></td>
+                                                <td><a class="text-center" style=" color: inherit;">@item.InsertDate</a></td>
+                                                <td><a class="text-center" style=" color: inherit;">@item.Lub</a></td>
+                                                <td><a class="btn mb-1 btn-primary btn-sm " href="/Management/Staff/Details/@item.MenaxhimiId">Details</a> | <a class="btn mb-1 btn-danger btn-sm" href="/Management/MenaxhimiKerkesave/DeleteKerkese/@item.MenaxhimiId" id="btnContinueDelete">Delete</a>
+                                                <a class="btn mb-1 btn-danger btn-sm" onclick="ConfirmDelete('@item.MenaxhimiId')" id="btnContinueDelete">Delete</a></td>
+                                                @*<td class="text-center">
+            <div class="btn-group btn-hspace">
+                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="true"><span class="icon mdi mdi-chevron-down"></span></button>
+                <ul role="menu" class="dropdown-menu pull-right">
+                    <li><a asp-action="details" asp-controller="Announcement" asp-route-id="@item.Id" asp-area="StoreManagement"><i class="fa fa-eye text-primary"></i> @SharedLocalizer["ViewAnnouncements"] </a></li>
+                    <li><a asp-action="add" asp-route-id="@item.Id" asp-controller="Announcement"><i class="fa fa-pencil text-warning"></i> @SharedLocalizer["Edit"] </a></li>
+                    <li><a href="javascript:void(0)" class="js-delete" data-id="@item.Id"><i class="fa fa-remove text-danger"></i> @SharedLocalizer["Delete"] </a></li>
+                </ul>
+            </div>
+        </td>*@
+                                            </tr>
                                                 i++;
                                             }
                                         </tbody>
@@ -146,8 +148,9 @@
         });
     </script>
     <script>
-        var ConfirmDelete = function (UserId) {
-            $("#hiddenUserId").val(UserId);
+        debugger;
+        var ConfirmDelete = function (MenaxhimiId) {
+            $("#hiddenUserId").val(MenaxhimiId);
             $("#myModal").modal('show');
         }
         debugger;

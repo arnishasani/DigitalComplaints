@@ -158,7 +158,7 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.Lud)
                     .HasColumnName("LUD")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Lun)
                     .HasColumnName("LUN")
@@ -322,15 +322,13 @@ namespace ApplicationCore.Entities
 
                 entity.HasIndex(e => e.KerkesaId);
 
-                entity.Property(e => e.VeprimiId)
-                    .HasColumnName("VeprimiID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.VeprimiId).HasColumnName("VeprimiID");
 
                 entity.Property(e => e.Grupi).HasMaxLength(50);
 
                 entity.Property(e => e.InsertBy).HasMaxLength(450);
 
-                entity.Property(e => e.InsertDate).HasColumnType("date");
+                entity.Property(e => e.InsertDate).HasMaxLength(100);
 
                 entity.Property(e => e.KerkesaId).HasColumnName("KerkesaID");
 

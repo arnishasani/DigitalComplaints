@@ -11,7 +11,6 @@ namespace ApplicationCore.Interfaces
         IEnumerable<Veprimet> GetAllComplaintList();
         IEnumerable<Veprimet> GetAllAnonymousComplaintList();
         bool DeleteKerkese(Veprimet model);
-
         bool UpdateKerkese(Veprimet model);
     }
 }

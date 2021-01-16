@@ -1,7 +1,9 @@
 ﻿using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Infrastructure.Repositories
@@ -37,7 +39,22 @@ namespace Infrastructure.Repositories
 
         public bool UpdateKerkese(Veprimet model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var temp = _digitalComplaintsDB.Veprimet.Where(x => x.KerkesaId == model.KerkesaId);
+                foreach (var item in temp)
+                {
+                    if (item.KerkesaId == model.KerkesaId)
+                    {
+                        _digitalComplaintsDB.Entry(model).State = EntityState.Modified;
+                    }
+                }
+                return _digitalComplaintsDB.SaveChanges() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

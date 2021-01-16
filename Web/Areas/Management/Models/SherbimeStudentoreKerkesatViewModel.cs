@@ -8,7 +8,13 @@ namespace Web.Areas.Management.Models
 {
     public class SherbimeStudentoreKerkesatViewModel
     {
+        public int VeprimiID { get; set; }
         public int KerkesaAnkesaId { get; set; }
+        
+        public bool PranuarNgaSherbimet { get; set; }
+        public bool VerifikuarNgaSherbimet { get; set; }
+        public bool MiratuarNgaSherbimet { get; set; }
+        public bool VendimiNgaSherbimet { get; set; }
         public string UserId { get; set; }
         public string LlojiKerkeses { get; set; }
         public int? DepartamentiId { get; set; }
