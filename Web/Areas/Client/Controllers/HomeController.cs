@@ -229,7 +229,7 @@ namespace Web.Areas.Client.Controllers
                 if (model.KerkesaAnkesaId == 0)
                 {
                     Kerkesat kerkesa = new Kerkesat();
-                    kerkesa.DepartamentiId = 1;
+                    kerkesa.DepartamentiId =model.DepartamentiId;
                     kerkesa.UserId = _userManager.GetUserId(User);
                     kerkesa.LlojiKerkeses = 4;
                     kerkesa.Nenshkrimi = model.Nenshkrimi;
