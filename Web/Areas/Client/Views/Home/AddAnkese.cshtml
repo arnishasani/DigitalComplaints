@@ -22,6 +22,8 @@
                                         <div class="form-group ">
                                             <div class="input-box ">
                                                 <label asp-for="DepartamentiId" style="text-align:center">Departamenti </label>
+
+
                                                 <select name="DepartamentiId" asp-for="DepartamentiId" class="form-control">
                                                     <option value="" disabled selected>-- zgjedh departamentin --</option>
                                                     @foreach (var item in Model.departamentetlist)
