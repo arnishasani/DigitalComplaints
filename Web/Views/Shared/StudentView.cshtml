@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AspNetCoreMvcIdentity</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div>
+        <header>
+                <nav class="navbar">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"style="font-weight:bold;font-style:italic;">DigitalComplaints</a>
+                    <div class="subnav"style="margin-right:1%">
+                            <button class="subnavbtn"style="font-weight: bold; font-style: italic;" >Kerkesa <i class="fa fa-caret-down"></i></button>
+                            <div class="subnav-content">
+                                <a asp-area="Client" asp-controller="Home" asp-action="AddKerkese" class="nav-link active"style=" margin-left: 13%;font-weight:bold;font-style:italic;">
+                                    Shto kerkese</a>
+                                    <a asp-area="Client" asp-controller="Home" asp-action="Index" class="nav-link active" style="font-weight: bold; font-style: italic;">
+                                        Shiko kerkesat
+                                    </a>
+                                    @*<a href="#careers" style=" margin-left: 2%;">Kerkesat e mia</a>*@
+                            </div>
+                    </div>
+                    <div class="subnav" style="margin-right:50%">
+                            <button class="subnavbtn" style="font-weight: bold; font-style: italic;">Ankesa <i class="fa fa-caret-down"></i></button>
+                            <div class="subnav-content">
+                                <a asp-area="Client" asp-controller="Home" asp-action="AddAnkese" class="nav-link active"style=" margin-left: 23%;font-weight:bold;font-style:italic;">
+                                    Shto ankese</a>
+                                    <a asp-area="Client" asp-controller="Home" asp-action="IndexAnkes" style=" margin-left: 2%;font-weight:bold;font-style:italic;" class="nav-link active">
+                                        Shiko ankesat
+                                    </a>
+                                    @*<a href="#careers" style=" margin-left: 2%;">Ankesat e mia</a>*@
+                            </div>
+                    </div>
+                        <a class="navbar-brand"> <partial name="_LoginPartial" /></a>
+                </nav>
+        </header>
+        <div>
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div>
+                &copy; 2018 - AspNetCoreRazorPageIdentity - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    </div>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>
+<style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+        }
+
+    .navbar {
+        overflow: hidden;
+        background-color: #2678c9;
+    }
+
+            .navbar a {
+                float: left;
+                font-size: 16px;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+            }
+
+        .subnav {
+            float: left;
+            overflow: hidden;
+        }
+
+            .subnav .subnavbtn {
+                font-size: 16px;
+                border: none;
+                outline: none;
+                color: white;
+                /*            padding: 14px 16px;
+    */ background-color: inherit;
+                font-family: inherit;
+                margin: 0;
+            }
+
+            .navbar a:hover, .subnav:hover .subnavbtn {
+                background-color: #2678c9;
+            }
+
+    .subnav-content {
+        display: none;
+        position: absolute;
+        left: 0;
+        background-color: #2678c9;
+        width: 100%;
+        z-index: 1;
+    }
+
+            .subnav-content a {
+                float: left;
+                color: white;
+                text-decoration: none;
+            }
+
+                .subnav-content a:hover {
+                    background-color: #2678c9;
+                    color: white;
+                }
+
+        .subnav:hover .subnav-content {
+            display: block;
+        }
+</style>

@@ -1,13 +1,13 @@
 ﻿@model Web.Areas.Client.Models.KerkesaViewModel
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+    Layout = "~/Views/Shared/StudentView.cshtml";
 }
-<div class="row">
+<div class="row"style="padding-left:6em;padding-right:6em">
     <div class="col-md-12">
         <br />
         <div class="alert alert-primary mb-0">
-            <span style="font-weight:bold;font-style:italic;  font-size: 24px;color:white">Kerkesat</span>
+            <span style="font-weight:bold;font-style:italic;  font-size: 24px;color:black">Kerkesat</span>
             <br />
         </div>
         <br />
@@ -66,10 +66,14 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <hr class="">
-                                        <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 deep-purple-text collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Shiko me shume</a>
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <hr class="">
+                                            <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 deep-purple-text collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Shiko me shume</a>
+                                            
+                                        </div>
+                                     
                                     </div>
-                                    <div id="myModal" class="modal fade delete-modal" role="dialog">
+                                    @*<div id="myModal" class="modal fade delete-modal" role="dialog">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-body text-center">
@@ -82,8 +86,10 @@
                                             </div>
                                         </div>
                                         <input type="hidden" id="hiddenCourseId" />
-                                    </div>
+                                    </div>*@
                                 </div>
+                                <br />
+                                <br />
                             </div>
                         }
                     }
