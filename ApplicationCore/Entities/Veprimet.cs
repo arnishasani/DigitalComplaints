@@ -27,12 +27,21 @@ namespace ApplicationCore.Entities
         public string LendetErefuzuara { get; set; }
         public string PagesatEperfunduara { get; set; }
         public string InsertBy { get; set; }
-        public DateTime? InsertDate { get; set; }
+        public string InsertDate { get; set; }
         public string Lub { get; set; }
         public DateTime? Lud { get; set; }
         public string Lun { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsDeleted { get; set; }
+        public bool? Perfunduar { get; set; }
+        public bool? ZyraCilesis { get; set; }
+        public bool? ZyraIt { get; set; }
+        public bool? SherbimeStudentore { get; set; }
+        public bool? DepShkenca { get; set; }
+        public bool? DepEkonomik { get; set; }
+        public bool? ZyraFinancave { get; set; }
+        public bool? Rektorati { get; set; }
+        public bool? Sekretari { get; set; }
 
         public virtual Kerkesat Kerkesa { get; set; }
         public virtual ICollection<VendimiPerfundimtar> VendimiPerfundimtar { get; set; }

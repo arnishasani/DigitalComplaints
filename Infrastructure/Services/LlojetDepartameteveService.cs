@@ -49,7 +49,7 @@ namespace Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public TblLlojetDepartamenteve GetById(int id)
+        public TblLlojetDepartamenteve GetByIdInt(int id)
         {
             throw new NotImplementedException();
         }

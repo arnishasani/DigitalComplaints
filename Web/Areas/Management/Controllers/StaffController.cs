@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Interfaces;
+﻿using ApplicationCore.Entities;
+using ApplicationCore.Interfaces;
 using Infrastructure.Identity;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -18,16 +19,20 @@ namespace Web.Areas.Management.Controllers
     public class StaffController : Controller
     {
         private readonly IStaff _staffRepository;
+        private readonly IUsersRole _staffRole;
+        private readonly IRole _roleStaff;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public StaffController(IStaff staffRepository, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public StaffController(IStaff staffRepository, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, IUsersRole staffRole, IRole roleStaff)
         {
             _staffRepository = staffRepository;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _staffRole = staffRole;
+            _roleStaff = roleStaff;
         }
 
         public IActionResult Index()
@@ -39,6 +44,17 @@ namespace Web.Areas.Management.Controllers
                 var modeel = _staffRepository.GetAllList();
                 foreach (var item in modeel)
                 {
+                    var roleId = _staffRole.GetRoleByUserId(item.Id);
+                    IEnumerable<AspNetRoles> roleName = null;
+                    foreach (var role in roleId)
+                    {
+                        roleName = _roleStaff.GetRole(role.RoleId);
+                    }
+                    var tempName = "";
+                    foreach (var tempN in roleName)
+                    {
+                        tempName = tempN.Name;
+                    }
                     staffList.Add(new StaffViewModel
                     {
                         StaffID = item.Id,
@@ -46,6 +62,7 @@ namespace Web.Areas.Management.Controllers
                         Surname = item.Surname,
                         Email = item.Email,
                         Birthday = item.Birthday,
+                        Roli = tempName,
                         Gender = item.Gender,
                         PhoneNumber = item.PhoneNumber,
                         IsActive = item.IsActive,
@@ -108,6 +125,7 @@ namespace Web.Areas.Management.Controllers
                 //    return View(model);
                 //else
                 //{
+                var currentDate = DateTime.Now;
                 var user = new ApplicationUser
                 {
                     Name = model.Name,
@@ -120,17 +138,68 @@ namespace Web.Areas.Management.Controllers
                     IsActive = true,
                     IsDeleted = false,
                     CreateByUserId = _userManager.GetUserId(User),
-                    CreateOnDate = DateTime.Now,
+                    CreateOnDate = currentDate,
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var role = await _roleManager.FindByIdAsync("2");
-                    await _userManager.AddToRoleAsync(user, role.Name);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    if (model.SherbimeStudentore != false)
+                    {
+                        var role = await _roleManager.FindByIdAsync("4");
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    }
+                    else if (model.DepShkenca != false)
+                    {
+                        var role = await _roleManager.FindByIdAsync("5");
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    }
+                    else if (model.DepEkonomik != false)
+                    {
+                        var role = await _roleManager.FindByIdAsync("6");
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    }
+                    else if (model.ZyraFinancave != false)
+                    {
+                        var role = await _roleManager.FindByIdAsync("7");
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    }
+                    else if (model.Rektorati != false)
+                    {
+                        var role = await _roleManager.FindByIdAsync("8");
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    }
+                    else if (model.Sekretari != false)
+                    {
+                        var role = await _roleManager.FindByIdAsync("9");
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    }
+                    else if (model.ZyraCilesise != false)
+                    {
+                        var role = await _roleManager.FindByIdAsync("10");
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    }
+                    else if (model.ZyraIT != false)
+                    {
+                        var role = await _roleManager.FindByIdAsync("11");
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    }
                 }
-                //}
                 return RedirectToAction(nameof(StaffController.Index), "Staff", new { area = "Management" });
             }
             catch (Exception ex)

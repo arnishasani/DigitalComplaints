@@ -6,12 +6,75 @@
     Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
 }
 <div style="padding-left:30em; padding-top:7em; padding-right:8em;">
+    @if (User.IsInRole("DepShkenca") || User.IsInRole("DepEkonomik"))
+    {
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <label> Te dhenat nga sherbimet studentore </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content" id="detajet">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                @if (Model.PranuarNgaSherbimet != false)
+                                {
+                                    <label> Eshte pranuar nga Sherbimet Studentore : Po </label><br />
+                                }
+                                else
+                                {
+                                    <label> Eshte pranuar nga Sherbimet Studentore : Jo </label><br />
+                                }
+                                @if (Model.VerifikuarNgaSherbimet != false)
+                                {
+                                    <label> Eshte verifikuar nga Sherbimet Studentore : Po </label><br />
+                                }
+                                else
+                                {
+                                    <label> Eshte verifikuar nga Sherbimet Studentore : Jo </label><br />
+                                }
+                                @if (Model.MiratuarNgaSherbimet != false)
+                                {
+                                    <label> Eshte miratuar nga Sherbimet Studentore : Po </label><br />
+                                }
+                                else
+                                {
+                                    <label> Eshte miratuar nga Sherbimet Studentore : Jo </label><br />
+                                }
+                                @if (Model.VendimiNgaSherbimet != false)
+                                {
+                                    <label> Eshte vendosur nga Sherbimet Studentore : Po </label><br />
+                                }
+                                else
+                                {
+                                    <label> Eshte vendosur nga Sherbimet Studentore : Jo </label><br />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
+                            <label> Ankesa nga Studenti/ja</label> <br />
+                            <input type="hidden" asp-for="VeprimiID" value="@Model.VeprimiID" />
                             @if (Model.Ankes == false)
                             {
                                 <label>Tipi i kerkeses :</label><h5>@Model.LlojiKerkeses</h5>
@@ -30,7 +93,6 @@
             </div>
         </div>
     </div>
-
     <div class="content" id="detajet">
         <div class="container-fluid">
             <div class="row">
@@ -71,23 +133,8 @@
                                 <label> Autori i kerkeses :</label><h5> Arnis Hasani </h5> <br />
                                 <label> Index ID :</label><h5> 180110K</h5> <br />
                             }
-                            <a href="#" style="float:left" class="card-link">Refuzoj</a>
-                            <a href="#" style="float:right" onclick="showDiv();" class="card-link">Vazhdo</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content" id="vazhdo" style="display:none">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-body">
-                          
-                            <a href="#" style="float:left" onclick="back();" class="card-link">Kthehu mbrapa</a>
-                            <a href="#" style="float:right" onclick="showDiv();" class="card-link">Aprovoj</a>
+                            <a href="/Management/SherbimeStudentore/Index" style="float:left" class="card-link">Kthehu mbrapa</a>
+                            <a href="/Management/Veprimet/AddVeprim/@Model.KerkesaAnkesaId" style="float:right" class="card-link">Aprovoj</a>
                         </div>
                     </div>
                 </div>
@@ -95,15 +142,15 @@
         </div>
     </div>
 </div>
-@section scripts{ 
-<script>
-    function showDiv() {
-        $('#detajet').hide();
-        $('#vazhdo').show();
-    }
-    function back() {
-        $('#detajet').show();
-        $('#vazhdo').hide();
-    }
-</script>
+@*@section scripts{
+    <script>
+        function showDiv() {
+            $('#detajet').hide();
+            $('#vazhdo').show();
+        }
+        function back() {
+            $('#detajet').show();
+            $('#vazhdo').hide();
+        }
+    </script>*@
 }

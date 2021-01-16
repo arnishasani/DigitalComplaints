@@ -9,7 +9,7 @@ namespace ApplicationCore.Interfaces
     {
         //IEnumerable<string> GetUserRoles(string id);
         AspNetUsers GetByStringId(string id);
-        //AspNetUserRoles GetUserRole(string id);
+        AspNetUserRoles GetUserRole(string id);
         //int CountUsersByRole(string roleId);
         //IEnumerable<AspNetUsers> GetOnlineCustomers();
         //int CountOrdersByUser(string userId);

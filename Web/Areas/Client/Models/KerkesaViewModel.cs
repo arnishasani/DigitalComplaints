@@ -26,6 +26,7 @@ namespace Web.Areas.Client.Models
         public string Lub { get; set; }
         public DateTime? Lud { get; set; }
         public string Lun { get; set; }
+        public bool Pranuar { get; set; }
         public int? Departamenti { get; set; }
         //public virtual TblLlojetDepartamenteve Departamenti { get; set; }
         public virtual TblMenaxhimiKerkesave LlojiKerkesesNavigation { get; set; }

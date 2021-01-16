@@ -8,7 +8,13 @@ namespace Web.Areas.Management.Models
 {
     public class SherbimeStudentoreKerkesatViewModel
     {
+        public int VeprimiID { get; set; }
         public int KerkesaAnkesaId { get; set; }
+        
+        public bool PranuarNgaSherbimet { get; set; }
+        public bool VerifikuarNgaSherbimet { get; set; }
+        public bool MiratuarNgaSherbimet { get; set; }
+        public bool VendimiNgaSherbimet { get; set; }
         public string UserId { get; set; }
         public string LlojiKerkeses { get; set; }
         public int? DepartamentiId { get; set; }
@@ -24,7 +30,7 @@ namespace Web.Areas.Management.Models
         public DateTime? Lud { get; set; }
         public string Lun { get; set; }
         public bool? Ankes { get; set; }
-
+        public bool? Pranuar { get; set; }
         public string IndexId { get; set; }
         public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreKerkesaList {get;set;}
         public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreAnkesaList {get;set;}

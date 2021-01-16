@@ -16,6 +16,11 @@ using Infrastructure.Services;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using System.Collections.Generic;
+using System.Reflection;
+using Microsoft.Extensions.Options;
 
 namespace Web
 {
@@ -71,6 +76,7 @@ namespace Web
                 options.User.RequireUniqueEmail = true;
             });
 
+
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
@@ -100,6 +106,10 @@ namespace Web
             services.AddTransient<IMenaxhimiK, MenaxhimiKerkesaveRepository>();
             services.AddTransient<ISherbimeStudentore, SherbimeStudentoreRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IVeprimet, VeprimetRepository>();
+            services.AddTransient<IMenaxhimiKerkesaveRole, MenaxhimiKerkesaveRoletRepository>();
+            services.AddTransient<IUsersRole, UsersRoleRepository>();
+            services.AddTransient<IRole, RoleRepository>();
             services.AddControllersWithViews();
         }
 
@@ -117,7 +127,11 @@ namespace Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
 
+            var localizationOption = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(localizationOption.Value);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

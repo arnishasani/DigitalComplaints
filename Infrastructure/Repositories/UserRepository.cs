@@ -28,27 +28,29 @@ namespace Infrastructure.Repositories
                 throw e;
             }
         }
-        //public IEnumerable<string> GetUserRoles(string id)
-        //{
-        //    try
-        //    {
-        //        try
-        //        {
-        //            return _digitalComplaintsDB.AspNetUsers.Include(p => p.AspNetUserRoles).ThenInclude(u => u.Role).FirstOrDefault(p => p.Id == id).AspNetUserRoles.Where(x => x.IsActive == true).Select(p => p.Role.Name);
-        //        }
-        //        catch
-        //        {
-        //            //To do: 1K
-        //            return null;
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
 
-        //        throw e;
-        //    }
+        public AspNetUserRoles GetUserRole(string id)
+        {
+            try
+            {
+                try
+                {
+                    //return _digitalComplaintsDB.AspNetUsers.Include(p => p.AspNetUserRoles).ThenInclude(u => u.Role).FirstOrDefault(p => p.Id == id).AspNetUserRoles.Where(x => x.IsActive == true).Select(p => p.Role.Name);
+                    return null;
+                }
+                catch
+                {
+                    //To do: 1K
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
 
-        //}
+                throw e;
+            }
+        }
+
         //public IEnumerable<string> GetUserRoleIds(string id)
         //{
         //    try
