@@ -192,6 +192,38 @@ namespace Web.Areas.Management.Controllers
                 {
 
                 }
+                else if(User.IsInRole("SuperAdmin"))
+                {
+                    var menaxhoKerkesenList = new List<Models.SherbimeStudentoreKerkesatViewModel>();
+                    var modelGetAllRequest = _sherbimeStudentoreRepository.GetAllRequestList();
+                    foreach (var item in modelGetAllRequest)
+                    {
+                        int tempDep = (int)item.DepartamentiId;
+                        var gjejeDepartamentin = _llojetDepartamenveRepository.GetByIdInt(tempDep);
+                        int temp = (int)item.LlojiKerkeses;
+                        var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetByIdInt(temp);
+                        menaxhoKerkesenList.Add(new Models.SherbimeStudentoreKerkesatViewModel
+                        {
+                            KerkesaAnkesaId = item.KerkesaAnkesaId,
+                            //  UserId = r,
+                            LlojiKerkeses = gjejLlojinKerkeses.LlojiIkerkeses,
+                            Departamenti = gjejeDepartamentin.EmriDepartamentit,
+                            Nenshkrimi = item.Nenshkrimi,
+                            PershkrimiIkerkeses = item.PershkrimiIkerkeses,
+                            IsActive = item.IsActive,
+                            IsDeleted = item.IsDeleted,
+                            IsAnonim = item.IsAnonim,
+                            AnonimId = item.AnonimId,
+                            Ankes = item.Ankes,
+                            InsertBy = item.InsertBy,
+                            InsertDate = item.InsertDate,
+                            Lub = item.Lub,
+                            Lud = item.Lud,
+                            Lun = item.Lun
+                        });
+                    }
+                    model.sherbimeStudentoreKerkesaList = menaxhoKerkesenList;
+                }
                 return View(model);
             }
             catch (Exception ex)
