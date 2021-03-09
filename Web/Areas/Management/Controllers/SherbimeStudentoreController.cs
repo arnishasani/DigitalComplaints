@@ -296,9 +296,6 @@ namespace Web.Areas.Management.Controllers
                         {
                             VeprimiID = vepID,
                             PranuarNgaSherbimet = (bool)item.Pranimi,
-                            VerifikuarNgaSherbimet = (bool)item.Verifikimi,
-                            MiratuarNgaSherbimet = (bool)item.Miratimi,
-                            VendimiNgaSherbimet = (bool)item.Vendimi,
                             KerkesaAnkesaId = kerkesA.KerkesaAnkesaId,
                             LlojiKerkeses = gjejLlojinKerkeses.LlojiIkerkeses,
                             Departamenti = gjejeDepartamentin.EmriDepartamentit,

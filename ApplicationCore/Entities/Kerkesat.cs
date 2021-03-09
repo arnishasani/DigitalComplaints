@@ -11,7 +11,6 @@ namespace ApplicationCore.Entities
         }
 
         public int KerkesaAnkesaId { get; set; }
-
         public string UserId { get; set; }
         public int? LlojiKerkeses { get; set; }
         public int? DepartamentiId { get; set; }

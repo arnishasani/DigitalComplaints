@@ -14,9 +14,6 @@ namespace ApplicationCore.Entities
         public int? KerkesaId { get; set; }
         public string StafId { get; set; }
         public bool? Pranimi { get; set; }
-        public bool? Verifikimi { get; set; }
-        public bool? Miratimi { get; set; }
-        public bool? Vendimi { get; set; }
         public string Grupi { get; set; }
         public string Orari { get; set; }
         public string LendetEmbetura { get; set; }
@@ -27,7 +24,7 @@ namespace ApplicationCore.Entities
         public string LendetErefuzuara { get; set; }
         public string PagesatEperfunduara { get; set; }
         public string InsertBy { get; set; }
-        public string InsertDate { get; set; }
+        public DateTime? InsertDate { get; set; }
         public string Lub { get; set; }
         public DateTime? Lud { get; set; }
         public string Lun { get; set; }

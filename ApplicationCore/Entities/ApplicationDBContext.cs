@@ -30,13 +30,13 @@ namespace ApplicationCore.Entities
         public virtual DbSet<VendimiPerfundimtar> VendimiPerfundimtar { get; set; }
         public virtual DbSet<Veprimet> Veprimet { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        optionsBuilder.UseSqlServer("Data Source=DESKTOP-FN1QQ0I\\ARNOOH;Initial Catalog=DigitalComplaintsDB3;Integrated Security=True");
-        //    }
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-HDPQJE9;Initial Catalog=DigitalComplaintsDB4;Integrated Security=True");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -121,9 +121,15 @@ namespace ApplicationCore.Entities
                     .IsUnique()
                     .HasFilter("([NormalizedUserName] IS NOT NULL)");
 
+                entity.Property(e => e.Birthday).HasColumnType("datetime");
+
+                entity.Property(e => e.CreateOnDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Email).HasMaxLength(256);
 
                 entity.Property(e => e.IndexId).HasMaxLength(450);
+
+                entity.Property(e => e.LastModifiedOnDate).HasColumnType("datetime");
 
                 entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
@@ -150,7 +156,7 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.InsertBy).HasMaxLength(450);
 
-                entity.Property(e => e.InsertDate).HasColumnType("date");
+                entity.Property(e => e.InsertDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Lub)
                     .HasColumnName("LUB")
@@ -190,14 +196,17 @@ namespace ApplicationCore.Entities
             {
                 entity.HasKey(e => e.MenaxhimiId);
 
+                entity.HasIndex(e => e.LlojiKerkesesId);
+
+                entity.HasIndex(e => e.RoliId);
+
                 entity.Property(e => e.MenaxhimiId).HasColumnName("MenaxhimiID");
 
                 entity.Property(e => e.LlojiKerkesesId).HasColumnName("LlojiKerkesesID");
 
                 entity.Property(e => e.RoliId)
                     .IsRequired()
-                    .HasColumnName("RoliID")
-                    .HasMaxLength(450);
+                    .HasColumnName("RoliID");
 
                 entity.HasOne(d => d.LlojiKerkeses)
                     .WithMany(p => p.MenaxhimiKerkesaveRolet)
@@ -252,7 +261,7 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.InsertBy).HasMaxLength(450);
 
-                entity.Property(e => e.InsertDate).HasColumnType("date");
+                entity.Property(e => e.InsertDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Lub)
                     .HasColumnName("LUB")
@@ -260,7 +269,7 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.Lud)
                     .HasColumnName("LUD")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Lun)
                     .HasColumnName("LUN")
@@ -277,7 +286,7 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.InsertBy).HasMaxLength(450);
 
-                entity.Property(e => e.InsertDate).HasColumnType("date");
+                entity.Property(e => e.InsertDate).HasColumnType("datetime");
 
                 entity.Property(e => e.LlojiIkerkeses)
                     .HasColumnName("LlojiIKerkeses")
@@ -289,7 +298,7 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.Lud)
                     .HasColumnName("LUD")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Lun)
                     .HasColumnName("LUN")
@@ -302,11 +311,11 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.InsertBy).HasMaxLength(450);
 
-                entity.Property(e => e.InsertDate).HasColumnType("date");
+                entity.Property(e => e.InsertDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Lub).HasMaxLength(450);
 
-                entity.Property(e => e.Lud).HasColumnType("date");
+                entity.Property(e => e.Lud).HasColumnType("datetime");
 
                 entity.Property(e => e.StaffId).HasMaxLength(450);
 
@@ -328,7 +337,7 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.InsertBy).HasMaxLength(450);
 
-                entity.Property(e => e.InsertDate).HasMaxLength(100);
+                entity.Property(e => e.InsertDate).HasColumnType("datetime");
 
                 entity.Property(e => e.KerkesaId).HasColumnName("KerkesaID");
 
@@ -350,7 +359,7 @@ namespace ApplicationCore.Entities
 
                 entity.Property(e => e.Lud)
                     .HasColumnName("LUD")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Lun)
                     .HasColumnName("LUN")

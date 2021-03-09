@@ -47,27 +47,7 @@ namespace Web.Areas.Management.Controllers
         {
             try
             {
-                var pranuar = false;
-                var verifikuar = false;
-                var miratuar = false;
-                var vendimi = false;
-                if (model.Pranimi == true)
-                {
-                    pranuar = true;
-                }
-                if (model.Verifikimi == true)
-                {
-                    verifikuar = true;
-                }
-                if (model.Miratimi == true)
-                {
-                    miratuar = true;
-                }
-                if (model.Vendimi == true)
-                {
-                    vendimi = true;
-                }
-
+                var pranuar = true;
                 var currentUser = _userManager.GetUserId(User);
                 if (!ModelState.IsValid)
                     return View(model);
@@ -75,15 +55,14 @@ namespace Web.Areas.Management.Controllers
                 {
                     if (User.IsInRole("SherbimeStudentore"))
                     {
-                        var currentDate = DateTime.Now;
                         Veprimet modelVeprimet = new Veprimet();
                         modelVeprimet.KerkesaId = model.KerkesaId;
                         modelVeprimet.Pranimi = pranuar;
                         modelVeprimet.StafId = currentUser;
-                        modelVeprimet.Vendimi = vendimi;
-                        modelVeprimet.Verifikimi = verifikuar;
-                        modelVeprimet.Miratimi = miratuar;
-                        modelVeprimet.InsertDate = currentDate.ToString();
+                        //modelVeprimet.Vendimi = vendimi;
+                        //modelVeprimet.Verifikimi = verifikuar;
+                        //modelVeprimet.Miratimi = miratuar;
+                        modelVeprimet.InsertDate = DateTime.Now;
                         modelVeprimet.SherbimeStudentore = true;
                         modelVeprimet.DepShkenca = false;
                         modelVeprimet.DepEkonomik = false;
@@ -101,6 +80,8 @@ namespace Web.Areas.Management.Controllers
                         int tempDep = (int)model.KerkesaId;
                         var kerkesauGjet = _menaxhimiKerkesaveRepository.GetByIdInt(tempDep);
                         kerkesauGjet.Pranuar = true;
+                        kerkesauGjet.Lub = currentUser;
+                        kerkesauGjet.Lud = DateTime.Now;
                         _menaxhimiKerkesaveRepository.Update(kerkesauGjet);
                         _menaxhimiKerkesaveRepository.SaveChanges();
                     }
