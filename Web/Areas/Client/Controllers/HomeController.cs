@@ -233,7 +233,7 @@ namespace Web.Areas.Client.Controllers
                     Kerkesat kerkesa = new Kerkesat();
                     kerkesa.DepartamentiId =model.DepartamentiId;
                     kerkesa.UserId = _userManager.GetUserId(User);
-                    kerkesa.LlojiKerkeses = 4;
+                    kerkesa.LlojiKerkeses = 1;
                     kerkesa.Nenshkrimi = model.Nenshkrimi;
                     kerkesa.PershkrimiIkerkeses = model.PershkrimiIkerkeses;
                     kerkesa.IsActive = true;

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApplicationCore.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20210305142802_migration1")]
+    [Migration("20210309105927_migration1")]
     partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -160,7 +160,7 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Birthday")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
@@ -169,7 +169,7 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreateOnDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<int?>("DepartamentiId")
                         .HasColumnType("int");
@@ -198,7 +198,7 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedOnDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -276,7 +276,7 @@ namespace ApplicationCore.Migrations
                         .HasMaxLength(450);
 
                     b.Property<DateTime?>("InsertDate")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime");
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -345,8 +345,7 @@ namespace ApplicationCore.Migrations
                     b.Property<string>("RoliId")
                         .IsRequired()
                         .HasColumnName("RoliID")
-                        .HasColumnType("nvarchar(450)")
-                        .HasMaxLength(450);
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("MenaxhimiId");
 
@@ -393,7 +392,7 @@ namespace ApplicationCore.Migrations
                         .HasMaxLength(450);
 
                     b.Property<DateTime?>("InsertDate")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime");
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -408,7 +407,7 @@ namespace ApplicationCore.Migrations
 
                     b.Property<DateTime?>("Lud")
                         .HasColumnName("LUD")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Lun")
                         .HasColumnName("LUN")
@@ -433,7 +432,7 @@ namespace ApplicationCore.Migrations
                         .HasMaxLength(450);
 
                     b.Property<DateTime?>("InsertDate")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime");
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -453,7 +452,7 @@ namespace ApplicationCore.Migrations
 
                     b.Property<DateTime?>("Lud")
                         .HasColumnName("LUD")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Lun")
                         .HasColumnName("LUN")
@@ -480,7 +479,7 @@ namespace ApplicationCore.Migrations
                         .HasMaxLength(450);
 
                     b.Property<DateTime?>("InsertDate")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime");
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -493,7 +492,7 @@ namespace ApplicationCore.Migrations
                         .HasMaxLength(450);
 
                     b.Property<DateTime?>("Lud")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("PershkrimiVendimit")
                         .HasColumnType("nvarchar(max)");
@@ -537,9 +536,8 @@ namespace ApplicationCore.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
-                    b.Property<string>("InsertDate")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<DateTime?>("InsertDate")
+                        .HasColumnType("datetime");
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -573,15 +571,12 @@ namespace ApplicationCore.Migrations
 
                     b.Property<DateTime?>("Lud")
                         .HasColumnName("LUD")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Lun")
                         .HasColumnName("LUN")
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
-
-                    b.Property<bool?>("Miratimi")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ObligimetEmbetura")
                         .HasColumnName("ObligimetEMbetura")
@@ -619,12 +614,6 @@ namespace ApplicationCore.Migrations
                     b.Property<string>("StafId")
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
-
-                    b.Property<bool?>("Vendimi")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("Verifikimi")
-                        .HasColumnType("bit");
 
                     b.Property<string>("VitiAkademik")
                         .HasColumnType("nvarchar(50)")
