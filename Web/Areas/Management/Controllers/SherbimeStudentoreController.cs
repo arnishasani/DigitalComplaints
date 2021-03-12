@@ -20,11 +20,12 @@ namespace Web.Areas.Management.Controllers
         private readonly IUsersRole _staffRole;
         private readonly IRole _roleStaff;
         private readonly IUserRepository _userRepository;
+        private readonly IVeprimet _veprimetRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         protected readonly ApplicationDBContext _digitalComplaintsDB;
 
-        public SherbimeStudentoreController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ISherbimeStudentore sherbimeStudentore, IMenaxhimiK llojetEKerkesave, ILlojetDepartamenteve llojetDepartamenve, IUserRepository userRepository, IRole roleStaff, IUsersRole staffRole, ApplicationDBContext digitalComplaintsDB)
+        public SherbimeStudentoreController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ISherbimeStudentore sherbimeStudentore, IMenaxhimiK llojetEKerkesave, ILlojetDepartamenteve llojetDepartamenve, IUserRepository userRepository, IRole roleStaff, IUsersRole staffRole, ApplicationDBContext digitalComplaintsDB, IVeprimet veprimetRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -35,6 +36,7 @@ namespace Web.Areas.Management.Controllers
             _roleStaff = roleStaff;
             _staffRole = staffRole;
             _digitalComplaintsDB = digitalComplaintsDB;
+            _veprimetRepository = veprimetRepository;
         }
         public IActionResult Index()
         {
@@ -234,12 +236,54 @@ namespace Web.Areas.Management.Controllers
 
         public IActionResult KerkesatNeShqyrtim()
         {
+           
             return View();
         }
 
         public IActionResult KerkesatEPerfunduara()
         {
-            return View();
+            var model = new SherbimeStudentoreKerkesatViewModel();
+            try
+            {
+                if (User.IsInRole("SherbimeStudentore"))
+                {
+
+                    var menaxhoKerkesenList = new List<Models.SherbimeStudentoreKerkesatViewModel>();
+                    var modelGetAllRequest = _sherbimeStudentoreRepository.GetAllCompletedRequest();
+                    foreach (var item in modelGetAllRequest)
+                    {
+                        int tempDep = (int)item.DepartamentiId;
+                        var gjejeDepartamentin = _llojetDepartamenveRepository.GetByIdInt(tempDep);
+                        int temp = (int)item.LlojiKerkeses;
+                        var gjejLlojinKerkeses = _llojetEKerkesaveRepository.GetByIdInt(temp);
+                        menaxhoKerkesenList.Add(new Models.SherbimeStudentoreKerkesatViewModel
+                        {
+                            KerkesaAnkesaId = item.KerkesaAnkesaId,
+                            LlojiKerkeses = gjejLlojinKerkeses.LlojiIkerkeses,
+                            Departamenti = gjejeDepartamentin.EmriDepartamentit,
+                            Nenshkrimi = item.Nenshkrimi,
+                            PershkrimiIkerkeses = item.PershkrimiIkerkeses,
+                            IsActive = item.IsActive,
+                            IsDeleted = item.IsDeleted,
+                            IsAnonim = item.IsAnonim,
+                            AnonimId = item.AnonimId,
+                            Pranuar = item.Pranuar,
+                            Ankes = item.Ankes,
+                            InsertBy = item.InsertBy,
+                            InsertDate = item.InsertDate,
+                            Lub = item.Lub,
+                            Lud = item.Lud,
+                            Lun = item.Lun
+                        });
+                    }
+                    model.KerkesatEPerfunduara = menaxhoKerkesenList;
+                }
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public IActionResult Details(int id)
         {

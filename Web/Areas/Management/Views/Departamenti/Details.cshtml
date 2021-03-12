@@ -1,16 +1,22 @@
 ﻿@using Web.Areas.Management.Models
 @model DepartamentiViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
 }
 
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div style="margin-left:50px" class="col-md-5">
-                <div class="form-group">
-                    <div class="col-md-12">
+<div class="row">
+    <div class="col-md-12">
+        <div class="card  card-tasks">
+            <div class="col-md-12">
+                <div class="card-header ">
+                <br />
+                <br />
+                <br />
+                </div>
+                <div class="card-body ">
+                    <div class="table-full-width table-responsive">
                         <table class="no-border no-strip skills">
                             <tbody class="no-border-x no-borsder-y">
                                 <tr>
@@ -32,7 +38,7 @@
                                     <td class="item" style="word-break:break-word">Eshte i fshirë : </td>
                                     @if (Model.IsDeleted == true)
                                     {
-                                        <td style="word-break:break-word">Po</td>
+                                        <td style="word-break:break-word">Po</td> 
                                     }
                                     else
                                     {
@@ -49,13 +55,64 @@
                                 </tr>
                             </tbody>
                         </table>
-
+                        <a asp-area="Management" asp-controller="Departamenti" asp-action="Index" class="btn mb-3 btn-primary btn-sm "> Kthehu</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@*<div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div style="margin-left:50px" class="col-md-5">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <table class="no-border no-strip skills">
+                                <tbody class="no-border-x no-borsder-y">
+                                    <tr>
+                                        <td class="item" style="word-break:break-word">Emri : </td>
+                                        <td style="word-break:break-word">@Model.EmriDepartamentit</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="item" style="word-break:break-word">Eshte aktiv : </td>
+                                        @if (Model.IsActive == true)
+                                        {
+                                            <td style="word-break:break-word">Po</td>
+                                        }
+                                        else
+                                        {
+                                            <td style="word-break:break-word">Jo</td>
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td class="item" style="word-break:break-word">Eshte i fshirë : </td>
+                                        @if (Model.IsDeleted == true)
+                                        {
+                                            <td style="word-break:break-word">Po</td>
+                                        }
+                                        else
+                                        {
+                                            <td style="word-break:break-word">Jo</td>
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td class="item" style="word-break:break-word">Eshte krijuar : </td>
+                                        <td style="word-break:break-word">@Model.InsertDate</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="item" style="word-break:break-word">Modifikimi i fundit : </td>
+                                        <td style="word-break:break-word">@Model.Lud</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
 
 
 

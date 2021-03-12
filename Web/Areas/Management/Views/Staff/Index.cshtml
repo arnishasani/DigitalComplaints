@@ -5,7 +5,7 @@
 @model Web.Areas.Management.Models.StaffViewModel
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
 }
 
 <div style="padding-left:4em; padding-top:5em; padding-right:4em;">
@@ -16,6 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
+                                <a asp-area="Management" asp-controller="Staff" asp-action="AddStaff" class="btn mb-3 btn-primary btn-sm float-right"> + Shto Staff</a>
                                 @if (Model.Staff.Count > 0)
                                 {
                                     <table id="staff-table" class="table table-bordered table-striped table-hover table-fw-widget">
@@ -121,15 +122,15 @@
                                                     <td><a class="text-center" style=" color: inherit;">@item.CreateOnDate</a></td>
                                                     <td><a class="btn mb-1 btn-primary btn-sm " href="/Management/Staff/Details/@item.StaffID">Details</a> | <a class="btn mb-1 btn-danger btn-sm" onclick="ConfirmDelete('@item.StaffID')" id="btnContinueDelete">Delete</a></td>
                                                     @*<td class="text-center">
-                                                            <div class="btn-group btn-hspace">
-                                                                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="true"><span class="icon mdi mdi-chevron-down"></span></button>
-                                                                <ul role="menu" class="dropdown-menu pull-right">
-                                                                    <li><a asp-action="details" asp-controller="Announcement" asp-route-id="@item.Id" asp-area="StoreManagement"><i class="fa fa-eye text-primary"></i> @SharedLocalizer["ViewAnnouncements"] </a></li>
-                                                                    <li><a asp-action="add" asp-route-id="@item.Id" asp-controller="Announcement"><i class="fa fa-pencil text-warning"></i> @SharedLocalizer["Edit"] </a></li>
-                                                                    <li><a href="javascript:void(0)" class="js-delete" data-id="@item.Id"><i class="fa fa-remove text-danger"></i> @SharedLocalizer["Delete"] </a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </td>*@
+                                    <div class="btn-group btn-hspace">
+                                        <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="true"><span class="icon mdi mdi-chevron-down"></span></button>
+                                        <ul role="menu" class="dropdown-menu pull-right">
+                                            <li><a asp-action="details" asp-controller="Announcement" asp-route-id="@item.Id" asp-area="StoreManagement"><i class="fa fa-eye text-primary"></i> @SharedLocalizer["ViewAnnouncements"] </a></li>
+                                            <li><a asp-action="add" asp-route-id="@item.Id" asp-controller="Announcement"><i class="fa fa-pencil text-warning"></i> @SharedLocalizer["Edit"] </a></li>
+                                            <li><a href="javascript:void(0)" class="js-delete" data-id="@item.Id"><i class="fa fa-remove text-danger"></i> @SharedLocalizer["Delete"] </a></li>
+                                        </ul>
+                                    </div>
+                                </td>*@
                                                 </tr>
                                                 i++;
                                             }

@@ -101,6 +101,47 @@ namespace Infrastructure.Repositories
             }
         }
 
+        public IEnumerable<Kerkesat> GetAllCompletedRequest()
+        {
+            try
+            {
+                var temp = _digitalComplaintsDB.Veprimet.Where(x => x.Perfunduar == false && x.IsActive == true && x.IsDeleted == false).ToList();
+                var model = new List<Kerkesat>();
+                foreach (var item in temp)
+                {
+                    var mod = _digitalComplaintsDB.Kerkesat.Where(x => x.KerkesaAnkesaId == item.KerkesaId && x.Pranuar == true && x.IsDeleted == false).ToList();
+                    foreach (var items in mod)
+                    {
+                        model.Add(new Kerkesat
+                        {
+                            KerkesaAnkesaId = items.KerkesaAnkesaId,
+                            UserId = items.UserId,
+                            LlojiKerkeses = items.LlojiKerkeses,
+                            DepartamentiId = items.DepartamentiId,
+                            Nenshkrimi = items.Nenshkrimi,
+                            PershkrimiIkerkeses = items.PershkrimiIkerkeses,
+                            IsActive = items.IsActive,
+                            IsDeleted = items.IsDeleted,
+                            IsAnonim = items.IsAnonim,
+                            AnonimId = items.AnonimId,
+                            InsertBy = items.InsertBy,
+                            InsertDate = items.InsertDate,
+                            Lub = items.Lub,
+                            Lud = items.Lud,
+                            Lun = items.Lun,
+                            Ankes = items.Ankes,
+                            Pranuar = items.Pranuar,
+                        });
+                    }
+                }
+                return model;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool UpdateKerkese(Kerkesat model)
         {
             throw new NotImplementedException();

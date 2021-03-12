@@ -1,14 +1,212 @@
-﻿
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Web.Areas.Management.Models.SherbimeStudentoreKerkesatViewModel
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
 }
 
+
+<div class="panel-header panel-header-lg">
+    <canvas id="bigDashboardChart"></canvas>
+</div>
 <div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                    <h1>Index</h1>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h4 class="card-title">Kerkesat</h4>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                            <i class="now-ui-icons loader_gear"></i>
+                        </button>
+                        @*<div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="lineChartExample"></canvas>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h4 class="card-title">Ankesat</h4>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                            <i class="now-ui-icons loader_gear"></i>
+                        </button>
+                        @*<div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h4 class="card-title">Ankesat Anonime</h4>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                            <i class="now-ui-icons loader_gear"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="barChartSimpleGradientsNumbers"></canvas>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card  card-tasks">
+                <div class="card-header ">
+                 <br />
+                </div>
+                <div class="card-body ">
+                    <div class="table-full-width table-responsive">
+                        @{ var i = 0;}
+                        @foreach (var item in Model.sherbimeStudentoreKerkesaList)
+                        {
+                            if (item.Ankes == false && item.IsAnonim == false)
+                            {
+                                <h3> @( i += 1) </h3>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="m-0">Tipi i Kerkeses : @item.LlojiKerkeses</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <label> Pershkrimi i kerkeses : </label><br />
+                                        <p class="card-text">
+                                            @Html.Raw(item.PershkrimiIkerkeses)
+                                        </p>
+                                        <h5 style="text-align:left">Departamenti : @item.Departamenti</h5>
+                                        <h5 style="text-align:left">Eshte paraqitur me : @item.InsertDate</h5>
+                                        <a href="/Management/SherbimeStudentore/Details/@item.KerkesaAnkesaId" style="float:right" class="btn btn-primary">Hap detajet</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                        <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <br />
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        @{ var j = 0;}
+                        @foreach (var item in Model.sherbimeStudentoreKerkesaList)
+                        {
+                            if (item.Ankes == true && item.IsAnonim == false)
+                            {
+                                <h3> @( j += 1) </h3>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="m-0">Tipi Ankeses : @item.LlojiKerkeses</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <label> Pershkrimi i Ankeses : </label><br />
+                                        <p class="card-text">
+                                            @Html.Raw(item.PershkrimiIkerkeses)
+                                        </p>
+                                        <h5 style="text-align:left">Departamenti : @item.Departamenti</h5>
+                                        <h5 style="text-align:left">Eshte paraqitur me : @item.InsertDate</h5>
+                                        <a href="/Management/SherbimeStudentore/Details/@item.KerkesaAnkesaId" style="float:right" class="btn btn-primary">Hap detajet</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                        <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <br />
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        @{ var d = 0;}
+                        @foreach (var item in Model.sherbimeStudentoreKerkesaList)
+                        {
+                            if (item.Ankes == true && item.IsAnonim == true)
+                            {
+                                <h3> @( d += 1) </h3>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="m-0">Tipi Ankeses Anonime : @item.LlojiKerkeses</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <label> Pershkrimi i Ankeses Anonime :</label><br />
+                                        <p class="card-text">
+                                            @Html.Raw(item.PershkrimiIkerkeses)
+                                        </p>
+                                        <h5 style="text-align:left">Departamenti : @item.Departamenti</h5>
+                                        <h5 style="text-align:left">Eshte anonime : Po</h5>
+                                        <h5 style="text-align:left">Eshte paraqitur me : @item.InsertDate</h5>
+                                        <a href="/Management/SherbimeStudentore/Details/@item.KerkesaAnkesaId" style="float:right" class="btn btn-primary">Hap detajet</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                        <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
+                    </div>
+                </div>
             </div>
         </div>
     </div>

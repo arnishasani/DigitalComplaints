@@ -71,14 +71,14 @@ namespace Web.Controllers
                         var user = await _userManager.FindByEmailAsync(model.Email);
                         var roles = await _userManager.GetRolesAsync(user);
                         if (roles[0] == "SuperAdmin" || roles[0] == "Admin" || roles[0] == "ZyraCilesis" || roles[0] == "ZyraIt" || roles[0] == "DepShkenca" || roles[0] == "DepEkonomik" || roles[0] == "ZyraFinancave"
-                             || roles[0] == "Rektorati" || roles[0] == "Sekretari")
+                             || roles[0] == "Rektorati" || roles[0] == "Sekretari" || roles[0] == "SherbimeStudentore")
                         {
-                            return RedirectToAction(nameof(SherbimeStudentoreController.Index), "SherbimeStudentore", new { area = "Management" });
+                            return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Management" });
                         }
-                        if (roles[0] == "SherbimeStudentore")
-                        {
-                            return RedirectToAction(nameof(SherbimeStudentoreController.Index), "SherbimeStudentore", new { area = "Management" });
-                        }
+                        //if (roles[0] == "SherbimeStudentore")
+                        //{
+                        //    return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Management" });
+                        //}
                         if (roles[0] == "Student")
                         {
                             return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Client" });
