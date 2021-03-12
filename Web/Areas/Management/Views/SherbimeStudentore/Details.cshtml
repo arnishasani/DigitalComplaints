@@ -3,7 +3,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
 }
 <div style="padding-left:30em; padding-top:7em; padding-right:8em;">
     @if (User.IsInRole("DepShkenca") || User.IsInRole("DepEkonomik"))
@@ -153,4 +153,3 @@
             $('#vazhdo').hide();
         }
     </script>*@
-}

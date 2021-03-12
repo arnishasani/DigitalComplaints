@@ -3,11 +3,132 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "AddStaff";
-    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
 }
 
-
-<div style="padding-left:3em; padding-top:3em; padding-right:3em;">
+<div class="row">
+    <div class="col-md-12">
+        <div class="card  card-tasks">
+            <div class="card-header ">
+                <br />
+                <br />
+                <br />
+            </div>
+            <div class="card-body ">
+                <div class="table-full-width table-responsive">
+                    <form id="staffFormId" asp-area="Management" asp-action="AddStaff" asp-controller="Staff" method="post">
+                        <div class="col-md-12">
+                            <div class="panel-body">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Email">Email</label>
+                                                <input name="Email" asp-for="Email" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Password">Password</label>
+                                                <input id="staff-pass" type="password" name="Password" asp-for="Password" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="ConfirmPassword">Confirm Password</label>
+                                                <input type="password" name="ConfirmPassword " asp-for="ConfirmPassword" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="PhoneNumber"> PhoneNumber</label>
+                                                <input name="PhoneNumber" asp-for="PhoneNumber" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Name">Name</label>
+                                                <input name="Name" asp-for="Name" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Surname">Surname</label>
+                                                <input name="Surname" asp-for="Surname" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="input-box ">
+                                                    <label for="gender">Gender </label>
+                                                    <select name="Gender" asp-for="Gender" class="form-control">
+                                                        <option value="" disabled selected>-- Select Gender --</option>
+                                                        <option value="false">Female</option>
+                                                        <option value="true">Male</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group" id="startD">
+                                                <label asp-for="Birthday">Birthday</label>
+                                                <input name="Birthday" asp-for="Birthday" autocomplete="off" id="datepicker" class="form-control datepicker" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label>Stafi i ri do ti takoj rolit : </label>
+                                                <br />
+                                                <label><input type="checkbox" asp-for="SherbimeStudentore" name="SherbimeStudentore" value="true" /> 1. Sherbimi studentor</label> <br />
+                                                <label><input type="checkbox" asp-for="DepShkenca" name="DepShkenca" value="true" /> 2. Departamenti i shkencave</label> <br />
+                                                <label><input type="checkbox" asp-for="DepEkonomik" name="DepEkonomik" value="true" /> 3. Departamenti i ekonomikut</label> <br />
+                                                <label><input type="checkbox" asp-for="ZyraFinancave" name="ZyraFinancave" value="true" /> 4. Zyra e financave</label> <br />
+                                                <label><input type="checkbox" asp-for="Rektorati" name="Rektorati" value="true" /> 5. Zyra e Rektorit</label> <br />
+                                                <label><input type="checkbox" asp-for="Sekretari" name="Sekretari" value="true" /> 6. Zyra e Sekretares</label> <br />
+                                                <label><input type="checkbox" asp-for="ZyraCilesise" name="ZyraCilesise" value="true" /> 7. Zyra e Cilesise</label> <br />
+                                                <label><input type="checkbox" asp-for="ZyraIT" name="ZyraIT" value="true" /> 8. Zyra e IT-së</label> <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a asp-area="Managment" asp-action="Index" asp-controller="Staff" class="btn btn-default btn-xl">Cancel</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-primary btn-sm float-right"><i class="fa fa-save"></i> Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div style="padding-left:3em; padding-top:3em; padding-right:3em;">
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -123,7 +244,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 @section Scripts {
     @*@await Html.PartialAsync("_ValidationScriptsPartial")*@
 
@@ -250,17 +371,17 @@
                 }
             });
         });
-            //$('#datepicker').datetimepicker({
-            //    format: timeFormat,
-            //    autoclose: true,
-            //});
+                        //$('#datepicker').datetimepicker({
+                        //    format: timeFormat,
+                        //    autoclose: true,
+                        //});
 
-            //$('#startD').find('.glyphicon-calendar').on('click', function () {
-            //    $(this).parent().siblings('#datepicker').trigger('focus');
-            //});
+                        //$('#startD').find('.glyphicon-calendar').on('click', function () {
+                        //    $(this).parent().siblings('#datepicker').trigger('focus');
+                        //});
 
-            //$(".prev").html("<span class='fa fa-chevron-left' style='font-size:12px; pointer-events: none;'></span>");
-            //$(".next").html("<span class='fa fa-chevron-right' style='font-size:12px; pointer-events: none;'></span>");
+                        //$(".prev").html("<span class='fa fa-chevron-left' style='font-size:12px; pointer-events: none;'></span>");
+                        //$(".next").html("<span class='fa fa-chevron-right' style='font-size:12px; pointer-events: none;'></span>");
 
     </script>
 }

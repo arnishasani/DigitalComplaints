@@ -59,9 +59,6 @@ namespace Web.Areas.Management.Controllers
                         modelVeprimet.KerkesaId = model.KerkesaId;
                         modelVeprimet.Pranimi = pranuar;
                         modelVeprimet.StafId = currentUser;
-                        //modelVeprimet.Vendimi = vendimi;
-                        //modelVeprimet.Verifikimi = verifikuar;
-                        //modelVeprimet.Miratimi = miratuar;
                         modelVeprimet.InsertDate = DateTime.Now;
                         modelVeprimet.SherbimeStudentore = true;
                         modelVeprimet.DepShkenca = false;
@@ -74,6 +71,7 @@ namespace Web.Areas.Management.Controllers
                         modelVeprimet.IsActive = true;
                         modelVeprimet.IsDeleted = false;
                         modelVeprimet.InsertBy = currentUser;
+                        modelVeprimet.Perfunduar = false;
                         _veprimetRepository.Add(modelVeprimet);
                         _veprimetRepository.SaveChanges();
                         Kerkesat mod = new Kerkesat();
@@ -142,7 +140,7 @@ namespace Web.Areas.Management.Controllers
                     }
 
                 }
-                return RedirectToAction(nameof(SherbimeStudentoreController.Index), "SherbimeStudentore", new { area = "Management" });
+                return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "Management" });
             }
             catch (Exception ex)
             {

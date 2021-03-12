@@ -33,6 +33,7 @@ namespace Web.Areas.Management.Models
         public bool? Pranuar { get; set; }
         public string IndexId { get; set; }
         public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreKerkesaList {get;set;}
+        public List<SherbimeStudentoreKerkesatViewModel> KerkesatEPerfunduara {get;set;}
         public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreAnkesaList {get;set;}
         public List<SherbimeStudentoreKerkesatViewModel> sherbimeStudentoreAnkesatAnonimeList {get;set;}
         public string Departamenti { get; set; }

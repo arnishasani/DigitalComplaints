@@ -1,12 +1,86 @@
 ﻿@model MenaxhimiKerkesaveViewModel
 @using Web.Areas.Management.Models;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
     ViewData["Title"] = "Shto Kerkese";
-    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
 }
 
-<div style="padding-left:3em; padding-top:3em">
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card  card-tasks">
+            <div class="card-header ">
+                <br />
+                <br />
+                <br />
+            </div>
+            <div class="card-body ">
+                <div class="table-full-width table-responsive">
+                    <form id="kerkeseID" asp-area="Management" asp-action="AddKerkese" asp-controller="MenaxhimiKerkesave" method="post">
+                        <div class="col-md-12">
+                            <div class="panel-body">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="LlojiIkerkeses">Shkruaj emertimin e llojit te kerkeses</label>
+                                                    <input name="LlojiIkerkeses" asp-for="LlojiIkerkeses" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="PershkrimiKerkeses">Cka mundeson kerkesa?</label>
+                                                    <textarea maxlength="5001" class="form-control " id="summernote" asp-for="PershkrimiKerkeses"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label>Kerkesa do te percillet tek departamentet : </label>
+                                                    <br />
+                                                    <label><input type="checkbox" asp-for="ZyraPerSherbim" name="ZyrPerSherbim" value="true" checked disabled /> 1. Sherbimi studentor</label> <br />
+                                                    <label><input type="checkbox" asp-for="DepShkenca" name="DepShkenca" value="true" /> 2. Departamenti i shkencave</label> <br />
+                                                    <label><input type="checkbox" asp-for="DepEkonomik" name="DepEkonomik" value="true" /> 3. Departamenti i ekonomikut</label> <br />
+                                                    <label><input type="checkbox" asp-for="ZyraFinancave" name="ZyraFinancave" value="true" /> 4. Zyra e financave</label> <br />
+                                                    <label><input type="checkbox" asp-for="Rektorati" name="Rektorati" value="true" /> 5. Zyra e Rektorit</label> <br />
+                                                    <label><input type="checkbox" asp-for="Sekretari" name="Sekretari" value="true" /> 6. Zyra e Sekretares</label> <br />
+                                                    <label><input type="checkbox" asp-for="ZyraCilesis" name="ZyraCilesis" value="true" /> 7. Zyra e Cilesise</label> <br />
+                                                    <label><input type="checkbox" asp-for="ZyraIt" name="ZyraIt" value="true" /> 7. Zyra e IT-së</label> <br />
+                                                    <label><input type="checkbox" asp-for="Studenti" name="Studenti" value="true" checked disabled /> 8. Studenti</label> <br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <a asp-area="Management" asp-action="Index" asp-controller="MenaxhimiKerkesave" class="btn btn-default btn-xl float-left">Cancel</a>
+                                                    <button type="submit" class="btn mb-3 btn-primary btn-sm float-right"><i class="fa fa-save"></i> Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div style="padding-left:3em; padding-top:3em">
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -42,15 +116,15 @@
                                                     <label>Kerkesa do te percillet tek departamentet : </label>
                                                     <br />
                                                     <label><input type="checkbox" asp-for="ZyraPerSherbim" name="ZyrPerSherbim" value="true" checked disabled /> 1. Sherbimi studentor</label> <br />
-                                                    <label><input type="checkbox" asp-for="DepShkenca" name="DepShkenca" value="true"/> 2. Departamenti i shkencave</label> <br />
-                                                    <label><input type="checkbox" asp-for="DepEkonomik" name="DepEkonomik" value="true"/> 3. Departamenti i ekonomikut</label> <br />
-                                                    <label><input type="checkbox" asp-for="ZyraFinancave" name="ZyraFinancave" value="true"/> 4. Zyra e financave</label> <br />
-                                                    <label><input type="checkbox" asp-for="Rektorati" name="Rektorati" value="true"/> 5. Zyra e Rektorit</label> <br />
-                                                    <label><input type="checkbox" asp-for="Sekretari" name="Sekretari" value="true"/> 6. Zyra e Sekretares</label> <br />
-                                                    <label><input type="checkbox" asp-for="ZyraCilesis" name="ZyraCilesis" value="true"/> 7. Zyra e Cilesise</label> <br />
-                                                    <label><input type="checkbox" asp-for="ZyraIt" name="ZyraIt" value="true"/> 7. Zyra e IT-së</label> <br />
-                                                    <label><input type="checkbox" asp-for="Studenti" name="Studenti" value="true" checked disabled/> 8. Studenti</label> <br />
-                                                </div> 
+                                                    <label><input type="checkbox" asp-for="DepShkenca" name="DepShkenca" value="true" /> 2. Departamenti i shkencave</label> <br />
+                                                    <label><input type="checkbox" asp-for="DepEkonomik" name="DepEkonomik" value="true" /> 3. Departamenti i ekonomikut</label> <br />
+                                                    <label><input type="checkbox" asp-for="ZyraFinancave" name="ZyraFinancave" value="true" /> 4. Zyra e financave</label> <br />
+                                                    <label><input type="checkbox" asp-for="Rektorati" name="Rektorati" value="true" /> 5. Zyra e Rektorit</label> <br />
+                                                    <label><input type="checkbox" asp-for="Sekretari" name="Sekretari" value="true" /> 6. Zyra e Sekretares</label> <br />
+                                                    <label><input type="checkbox" asp-for="ZyraCilesis" name="ZyraCilesis" value="true" /> 7. Zyra e Cilesise</label> <br />
+                                                    <label><input type="checkbox" asp-for="ZyraIt" name="ZyraIt" value="true" /> 7. Zyra e IT-së</label> <br />
+                                                    <label><input type="checkbox" asp-for="Studenti" name="Studenti" value="true" checked disabled /> 8. Studenti</label> <br />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +146,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 @section Scripts {
     @*@await Html.PartialAsync("_ValidationScriptsPartial")*@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">

@@ -8,6 +8,7 @@ namespace ApplicationCore.Interfaces
     public interface ISherbimeStudentore : IRepository<Kerkesat>
     {
         IEnumerable<Kerkesat> GetAllRequestList();
+        IEnumerable<Kerkesat> GetAllCompletedRequest();
         IEnumerable<Veprimet> GetAllRequestsForShk();
         IEnumerable<Veprimet> GetAllRequestsForEk();
         IEnumerable<Veprimet> GetVeprimID(int kerkesaID);

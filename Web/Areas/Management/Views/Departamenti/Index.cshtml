@@ -1,9 +1,10 @@
 ﻿@using Web.Areas.Management.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @model DepartamentiViewModel
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutManagementView.cshtml";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
 }
 
 <div style="padding-left:4em; padding-top:5em; padding-right:4em;">
@@ -14,13 +15,14 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
+                                <a asp-area="Management" asp-controller="Departamenti" asp-action="AddDepartamente" class="btn mb-3 btn-primary btn-sm float-right"> + Shto Departament</a>
                                 @if (Model.DepartamentetList.Count > 0)
                                 {
                                     <table id="staff-table" class="table table-bordered table-striped table-hover table-fw-widget">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">DepartamentiId</th>
-                                                <th class="text-center">EmriDepartamentit</th>
+                                                <th class="text-center">Departamenti Id</th>
+                                                <th class="text-center">Emri Departamentit</th>
                                                 <th class="text-center">Is Active</th>
                                                 <th class="text-center">Is Delete</th>
                                                 <th class="text-center">Create On Date</th>
@@ -61,7 +63,7 @@
                                                     </td>
                                                     <td><a class="text-center" style=" color: inherit;">@item.InsertDate</a></td>
                                                     <td><a class="text-center" style=" color: inherit;">@item.Lud</a></td>
-                                                    <td><a class="btn mb-1 btn-primary btn-sm " href="/Management/Departamenti/Details/@item.DepartamentiId">Details</a> | <a class="btn mb-1 btn-danger btn-sm"  onclick="ConfirmDelete('@item.DepartamentiId')" id="btnContinueDelete">Delete</a></td>
+                                                    <td><a class="btn mb-1 btn-primary btn-sm " href="/Management/Departamenti/Details/@item.DepartamentiId">Details</a> | <a class="btn mb-1 btn-danger btn-sm" onclick="ConfirmDelete('@item.DepartamentiId')" id="btnContinueDelete">Delete</a></td>
                                                     @*<td class="text-center">
                                                             <div class="btn-group btn-hspace">
                                                                 <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="true"><span class="icon mdi mdi-chevron-down"></span></button>
@@ -150,6 +152,7 @@
                 success: function (result) {
                     $("#myModal").modal("hide");
                     $("#row_" + userid).remove();
+                    window.location.href = '/Management/Departamenti/Index';
                 }
             })
         }

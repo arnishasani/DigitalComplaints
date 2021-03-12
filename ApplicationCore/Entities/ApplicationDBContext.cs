@@ -30,13 +30,13 @@ namespace ApplicationCore.Entities
         public virtual DbSet<VendimiPerfundimtar> VendimiPerfundimtar { get; set; }
         public virtual DbSet<Veprimet> Veprimet { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-HDPQJE9;Initial Catalog=DigitalComplaintsDB4;Integrated Security=True");
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer("Data Source=DESKTOP-HDPQJE9;Initial Catalog=DigitalComplaintsDB4;Integrated Security=True");
+        //    }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
