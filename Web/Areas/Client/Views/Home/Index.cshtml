@@ -1,5 +1,7 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model Web.Areas.Client.Models.KerkesaViewModel
+@model Web.Areas.Client.Models.KerkesaViewModel;
+
+
 @{
     ViewData["Title"] = "Index";
     //Layout = "~/Views/Shared/StudentView.cshtml";
@@ -25,7 +27,7 @@
                     </div>
                     <nav id="mainav" class="fl_right">
                         <ul class="clear">
-                            <li class="active"><a href="index.cshtml">Kryefaqja</a></li>
+                            <li class="active"><a asp-controller="Home" asp-action="Index">Kryefaqja</a></li>
                             <li>
                                 <a class="drop" href="#">Faqet</a>
                                 <ul>
@@ -51,13 +53,13 @@
                                             <li><a asp-controller="Home" asp-action="IndexAnkes">Shiko Ankesat</a></li>
                                         </ul>
                                     </li>
-                                  
+
                                 </ul>
                             </li>
-                            <li>
-                                <partial name="_LoginPartial" />
+                            @*<li>
+                                    <partial name="_LoginPartial" />
 
-                            </li>
+                                </li>*@
                         </ul>
                     </nav>
                 </header>
@@ -143,22 +145,25 @@
                                         Drejtimi:  @item.EmriDepartamentit
                                     </p>
                                     <div class="d-flex justify-content-between">
-                                        <h4 class="display-3 degree">Nr @(i+=1)</h4>
+                                        <h4 class="display-3 degree">Nr @(i += 1)</h4>
                                     </div>
                                     <div class="d-flex justify-content-between mb-4">
                                         <p><i class="fa fa-user"></i> @item.InsertBy</p>
                                         <p><i class="fa fa-save"></i> ID: 180029K</p>
                                     </div>
+                                    @if (item.Pranuar == true)
+                                    {
+                                        <div class="progress md-progress">
+                                            <div class="progress-bar black" role="progressbar" style="width:80%; background-color:#FF3F4A" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="progress md-progress">
+                                            <div class="progress-bar black" role="progressbar" style="width: 50%; background-color:#FF3F4A" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    }
 
-                                    <div class="progress md-progress">
-                                        <div class="progress-bar black" role="progressbar" style="width: 40%; background-color:#FF3F4A" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    @*<ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
-                                            <li class="pl-4">dicka</li>
-                                            <li>Vertetuar</li>
-                                            <li>Miratuar</li>
-                                            <li>Shqyrtuar</li>
-                                        </ul>*@
                                     <div class="collapse-content" style="color:gray">
                                         <div class="collapse" id="collapseExample" style="color:gray">
                                             <table class="table table-borderless table-sm mb-0" style="color:gray">
@@ -193,7 +198,79 @@
                 </div>
             </div>
         </div>
+        @*<div id="contactbutton" class="card" style="padding-left:6em;padding-right:6em">
+            <div class="card-body ">
+                <div class="row">
+                    <h1 style="text-align:center">Kerkesat e perfunduara</h1>
+                    <br />
+                    <br />
+                    <br />
+                    @{ int k = 0;}
+                    @foreach (var item in Model.Veprimet)
+                    {
+                        @if (item.Perfunduar == false && item.IsActive == true && item.Pranimi == true)
+                        {
 
+                            @foreach (var item2 in Model.kerkesalist)
+                            {
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="card gradient" style="background-image:none; background-color:white">
+                                        <br>
+                                        <br>
+                                        @if (item2.Ankes == false)
+                                        {
+                                            <label>Lloji i kerkese:  @item2.EmriKerkeses </label>
+                                        }
+                                        <p class="card-text">@item2.InsertDate</p>
+                                        <p>
+                                            Drejtimi:  @item2.EmriDepartamentit
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <h4 class="display-3 degree">Nr @(k += 1)</h4>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <p><i class="fa fa-user"></i> @item2.InsertBy</p>
+                                            <p><i class="fa fa-save"></i> ID: 180029K</p>
+                                        </div>
+                                        <div class="progress md-progress">
+                                            <div class="progress-bar black" role="progressbar" style="width:100%; background-color:#FF3F4A" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+
+                                        <div class="collapse-content" style="color:gray">
+                                            <div class="collapse" id="collapseExample" style="color:gray">
+                                                <table class="table table-borderless table-sm mb-0" style="color:gray">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Pershkrimi i kerkeses</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="card-title " style="color:black">@item2.PershkrimiIkerkeses</p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-4">
+                                                <hr class="">
+
+                                                <a class="btn btn-secondary red-text p-1 my-1 mr-0 mml-1 " style="background-color:#FF3F4A" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Shiko me shume</a>
+                                                <br />
+                                                <br />
+                                                <br />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>*@
         <div class="wrapper row3">
             <main class="hoc container clear">
                 <div class="center btmspace-80">

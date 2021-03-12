@@ -26,7 +26,7 @@
                     </div>
                     <nav id="mainav" class="fl_right">
                         <ul class="clear">
-                            <li class="active"><a href="index.cshtml">Kryefaqja</a></li>
+                            <li class="active"><a asp-controller="Home" asp-action="Index">Kryefaqja</a></li>
                             <li>
                                 <a class="drop" href="#">Faqet</a>
                                 <ul>
@@ -55,9 +55,9 @@
 
                                 </ul>
                             </li>
-                            <li>
+                            @*<li>
                                 <h1 class="navbar-brand"> <partial name="_LoginPartial" /></h1>
-                            </li>
+                            </li>*@
                         </ul>
                     </nav>
                 </header>
