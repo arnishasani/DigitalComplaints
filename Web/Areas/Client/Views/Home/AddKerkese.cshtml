@@ -19,9 +19,14 @@
                                 <div class="card-body">
                                     <div class="col-12">
                                         @*<div class="row">*@
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="input-box ">
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <br />
                                                     <label asp-for="DepartamentiId">Departamenti </label>
                                                     <select name="DepartamentiId" asp-for="DepartamentiId" class="form-control">
                                                         <option value="" disabled selected>-- zgjedh departamentin --</option>
@@ -34,7 +39,7 @@
                                             </div>
                                         </div>
                                         <hr />
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="input-box ">
                                                     <label asp-for="LlojiKerkeses">Lloji i kerkeses </label>
@@ -50,25 +55,31 @@
                                             </div>
                                         </div>
                                         <hr />
-                                        <div class="col-md-10">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label asp-for="Nenshkrimi">Emri dhe mbiemri</label>
                                                 <input name="Nenshkrimi " asp-for="Nenshkrimi" class="form-control" />
                                             </div>
                                         </div>
-                                        <div class="col-md-10">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label asp-for="PershkrimiIkerkeses"> PershkrimiIKerkese</label>
                                                 <textarea maxlength="5001" class="form-control " id="summernote" asp-for="PershkrimiIkerkeses"></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-12" style="float:right">
+                                        <div class="col-12">
                                             <div class="row">
-                                                <div class="col-md-10">
+                                                <div class="col-md-6">
                                                     <a asp-area="Client" asp-action="Index" asp-controller="Home" class="btn  btn-default btn-xl">Cancel</a>
                                                 </div>
-                                                <div class="col-md-10">
-                                                    <button type="submit" class="btn btn-success btn-xl"><i class="fa fa-save"></i> Save</button>
+                                                <div class="col-md-6">
+                                                    <button type="submit" class="btn btn-success btn-xl" style="background-color:#FF3F4A;float:right"> <i class="fa fa-save"></i> Save</button>
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <br />
                                                 </div>
                                             </div>
                                         </div>
